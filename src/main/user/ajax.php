@@ -34,12 +34,30 @@ if (!empty($_POST['email_login']) &&
             $user_type = $row["user_type"];
             if ($user_type == "o") {
                 echo ("1");
+<<<<<<< HEAD
+            } elseif($user_type == "a") {
+                echo ("2");
+            }elseif($user_type == "p")
+            {
+                echo ("3");
+            }elseif($user_type == "i")
+            {
+                echo("4");
+            }
+            else{
+                echo("5");
+=======
             } else {
                 echo ("2");
+>>>>>>> db0b766 (done)
             }
             session_start();
             $_SESSION["user_email"] = $email;
             $_SESSION["user_full_name"] = $user_full_name;
+<<<<<<< HEAD
+            $_SESSION["user_type"] = $user_type;
+=======
+>>>>>>> db0b766 (done)
         }
 
 
@@ -47,10 +65,67 @@ if (!empty($_POST['email_login']) &&
         echo ("no");
     }
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
 if (!empty($_POST['datee']) && !empty($_POST['Venue_name']) ) {
     $datee = date('Y-m-d', strtotime($_POST["datee"]));
     $Venue_name = mysqli_real_escape_string($con, $_POST["Venue_name"]);
     $get_time_info = "SELECT * FROM `EVENT` WHERE `event_date` = '$datee' AND ar_name = '$Venue_name' AND status_value in ('Approved','Pending')";
+=======
+if (!empty($_POST["user_email"]) &&
+    !empty($_POST["eventname"]) &&
+    !empty($_POST["event_desc"]) &&
+    !empty($_POST["no_of_students"]) &&
+    !empty($_POST["event_date"]) &&
+    !empty($_POST["event_start_time"]) &&
+    !empty($_POST["event_end_time"]) &&
+    !empty($_POST["Institute_OrgName"]) &&
+    !empty($_POST["Venue_name"]) &&
+    !empty($_POST["rp_name"]) &&
+    !empty($_POST["companyName"]) &&
+    !empty($_POST["designation"]) &&
+    !empty($_POST["experience"])
+) {
+    $FourDigitRandomNumber = mt_rand(1111, 9999);
+    $user_email = mysqli_real_escape_string($con, $_POST["user_email"]);
+    $event_name = mysqli_real_escape_string($con, $_POST["eventname"]);
+    $event_Descr = mysqli_real_escape_string($con, $_POST["event_desc"]);
+    $num_of_students = mysqli_real_escape_string($con, $_POST["no_of_students"]);
+    $event_date = date('Y-m-d', strtotime($_POST["event_date"]));
+    $event_start_time = $_POST["event_start_time"];
+    $event_end_time = $_POST["event_end_time"];
+    $Institute_OrgName = mysqli_real_escape_string($con, $_POST["Institute_OrgName"]);
+    $Venue_name = mysqli_real_escape_string($con, $_POST["Venue_name"]);
+    $rp_name = mysqli_real_escape_string($con, $_POST["rp_name"]);
+    $companyName = mysqli_real_escape_string($con, $_POST["companyName"]);
+    $designation = mysqli_real_escape_string($con, $_POST["designation"]);
+    $experience = mysqli_real_escape_string($con, $_POST["experience"]);
+    date_default_timezone_set("Asia/Calcutta");
+    $timestamp = date("Y-m-d H:i:s");
+    $event_info_query = " INSERT INTO `EVENT` (`event_id`,`event_name`,`event_date`,`event_start_time`,`event_end_time`,`event_description`,`students_total_number`,`organization_institute`,`request_date_time`,`user_name`,`ar_name`,`status_value`) VALUES ('$FourDigitRandomNumber','$event_name','$event_date','$event_start_time','$event_end_time','$event_Descr','$num_of_students','$Institute_OrgName','$timestamp','$user_email','$Venue_name','Pending') ";
+    if (mysqli_query($con, $event_info_query)) {
+        $resource_person_info = "INSERT INTO `RESOURCE_PERSON` (`full_name`,`company_name`,`designation`,`experience`,`event_id`) VALUES ('$rp_name','$companyName','$designation','$experience','$FourDigitRandomNumber')";
+        if (mysqli_query($con, $resource_person_info)) {
+            echo ("1");
+        } else {
+            echo ("2");
+        }
+    } else {
+        echo ("2");
+    }
+}
+
+=======
+>>>>>>> 4c514c7 (donee)
+if (!empty($_POST['datee']) && !empty($_POST['Venue_name']) ) {
+    $datee = date('Y-m-d', strtotime($_POST["datee"]));
+<<<<<<< HEAD
+    $get_time_info = "SELECT * FROM `EVENT` WHERE `event_date` = '$datee' AND status_value in ('Approved','Pending')";
+>>>>>>> db0b766 (done)
+=======
+    $Venue_name = mysqli_real_escape_string($con, $_POST["Venue_name"]);
+    $get_time_info = "SELECT * FROM `EVENT` WHERE `event_date` = '$datee' AND ar_name = '$Venue_name' AND status_value in ('Approved','Pending')";
+>>>>>>> 86879d7 (half blocking donee)
     $result_of_time = mysqli_query($con, $get_time_info);
     if (mysqli_num_rows($result_of_time) > 0) {
         ?>
@@ -81,6 +156,10 @@ if (!empty($_POST['datee']) && !empty($_POST['Venue_name']) ) {
             }
         </script>
         <?php
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4c514c7 (donee)
     }else{
         ?>
         <script>
@@ -93,6 +172,11 @@ if (!empty($_POST['datee']) && !empty($_POST['Venue_name']) ) {
             }
             </script>
         <?php
+<<<<<<< HEAD
+=======
+>>>>>>> db0b766 (done)
+=======
+>>>>>>> 4c514c7 (donee)
     }
 }
 if (!empty($_POST['eventid']) && !empty($_POST['reason'])) {
@@ -148,6 +232,10 @@ if (!empty($_POST['selectdatee']) && !empty($_POST['venue_name'])) {
     }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4c514c7 (donee)
 if(!empty($_POST['user_email']) 
             &&
     !empty($_POST['event_name'])
@@ -176,7 +264,15 @@ if(!empty($_POST['user_email'])
             &&
     !empty($_POST['experience'])
             &&
+<<<<<<< HEAD
+<<<<<<< HEAD
     !empty($_POST['insider'])
+=======
+    !empty($_POST['insider '])
+>>>>>>> 4c514c7 (donee)
+=======
+    !empty($_POST['insider'])
+>>>>>>> 5a990c7 (donee)
         
 
 )
@@ -301,7 +397,14 @@ if(!empty($_POST['user_email'])
             if(sizeof($rp_names)==$count)
             {
                 echo("1");
+<<<<<<< HEAD
+<<<<<<< HEAD
                 
+=======
+>>>>>>> 4c514c7 (donee)
+=======
+                
+>>>>>>> b01df11 (done principal email)
             }else{
                 echo("2");
                 echo ("Error description: " . mysqli_error($con));
@@ -316,6 +419,10 @@ if(!empty($_POST['user_email'])
         echo ("Error description: " . mysqli_error($con));
     } 
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3065924 (forgotpass done)
 
 if(!empty($_POST['user_email_forgot']) && !empty($_POST['password']))
 {
@@ -329,11 +436,24 @@ if(!empty($_POST['user_email_forgot']) && !empty($_POST['password']))
         echo("2");
     }
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3711305 (google drive api done)
 
 
 if(!empty($_POST['event_id_change']) && !empty($_POST['imglink']))
 {
     echo($_POST['imglink']);
 }
+<<<<<<< HEAD
+=======
+>>>>>>> db0b766 (done)
+=======
+>>>>>>> 4c514c7 (donee)
+=======
+>>>>>>> 3065924 (forgotpass done)
+=======
+>>>>>>> 3711305 (google drive api done)
 mysqli_close($con);
 ?>

@@ -3,19 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4c514c7 (donee)
-
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
-<<<<<<< HEAD
-=======
->>>>>>> db0b766 (done)
-=======
->>>>>>> 4c514c7 (donee)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -40,7 +27,7 @@
     ?>
     <main id="main">
         <?php
-        include("navigation.html");
+        include("./admin_navbar.html");
         ?>
         <div class="container">
             <div class="row p-4">
@@ -55,7 +42,7 @@
                         ?>
                         <div class="col-lg-4 mb-5">
                             <div class="card mx-auto shadow w-75" id="card" style="border-radius:20px;">
-                                <a href="list_view.php?id=<?php echo ($row_audi_room_info['ar_name']); ?>"
+                                <a href="admin_list_view.php?id=<?php echo ($row_audi_room_info['ar_name']); ?>"
                                     style="text-decoration:none;">
                                     <div class="card-body text-center text-black">
                                         <?php

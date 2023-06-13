@@ -1,5 +1,13 @@
 <?php
+<<<<<<< HEAD
+<<<<<<< HEAD
 include '../connection/connect.php';
+=======
+include './connection/connect.php';
+>>>>>>> db0b766 (done)
+=======
+include '../connection/connect.php';
+>>>>>>> 20ec2bd (seperate folders)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,9 +104,32 @@ if(isset($_POST['update_ar'])){
     <form action="update_ar.php" method="POST" id="form_data">
       <div class="modal-body">
       <div class="form-outline w-100 m-auto">
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    <label for="ar_name" id="ar_name" class="form-label fw-bold">Do Update for Audi/Room Name</label>
+=======
+                    <label for="ar_name" id="ar_name" class="form-label fw-bold">Do Updates for Audi/Room Name</label>
+>>>>>>> db0b766 (done)
+                    <input type="text" id="ar_name_original" name="ar_name_original" readonly class="form-control">
+                </div>
+                <div class="form-outline w-100 m-auto">
+                    <label for="floor" id="floor" class="form-label fw-bold">Floor</label>
+                    <input type="text" id="floor_original" name="floor_original"  class="form-control">
+                </div>  
+                <div class="form-outline w-100 m-auto">
+                    <label for="capacity_original" id="capacity_original" class="form-label fw-bold">Capacity</label>
+                    <input type="text" id="capacity_original" name="capacity_original" class="form-control" >
+=======
+                    <label for="department_name" id="department_name" class="form-label fw-bold">Old Department Name</label>
+                    <input type="text" id="department_name_original" name="department_name_original" readonly class="form-control" placeholder="Enter a depertment name">
+>>>>>>> 20ec2bd (seperate folders)
+                </div> 
+=======
                     <label for="ar_name" id="ar_name" class="form-label fw-bold">Do Update for Audi/Room Name</label>
                     <input type="text" id="ar_name_original" name="ar_name_original" readonly class="form-control">
                 </div>
+>>>>>>> f06e2d6 (view by list)
                 <div class="form-outline w-100 m-auto">
                     <label for="floor" id="floor" class="form-label fw-bold">Floor</label>
                     <input type="text" id="floor_original" name="floor_original"  class="form-control">

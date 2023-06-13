@@ -45,19 +45,31 @@ if(!empty($_POST['event_name'])
   { 
     Email.send({ 
         SecureToken: '81b5fc89-513e-421c-ab1a-f690f117c594',
+<<<<<<< HEAD
+        To: 'hrushiop@gmail.com',
+=======
         To: '<?php echo($_POST['Institute_OrgName_email']) ?>',
+>>>>>>> b01df11 (done principal email)
         From: 'audibooking55@gmail.com',
         Subject: 'Request for Venue',
         Body: document.getElementById('emailContent').innerHTML,
         }).then(message => console.log(message));
     } 
+<<<<<<< HEAD
+    
+=======
     send()
+>>>>>>> b01df11 (done principal email)
         </script>
 
     <?php
 
 
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5a990c7 (donee)
 
 if(!empty($_POST['email']) && !empty($_POST['otp']))
 {
@@ -102,4 +114,9 @@ if(!empty($_POST['email']) && !empty($_POST['otp']))
   </script>
   <?php
 }
+<<<<<<< HEAD
+=======
+>>>>>>> b01df11 (done principal email)
+=======
+>>>>>>> 5a990c7 (donee)
 ?>

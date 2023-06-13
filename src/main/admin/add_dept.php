@@ -1,5 +1,13 @@
 <?php
+<<<<<<< HEAD
+<<<<<<< HEAD
 include '../connection/connect.php';
+=======
+include './connection/connect.php';
+>>>>>>> db0b766 (done)
+=======
+include '../connection/connect.php';
+>>>>>>> 20ec2bd (seperate folders)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,8 +16,11 @@ include '../connection/connect.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+<<<<<<< HEAD
     <link type="image/png" sizes="16x16" rel="icon" href="../../img/logo11.jpeg" />
 
+=======
+>>>>>>> 4f687d3 (Add files)
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -48,7 +59,14 @@ if(isset($_POST['add_dept'])){
             <div class="col-md-8 col-lg-6 mb-4 "> -->
     <div class="con1 mt-3 ">
     <h1 class='text-center text-primary'>Add New Department</h1>
+<<<<<<< HEAD
+<<<<<<< HEAD
     <div class="table-responsive-sm col-lg-10 col-sm-12">
+=======
+>>>>>>> db0b766 (done)
+=======
+    <div class="table-responsive-sm col-lg-10 col-sm-12">
+>>>>>>> 20ec2bd (seperate folders)
     <table  class='table table-bordered my-4' style="align-items:center">
     <thead class="bg-light">
         <tr >
@@ -71,7 +89,14 @@ if(isset($_POST['add_dept'])){
             ?>
         </tbody>    
     </table>
+<<<<<<< HEAD
+<<<<<<< HEAD
     </div>
+=======
+>>>>>>> db0b766 (done)
+=======
+    </div>
+>>>>>>> 20ec2bd (seperate folders)
     <div class="mt-2">
      <a  style='text-decoration:none'  type='button' class='text-light' data-toggle='modal' data-target='#adddept' ><input type="submit" name="add_dept" value="ADD" class="btn btn-primary px-3 mb-3"></a>
      </div>          

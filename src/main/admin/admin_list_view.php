@@ -3,19 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4c514c7 (donee)
-
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
-<<<<<<< HEAD
-=======
->>>>>>> db0b766 (done)
-=======
->>>>>>> 4c514c7 (donee)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -39,11 +26,11 @@
     ?>
     <main id="main">
         <?php
-        include("navigation.html");
+        include("./admin_navbar.html");
         ?>
         <?php
         if ($_GET['id'] == "") {
-            echo ("<script>window.location='list.php';</script>");
+            echo ("<script>window.location='admin_list.php';</script>");
         } else {
             $venue_name = $_GET['id'];
         }
@@ -51,8 +38,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="ec">
-
-
                 </div>
             </div>
         </div>
@@ -76,17 +61,7 @@
         //initialView: 'listWeek',
         events: [
             <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
-            if($venue_name=="Audi 1"){
-                $event_info_query = "SELECT event_name,event_date,event_start_time,event_end_time,organization_institute FROM `EVENT` WHERE ar_name = '$venue_name' AND status_value in ('Approved','Pending') UNION SELECT `description`,datee,start_time,end_time,branch FROM disableDates";
-=======
-            $event_info_query = "SELECT * FROM `EVENT` WHERE ar_name = '$venue_name' AND status_value in ('Approved','Pending') ";
->>>>>>> db0b766 (done)
-=======
-            if($venue_name=="Audi 1"){
-                $event_info_query = "SELECT event_name,event_date,event_start_time,event_end_time,organization_institute FROM `EVENT` WHERE ar_name = '$venue_name' AND status_value in ('Approved','Pending') UNION SELECT `description`,datee,start_time,end_time,branch FROM disableDates";
->>>>>>> 4c514c7 (donee)
+            $event_info_query = "SELECT * FROM `EVENT` WHERE ar_name = '$venue_name' AND status_value='approved' ";
             $result_of_event_info_query = mysqli_query($con, $event_info_query);
             if (mysqli_num_rows($result_of_event_info_query)) {
                 while ($row_of_event_info = mysqli_fetch_assoc($result_of_event_info_query)) {
@@ -119,51 +94,6 @@
             <?php
                 }
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4c514c7 (donee)
-            
-            }else{
-                $event_info_query = "SELECT * FROM `EVENT` WHERE ar_name = '$venue_name' AND status_value in ('Approved','Pending') ";
-            $result_of_event_info_query = mysqli_query($con, $event_info_query);
-            if (mysqli_num_rows($result_of_event_info_query)) {
-                while ($row_of_event_info = mysqli_fetch_assoc($result_of_event_info_query)) {
-            ?>
-                    { // this object will be "parsed" into an Event Object
-                        title: " <?php echo ($row_of_event_info['event_name']); ?> \n <?php echo ($row_of_event_info['organization_institute']); ?>", // a property!
-                        start: "<?php echo ($row_of_event_info['event_date']); ?> <?php echo ($row_of_event_info['event_start_time']); ?>", // a property!
-                        end: "<?php echo ($row_of_event_info['event_date']); ?> <?php echo ($row_of_event_info['event_end_time']); ?>", // a property! ** see important note below about 'end' **
-                        <?php
-                        $color_array = Array(
-                            '#FF0000', // Red
-                            '#0000FF', // Blue
-                            '#00FF00', // Green
-                            '#FFFF00', // Yellow
-                            '#FFA500', // Orange
-                            '#800080', // Purple
-                            '#00FFFF', // Cyan
-                            '#FF00FF', // Magenta
-                            '#008080', // Teal
-                            '#FFC0CB', // Pink
-                            '#00FF00', // Lime
-                            '#A52A2A', // Brown
-                            '#808080', // Gray
-                            '#000000' // Black
-                        );
-                        ?>
-                        color: " <?php echo ($color_array[array_rand($color_array)]) ?> ",
-                        draggable: false,
-                    },
-            <?php
-                }
-            }
-            }
-<<<<<<< HEAD
-=======
->>>>>>> db0b766 (done)
-=======
->>>>>>> 4c514c7 (donee)
             ?>
         ],
     });

@@ -2,19 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4c514c7 (donee)
 
   <meta http-equiv='cache-control' content='no-cache'>
     <meta http-equiv='expires' content='0'>
     <meta http-equiv='pragma' content='no-cache'>
-<<<<<<< HEAD
-=======
->>>>>>> db0b766 (done)
-=======
->>>>>>> 4c514c7 (donee)
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
