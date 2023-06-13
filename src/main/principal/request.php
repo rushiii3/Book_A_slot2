@@ -147,7 +147,7 @@ require "../connection/connect.php";
                 ?>
             </div>
         </div>
-        <div id="emailTemp">
+        <div id="emailTemp" style="display:none;">
                 
         </div>
     </main>

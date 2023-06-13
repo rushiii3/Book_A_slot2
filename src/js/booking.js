@@ -53,19 +53,25 @@ $('.section4').hide();
 $step = $('.stepper-item');
 $step.eq(0).addClass("active");
 $('#prevBtnSecond').on('click',function(){
+    $('.section2').fadeOut();
     $('.section2').hide();
+    $('.section1').fadeIn();
     $('.section1').show();
     $step.eq(0).addClass("active");
     $step.eq(1).removeClass("active");
 })
 $('#prevBtnThird').on('click',function(){
+    $('.section3').fadeOut();
     $('.section3').hide();
+    $('.section2').fadeIn();
     $('.section2').show();
     $step.eq(1).addClass("active");
     $step.eq(2).removeClass("active");
 })
 $('#prevBtnFourth').on('click',function(){
+    $('.section4').fadeOut();
     $('.section4').hide();
+    $('.section3').fadeIn();
     $('.section3').show();
     $step.eq(2).addClass("active");
     $step.eq(3).removeClass("active");
@@ -101,7 +107,9 @@ $('#nextFirst').on('click',function()
                       {
                         $step.eq(0).removeClass("active");
                         $step.eq(0).addClass("completed");
+                        $('.section1').fadeOut();
                         $('.section1').hide();
+                        $('.section2').fadeIn();
                         $('.section2').show();
                         $step.eq(1).addClass("active");
                       }else{
@@ -173,8 +181,10 @@ $('#nextSecond').on('click',function()
                 $step.eq(1).removeClass("active");
                 $step.eq(1).addClass("completed");
                 $('.section1').hide();
+                $('.section2').fadeOut();
                 $('.section2').hide();
                 $('.section3').show();
+                $('.section3').fadeIn();
                 $step.eq(2).addClass("active");
             }
           }else{
@@ -195,7 +205,9 @@ $('#nextThird').on('click',function(){
                 $step.eq(2).addClass("completed");
                 $('.section1').hide();
                 $('.section2').hide();
+                $('.section3').fadeOut();
                 $('.section3').hide();
+                $('.section4').fadeIn();
                 $('.section4').show();
                 $step.eq(3).addClass("active");
 })

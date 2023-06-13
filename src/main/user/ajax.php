@@ -34,8 +34,14 @@ if (!empty($_POST['email_login']) &&
             $user_type = $row["user_type"];
             if ($user_type == "o") {
                 echo ("1");
-            } else {
+            } elseif($user_type == "a") {
                 echo ("2");
+            }elseif($user_type == "p") {
+                echo ("3");
+            }elseif($user_type == "i") {
+                echo ("4");
+            }else{
+                echo("5");
             }
             session_start();
             $_SESSION["user_email"] = $email;

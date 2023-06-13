@@ -31,6 +31,14 @@ $(document).ready(function(){
                 {
                     window.location.href = '../admin/admin_home.php';
                 }
+                else if(data==3)
+                {
+                    window.location.href = '../principal/home.php';
+                }
+                else if(data==4)
+                {
+                    window.location.href = '../admin/admin_home.php';
+                }
                 else{
                     $('#failed').modal('show');
                     

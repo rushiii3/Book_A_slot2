@@ -103,6 +103,30 @@ It is a long established fact that a reader will be distracted by the readable c
                     <img src="https://img.freepik.com/free-vector/appointment-booking-with-woman-calendar_23-2148559014.jpg?w=1060&t=st=1684132939~exp=1684133539~hmac=d2101dc2baf34866ceb2d3eabe252bb481424284e4e6adc90f6765677ba3ae4e" alt="" class="img-fluid">
                 </div>
                 <div class="p-4 col-lg-6">
+                    <?php
+                    $open_closed = array();
+                    $get_close_event_info = "SELECT * FROM `EVENT` WHERE user_name = '$user_email' ";
+                    $result_of_closed_event = mysqli_query($con,$get_close_event_info);
+                    if(mysqli_num_rows($result_of_closed_event))
+                    {
+                        while($row = mysqli_fetch_assoc($result_of_closed_event))
+                        {
+                            date_default_timezone_set('Asia/Kolkata');
+                            if($row['event_status']=="Open" && date('Y-m-d')>$row['event_date'])
+                            {
+                                array_push($open_closed,"open");
+                            }else{
+                                array_push($open_closed,"close");
+                            }
+                        }
+                    }
+                               if(array_search("open",$open_closed))
+                               {
+                                ?>
+                                <p class="fw-bold text-center fs-3" style="margin-top:15rem;margin-bottom:10rem;">Please Close the previous event.</p>
+                                <?php
+                               }else{
+                    ?>
                     <!-- new col for booking -->
                     <p class="fs-3 text-center fw-bold">
                         Book your slot
@@ -404,7 +428,7 @@ It is a long established fact that a reader will be distracted by the readable c
                         </div>
                         <div id="timeBlock">
                         </div>
-                        <div id="emailtemp">
+                        <div id="emailtemp" style="display:none;">
 
                         </div>
 <!-- new row ending -->
@@ -413,6 +437,10 @@ It is a long established fact that a reader will be distracted by the readable c
                     </div>
                     <!-- new container ending -->
 
+<?php
+} 
+
+?>
 
 
                 </div>
