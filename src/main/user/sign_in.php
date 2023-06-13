@@ -3,18 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<<<<<<< HEAD
-<<<<<<< HEAD
     <meta http-equiv='cache-control' content='no-cache'>
     <meta http-equiv='expires' content='0'>
     <meta http-equiv='pragma' content='no-cache'>
-=======
->>>>>>> db0b766 (done)
-=======
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
->>>>>>> 4c514c7 (donee)
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -70,18 +61,9 @@
                             </div>
                             <div id="pass_verify" class="form-text"></div>
                         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
                         <div class="mb-3 text-end">
                                 <a href="forgot.php" class="link-dark">Forgot password?</a>
                         </div>
-=======
->>>>>>> db0b766 (done)
-=======
-                        <div class="mb-3 text-end">
-                                <a href="forgot.php" class="link-dark">Forgot password?</a>
-                        </div>
->>>>>>> 3711305 (google drive api done)
                         <button type="submit" name="submit" id="submit" class="btn btn-primary px-5 py-2 ms-5 mt-3">
                             Submit
                         </button>

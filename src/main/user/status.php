@@ -2,19 +2,10 @@
 <html lang="en">
 
 <head>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4c514c7 (donee)
 
 <meta http-equiv='cache-control' content='no-cache'>
     <meta http-equiv='expires' content='0'>
     <meta http-equiv='pragma' content='no-cache'>
-<<<<<<< HEAD
-=======
->>>>>>> db0b766 (done)
-=======
->>>>>>> 4c514c7 (donee)
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,8 +37,6 @@
                 <?php
                 date_default_timezone_set("Asia/Calcutta");
                 $today_date = date("Y-m-d");
-<<<<<<< HEAD
-<<<<<<< HEAD
                 $get_events_pending_approved = "SELECT * FROM `EVENT` WHERE user_name = '$user_email' AND status_value in ('Approved','Not Approved','Pending') ORDER BY event_date";
                 $result_of_events_pending_approved = mysqli_query($con, $get_events_pending_approved);
                 if (mysqli_num_rows($result_of_events_pending_approved) > 0) {
@@ -55,21 +44,6 @@
                         $event_status = $row_of_query['event_status'];
                         if($event_status=="Open" || $event_status=="")
                         {
-=======
-                $get_events_pending_approved = "SELECT * FROM `EVENT` WHERE user_name = '$user_email' AND status_value in ('Approved','Not Approved','Pending')  AND event_date > '$today_date' ORDER BY event_date";
-                $result_of_events_pending_approved = mysqli_query($con, $get_events_pending_approved);
-                if (mysqli_num_rows($result_of_events_pending_approved) > 0) {
-                    while ($row_of_query = mysqli_fetch_assoc($result_of_events_pending_approved)) {
->>>>>>> db0b766 (done)
-=======
-                $get_events_pending_approved = "SELECT * FROM `EVENT` WHERE user_name = '$user_email' AND status_value in ('Approved','Not Approved','Pending') ORDER BY event_date";
-                $result_of_events_pending_approved = mysqli_query($con, $get_events_pending_approved);
-                if (mysqli_num_rows($result_of_events_pending_approved) > 0) {
-                    while ($row_of_query = mysqli_fetch_assoc($result_of_events_pending_approved)) {
-                        $event_status = $row_of_query['event_status'];
-                        if($event_status=="Open" || $event_status=="")
-                        {
->>>>>>> 3711305 (google drive api done)
                 ?>
                         <div class="col-lg-4 col-md-6 mb-5">
                             <div class="card shadow p-1" style="width: auto;border-radius: 20px;">
@@ -102,10 +76,6 @@
                                         <p class="card-text bg-secondary text-white w-100 rounded p-2"> <span class="fw-bold">Reason: </span> <?php echo ($row_of_query['status_reason']); ?> </p>
                                     <?php
                                     } else {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 3711305 (google drive api done)
                                         if($event_status=="Open")
                                         {
                                             ?>
@@ -118,29 +88,13 @@
                                             <?php
                                         }
                                     
-<<<<<<< HEAD
-=======
-                                    ?>
-                                        <a href="cancel.php">What to cancel the event?</a>
-                                    <?php
->>>>>>> db0b766 (done)
-=======
->>>>>>> 3711305 (google drive api done)
                                     }
                                     ?>
                                 </div>
                             </div>
                         </div>
                 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
                     }}
-=======
-                    }
->>>>>>> db0b766 (done)
-=======
-                    }}
->>>>>>> 3711305 (google drive api done)
                 } else {
                 ?>
                     <div class="col-lg-12 col-md-12 mb-5">

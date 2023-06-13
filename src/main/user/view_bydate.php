@@ -2,19 +2,10 @@
 <html lang="en">
 
 <head>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4c514c7 (donee)
 
 <meta http-equiv='cache-control' content='no-cache'>
     <meta http-equiv='expires' content='0'>
     <meta http-equiv='pragma' content='no-cache'>
-<<<<<<< HEAD
-=======
->>>>>>> db0b766 (done)
-=======
->>>>>>> 4c514c7 (donee)
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,35 +17,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<<<<<<< HEAD
-<<<<<<< HEAD
     <link type="image/png" sizes="16x16" rel="icon" href="../../img/logo11.jpeg" />
-=======
-    <link type="image/png" sizes="16x16" rel="icon" href="../img/logo11.jpeg" />
->>>>>>> db0b766 (done)
-=======
-    <link type="image/png" sizes="16x16" rel="icon" href="../../img/logo11.jpeg" />
->>>>>>> 2fe4c77 (done index)
     <title>Select View</title>
 </head>
 
 <body>
     <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
      include("../config/session.php");
      require "../connection/connect.php";
      require_once("../loader.html");
-=======
-    include("session.php");
-    require "connection/connect.php";
-    //require_once("loader.html"); 
->>>>>>> db0b766 (done)
-=======
-     include("../config/session.php");
-     require "../connection/connect.php";
-     require_once("../loader.html");
->>>>>>> e200968 (doen)
     ?>
     <main id="main">
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -118,15 +89,7 @@
         </div>
        
     </main>
-<<<<<<< HEAD
-<<<<<<< HEAD
     <script src="../../js/view_date.js"></script>
-=======
-    <script src="../js/view_date.js"></script>
->>>>>>> db0b766 (done)
-=======
-    <script src="../../js/view_date.js"></script>
->>>>>>> 2fe4c77 (done index)
 </body>
 
 </html>

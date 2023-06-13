@@ -15,10 +15,6 @@ $(document).ready(function(){
         
         $date = $('#selectDate').val();
         $Venue_name = $('#Venue_name').val();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 72563ee (doneviews)
         // format date into day 29-05-2023 to Tuesday
         const selectDated =  new Date($date);
         const day = selectDated.getDay();
@@ -30,11 +26,6 @@ $(document).ready(function(){
         let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
 
         console.log();
-<<<<<<< HEAD
-=======
->>>>>>> e755e8f (done)
-=======
->>>>>>> 72563ee (doneviews)
         if($date!==""){
             if($Venue_name!=="Select Venue")
             {
@@ -44,18 +35,8 @@ $(document).ready(function(){
                     data: { selectdatee:$date,venue_name:$Venue_name },
                     success: function(data){
                         console.log(data);
-<<<<<<< HEAD
-<<<<<<< HEAD
                         $('#showDate').html(`${da} ${mo} ${ye}`);
                         $('#showDay').html(dayNames[day]);
-=======
-                        $('#showDate').html($date);
-                        $('#showDay').html($date);
->>>>>>> e755e8f (done)
-=======
-                        $('#showDate').html(`${da} ${mo} ${ye}`);
-                        $('#showDay').html(dayNames[day]);
->>>>>>> 72563ee (doneviews)
                         $('#dayList').html(" ");
                         $('#dayList').append(data);
                         
