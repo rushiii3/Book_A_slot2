@@ -1,0 +1,47 @@
+
+CREATE TABLE `DEPARTMENT`(
+    department_name varchar(255),
+    CONSTRAINT NAME_OF_DEPT PRIMARY KEY(department_name)
+    );
+
+CREATE TABLE `USER`(
+	user_name varchar(255),
+    user_full_name varchar(255),
+    pwd varchar(50) NOT NULL,
+    department_name varchar(255),
+    user_type varchar(20),
+    CONSTRAINT USER_PK PRIMARY KEY(user_name),
+    CONSTRAINT DEPARTMENT_FK FOREIGN KEY(department_name) REFERENCES DEPARTMENT(department_name) ON UPDATE CASCADE,
+    CONSTRAINT USER_TYPE_CHECK CHECK (user_type='a' OR user_type='o')
+    );
+CREATE TABLE `AUDI_ROOM`(
+    ar_name varchar(255),
+    floor varchar(255),
+    capacity int(20),
+    CONSTRAINT AudiRoom_PK PRIMARY KEY(ar_name)
+    )
+CREATE TABLE `EVENT`(
+    event_id int,
+    event_name varchar(255),
+    event_date date,
+    event_start_time time,
+    event_end_time time,
+    event_description varchar(255),
+    students_total_number int(50),
+    status_value varchar(50),
+    status_reason varchar(255),
+    user_name varchar(255),
+    ar_name varchar(255),
+    CONSTRAINT EVENT_PK PRIMARY KEY(event_id),
+    CONSTRAINT USER_FK FOREIGN KEY(user_name) REFERENCES USER(user_name),
+    CONSTRAINT AudiRoom_fk FOREIGN KEY(ar_name) REFERENCES AUDI_ROOM(ar_name)
+    );
+
+CREATE TABLE `RESOURCE_PERSON`(
+    full_name varchar(255),
+    company_name varchar(255),
+    designation varchar(255),
+    experience varchar(255),
+    event_id int,
+    CONSTRAINT EVENT_REF FOREIGN KEY(event_id) REFERENCES event(event_id)
+    );
