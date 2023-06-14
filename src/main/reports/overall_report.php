@@ -8,11 +8,8 @@ include '../connection/connect.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Summary Report</title>
-<<<<<<< HEAD
     <link type="image/png" sizes="16x16" rel="icon" href="../../img/logo11.jpeg" />
 
-=======
->>>>>>> 4f687d3 (Add files)
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" integrity="sha512-5SUkiwmm+0AiJEaCiS5nu/ZKPodeuInbQ7CiSrSnUHe11dJpQ8o4J1DU/rw4gxk/O+WBpGYAZbb8e17CDEoESw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -31,19 +28,7 @@ include '../connection/connect.php';
         <div class="row">
             <div class="col-md-10 col-lg-10 m-auto">
             <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                 include '../admin/admin_navbar.html';
-=======
-                include '../navigation.html';
->>>>>>> 677e8c8 (all reports)
-=======
-                include '../user/navigation.html';
->>>>>>> 20ec2bd (seperate folders)
-=======
-                include '../admin/admin_navbar.html';
->>>>>>> f06e2d6 (view by list)
                 ?>
                 <button class="btn btn-primary w-50 m-auto d-flex justify-content-center fw-bolder" style="align-items: center;">OVERALL SUMMARY</button>
 
@@ -58,17 +43,10 @@ include '../connection/connect.php';
                             </div>
                             <div class="col-md-6 col-lg-6 my-5">
                                 <?php
-<<<<<<< HEAD
                                 $most_occupied_ar="SELECT ar_name as first_ar,count(ar_name) as occurance from `EVENT` where status_value='approved' group by ar_name order by occurance desc LIMIT 1 ";
                                 $result=mysqli_query($con,$most_occupied_ar);
                                 $row=mysqli_fetch_assoc($result);
                                 $ar_name= $row['first_ar'];
-=======
-                                $most_occupied_ar="select max(ar_name) from `EVENT` where status_value='approved' ";
-                                $result=mysqli_query($con,$most_occupied_ar);
-                                $row=mysqli_fetch_assoc($result);
-                                $ar_name= $row['max(ar_name)'];
->>>>>>> 4f687d3 (Add files)
                                 echo "<h2>Maximum time events occured in <strong class='fw-bolder'> $ar_name </strong> </h2>"
                                 ?>
                             </div>
@@ -84,32 +62,14 @@ include '../connection/connect.php';
                             <div class="col-md-6 col-lg-6">
                             <img src="https://images.pexels.com/photos/1963622/pexels-photo-1963622.jpeg?auto=compress&cs=tinysrgb&w=600">
                             </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> 4f687d3 (Add files)
                             <div class="col-md-6 col-lg-6 my-5">
                                 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
                                 $organizer="SELECT count(organization_institute) as max_organizer,organization_institute from `event` where status_value='approved' GROUP by organization_institute order by max_organizer desc limit 1";
                                 $result=mysqli_query($con,$organizer);
                                 $row=mysqli_fetch_assoc($result);
                                 $organization_institute= $row['organization_institute'];
                                 $count=$row['max_organizer'];
-=======
-                                $organizer="select max(organization_institute) from `EVENT` where status_value='approved' ";
-                                $result=mysqli_query($con,$organizer);
-                                $row=mysqli_fetch_assoc($result);
-                                $organization_institute= $row['max(organization_institute)'];
->>>>>>> 677e8c8 (all reports)
-=======
-                                $organizer="SELECT count(organization_institute) as max_organizer,organization_institute from `event` where status_value='approved' GROUP by organization_institute order by max_organizer desc limit 1";
-                                $result=mysqli_query($con,$organizer);
-                                $row=mysqli_fetch_assoc($result);
-                                $organization_institute= $row['organization_institute'];
-                                $count=$row['max_organizer'];
->>>>>>> 1896fe1 (changes done)
                                 echo "<h2>Most of the events organized by <strong class='fw-bolder'> $organization_institute </strong> </h2>"
                                 ?>
                             </div>
@@ -162,7 +122,6 @@ include '../connection/connect.php';
                         </div>
                     </div>
                 </div> 
-<<<<<<< HEAD
                 <!-- new row -->
                 <div class="row mt-5">
                     <!-- row2 -->
@@ -263,9 +222,6 @@ include '../connection/connect.php';
                         </div>
                     </div>
                 </div>          
-=======
-
->>>>>>> 4f687d3 (Add files)
             </div>
         </div>
 </div>           
