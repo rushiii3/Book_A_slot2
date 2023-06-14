@@ -1,13 +1,5 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
 include '../connection/connect.php';
-=======
-include './connection/connect.php';
->>>>>>> db0b766 (done)
-=======
-include '../connection/connect.php';
->>>>>>> f06e2d6 (view by list)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +21,6 @@ include '../connection/connect.php';
         </style>
 </head>
 <?php
-<<<<<<< HEAD
 if(isset($_POST['update_dept'])){
   $department_name=$_POST['department_name_original'];
     $dept=$_POST['department_name_new'];
@@ -58,8 +49,6 @@ if(isset($_POST['update_dept'])){
         header("location:./admin_home.php?update_dept");
       }}
 }
-=======
->>>>>>> 4f687d3 (Add files)
 if(isset($_POST['no'])){
     header('location:./admin_home.php?update_dept');
 }
@@ -67,14 +56,7 @@ if(isset($_POST['no'])){
 <body class=' text-center w-50 m-auto'>
     <div class="con1 mt-3 ">
     <h1 class='text-center text-primary'>Update Department</h1>
-<<<<<<< HEAD
-<<<<<<< HEAD
     <div class="table-responsive-sm col-lg-10 col-sm-12">
-=======
->>>>>>> db0b766 (done)
-=======
-    <div class="table-responsive-sm col-lg-10 col-sm-12">
->>>>>>> f06e2d6 (view by list)
     <table  class='table table-bordered my-4' style="align-items:center">
     <thread class="bg-light">
         <tr >
@@ -102,48 +84,10 @@ if(isset($_POST['no'])){
         </tbody>    
     </table>
     </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
     </div>
-=======
->>>>>>> db0b766 (done)
-=======
-    </div>
->>>>>>> f06e2d6 (view by list)
     <?php
     // to update data
-<<<<<<< HEAD
     
-=======
-    if(isset($_POST['update_dept'])){
-  $department_name=$_POST['department_name_original'];
-    $dept=$_POST['department_name_new'];
-    if($dept==''){
-      $sql="UPDATE `DEPARTMENT` set department_name='$department_name' where department_name='$department_name' ";
-      $result=mysqli_query($con,$sql);
-      if($result){
-        //echo "<p class='text-aign'>Data updated Successfully ";
-        header("location:./admin_home.php?update_dept");
-      }
-      else{
-        echo "<p class='text-aign'>Data Is Not updated Successfully ";
-        header("location:./admin_home.php?update_dept");
-      }
-
-    }
-    else{
-    $sql="UPDATE `DEPARTMENT` set department_name='$dept' where department_name='$department_name' ";
-      $result=mysqli_query($con,$sql);
-      if($result){
-        //echo "<p class='text-aign'>Data updated Successfully ";
-        header("location:./admin_home.php?update_dept");
-      }
-      else{
-        echo "<p class='text-aign'>Data Is Not updated Successfully ";
-        header("location:./admin_home.php?update_dept");
-      }}
-}
->>>>>>> 4f687d3 (Add files)
 ?>
 <script>
   function confirmupdate(self){

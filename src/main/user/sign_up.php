@@ -64,7 +64,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailVerify" placeholder="e.g. abc@vazecollege.net" required>
+                            <input type="text" name="email" class="form-control" id="email" aria-describedby="emailVerify" placeholder="e.g. abc@vazecollege.net" required>
                             <div id="emailVerify" class="form-text"></div>
                         </div>
                         <div class="mb-3">
@@ -112,7 +112,7 @@
                     </form>
                 </div>
                 <div class="p-4 col-lg-6">
-                    <img src="https://img.freepik.com/premium-vector/online-registration-sign-up-with-man-sitting-near-smartphone_268404-95.jpg?w=1480" alt="" class="img-fluid" />
+                    <img src="https://img.freepik.com/premium-vector/online-registration-sign-up-with-man-sitting-near-smartphone_268404-95.jpg?w=1480" alt="" class="img-fluid h-auto" />
                     <p class="text-center mt-5">
                         <a href="sign_in.php"  class="link-dark">Already have an account? Sign in</a>
                     </p>

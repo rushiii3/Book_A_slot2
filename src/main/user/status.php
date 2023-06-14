@@ -27,6 +27,11 @@
     include("../config/session.php");
     require "../connection/connect.php";
     require_once("../loader.html");
+    if($user_type=="o")
+  {
+  }else{
+    echo("<script>window.location='../user/sign_in.php';</script>");
+  }
     ?>
     <main id="main">
         <?php
@@ -76,13 +81,13 @@
                                         <p class="card-text bg-secondary text-white w-100 rounded p-2"> <span class="fw-bold">Reason: </span> <?php echo ($row_of_query['status_reason']); ?> </p>
                                     <?php
                                     } else {
-                                        if($event_status=="Open")
-                                        {
-                                            ?>
-                                            <button type="button" class="btn btn-primary btn-primary w-100 my-1" >Close Event</button>
-
-                                            <?php
-                                        }else{
+                                        
+                                            date_default_timezone_set('Asia/Kolkata');
+                            if($row_of_query['event_status']=="Open" && date('Y-m-d')>=$row_of_query['event_date'])
+                            {?>
+                                <a href="close_event_form.php?event_id=<?php echo $row_of_query['event_id']; ?>" class="btn btn-primary btn-primary w-100 my-1" role="button">Close Event</a>
+                                <?php
+                            }else{
                                             ?>
                                                 <a href="cancel.php">What to cancel the event?</a>
                                             <?php

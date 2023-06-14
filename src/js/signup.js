@@ -10,17 +10,30 @@ $(document).ready(function(){
      $('#full_name').bind('keypress', testInput);
     
     $('#email').on('input',function(){
-        var regex = /^([A-Za-z0-9_\-\.])+\@(vazecollege.net)$/;
         var email = $('#email').val();
-        if (!regex.test(email)) {
-            $('#emailVerify').text("Invalid email!").css("color", "red");
-            $('#email').css("border-color","red");
-        }
-        else {
-            $('#emailVerify').text("Valid email!").css("color", "green");
+        $.ajax({
+            type: 'POST',
+            url: 'ajax.php',
+            data: {sign_up_email : email},
+            success: function(data) {
+                console.log(data);
+                if(data==1)
+                {
+                    $('#emailVerify').text("Valid email!").css("color", "green");
             $('#email').css("border-color","green");
-        }
+                }
+                else
+                {
+                    $('#emailVerify').text("Invalid email!").css("color", "red");
+            $('#email').css("border-color","red");
+                }
+            },
+            error: function() {
+                console.log(response.status);
+            },
+        })
     })
+
     $('.pass_icon').on('click',function(){
         if('password' == $('#password').attr('type')){
             $('#password').prop('type', 'text');

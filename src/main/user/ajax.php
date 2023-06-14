@@ -46,6 +46,7 @@ if (!empty($_POST['email_login']) &&
             session_start();
             $_SESSION["user_email"] = $email;
             $_SESSION["user_full_name"] = $user_full_name;
+            $_SESSION["user_type"] = $user_type;
         }
 
 
@@ -341,5 +342,20 @@ if(!empty($_POST['event_id_change']) && !empty($_POST['imglink']))
 {
     echo($_POST['imglink']);
 }
+
+
+if(!empty($_POST['sign_up_email']))
+{
+    $email = $_POST['sign_up_email'];
+    $query_to_search_email = "SELECT * FROM USER WHERE user_name = '$email'";
+    if(mysqli_num_rows(mysqli_query($con,$query_to_search_email))>0)
+    {
+        echo("1");
+    }else{
+        echo("2");
+    }
+}
+
+
 mysqli_close($con);
 ?>

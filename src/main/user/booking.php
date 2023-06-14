@@ -31,7 +31,11 @@
          include("../config/session.php");
          require "../connection/connect.php";
          require_once("../loader.html"); 
-         
+         if($user_type=="o")
+  {
+  }else{
+    echo("<script>window.location='../user/sign_in.php';</script>");
+  }
      ?>
     <main id="main">
 
@@ -112,15 +116,14 @@ It is a long established fact that a reader will be distracted by the readable c
                         while($row = mysqli_fetch_assoc($result_of_closed_event))
                         {
                             date_default_timezone_set('Asia/Kolkata');
-                            if($row['event_status']=="Open" && date('Y-m-d')>$row['event_date'])
+                            if($row['event_status']=="Open" && date('Y-m-d')>=$row['event_date'])
                             {
+                                
                                 array_push($open_closed,"open");
-                            }else{
-                                array_push($open_closed,"close");
                             }
                         }
                     }
-                               if(array_search("open",$open_closed))
+                               if(sizeof($open_closed)>0)
                                {
                                 ?>
                                 <p class="fw-bold text-center fs-3" style="margin-top:15rem;margin-bottom:10rem;">Please Close the previous event.</p>
@@ -464,9 +467,14 @@ It is a long established fact that a reader will be distracted by the readable c
             $result_of_blocked_date_query = mysqli_query($con,$get_blocked_date_query);
             if(mysqli_num_rows($result_of_blocked_date_query)>0){
                 while($row_of_blocked_date = mysqli_fetch_assoc($result_of_blocked_date_query))
-                {?>
-                    '<?php echo($row_of_blocked_date['datee']); ?>',
-                <?php
+                {
+                     $date = date("Y-m-d", strtotime("-1 years", strtotime($row_of_blocked_date['datee'])));
+                     for($i=0;$i<=5;$i++)
+                     {?>
+                        '<?php echo(date("Y-m-d", strtotime("+$i years", strtotime($row_of_blocked_date['datee']))));?>',
+                    <?php
+                     } 
+                
                 }
             }
         ?>

@@ -7,11 +7,6 @@ if(!isset($_SESSION["user_email"]) )
 else{
   $user_email = $_SESSION["user_email"];
   $user_name = $_SESSION["user_full_name"];
-  //$user_type = $_SESSION["user_type"];
-  /*
-  if($user_type!=="p")
-  {
-    echo("<script>window.location='../user/sign_in.php';</script>");
-  }*/
+  $user_type = $_SESSION["user_type"];
 }
 ?>

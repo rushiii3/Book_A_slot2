@@ -1,13 +1,5 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
 include '../connection/connect.php';
-=======
-include '../other/connection/connect.php';
->>>>>>> db0b766 (done)
-=======
-include '../connection/connect.php';
->>>>>>> 20ec2bd (seperate folders)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,11 +8,8 @@ include '../connection/connect.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DELETE</title>
-<<<<<<< HEAD
     <link type="image/png" sizes="16x16" rel="icon" href="../../img/logo11.jpeg" />
 
-=======
->>>>>>> 4f687d3 (Add files)
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -37,15 +26,7 @@ include '../connection/connect.php';
         </style>
 </head>
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
   include '../connection/connect.php';
-=======
-  include './connection/connect.php';
->>>>>>> db0b766 (done)
-=======
-  include '../connection/connect.php';
->>>>>>> 20ec2bd (seperate folders)
 //to delete record
 if(isset($_POST['no'])){
   header('location:./admin_home.php?delete_ar');
@@ -112,15 +93,7 @@ function confirmdelete(self){
      <form action="delete_ar.php" method='post' id='form_data'>
       <div class="modal-body">
        <h4>Are you sure you want to delete this?</h4>
-<<<<<<< HEAD
-<<<<<<< HEAD
        <input type="hidden" name="ar_name">
-=======
-       <input type="text" name="ar_name">
->>>>>>> db0b766 (done)
-=======
-       <input type="hidden" name="ar_name">
->>>>>>> 20ec2bd (seperate folders)
       </div>
       <div class="modal-footer">
       <button type="submit" class="btn btn-secondary" name='no' >No</button>

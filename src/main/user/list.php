@@ -28,6 +28,11 @@
     include("../config/session.php");
     require "../connection/connect.php";
     require_once("../loader.html");
+    if($user_type=="o")
+  {
+  }else{
+    echo("<script>window.location='../user/sign_in.php';</script>");
+  }
     ?>
     <main id="main">
         <?php

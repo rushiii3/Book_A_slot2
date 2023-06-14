@@ -1,5 +1,28 @@
 $('.pass_open_eye').hide();
 $('.cpass_open_eye').hide();
+$('#sendOtp').hide();
+$('#email').on('input',function(){
+    var email = $('#email').val();
+    $.ajax({
+        type: 'POST',
+        url: 'ajax.php',
+        data: {sign_up_email : email},
+        success: function(data) {
+            console.log(data);
+            if(data==1)
+            {
+                $('#sendOtp').show();
+            }
+            else
+            {
+                $('#sendOtp').hide();
+            }
+        },
+        error: function() {
+            console.log(response.status);
+        },
+    })
+})
 $('.pass_icon').on('click',function(){
     if('password' == $('#password').attr('type')){
         $('#password').prop('type', 'text');
