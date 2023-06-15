@@ -59,42 +59,61 @@ if(isset($_POST['approve_event_id'])){
         $row=mysqli_fetch_assoc($result);
         $email=$row['user_name'];
         $status_value=$row['status_value'];
-        $event_name=$row['event_name'];
+        $event_name = $row['event_name'];
         $event_date=$row['event_date'];
+        $event_description = $row['event_description'];
+        $event_start_time = $row['event_start_time'];
         $query_for_name="select * from `USER` where user_name='$email' ";
         $result1=mysqli_query($con,$query_for_name);
         $row=mysqli_fetch_assoc($result1);
         $name=$row['user_full_name'];
     
+
+// API endpoint URL
+$apiUrl = 'https://alumniandroidapp.000webhostapp.com/EventInsertApi3.php?apikey=12345';
+
+// Data to be sent in the request body
+$data = array(
+    'event_name' => $event_name,
+    'event_description' => $event_description,
+    'event_date' => $event_date,
+    'event_time' => $event_start_time,
+    'event_image' => 'event_image',
+    'event_registration_link' => '#'
+);
+
+// Convert data to JSON
+$jsonData = json_encode($data);
+
+// Initialize curl
+$curl = curl_init();
+
+// Set curl options
+curl_setopt_array($curl, array(
+    CURLOPT_URL => $apiUrl,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json',
+    ),
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => $jsonData,
+));
+
+// Execute curl request
+$response = curl_exec($curl);
+
+// Check for errors
+if ($response === false) {
+    echo 'Error: ' . curl_error($curl);
+} else {
+    // Display the response
+    echo $response;
+}
+
+// Close curl
+curl_close($curl);
+
     if($result){
-      $curl = curl_init();
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://alumniandroidapp.000webhostapp.com/EventInsertFromAudiBookingApi.php?apikey=12345',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'GET',
-          CURLOPT_POSTFIELDS =>'{
-            "event_name":"'.$event_name.'",
-            "event_description":"'.$event_description.'",
-            "event_date":"'.$event_date.'",
-            "event_time":"'.$event_start_time.'",
-            "event_image":"event_image",
-            "event_registration_link":"https://www.google.com"
-        
-        }',
-          CURLOPT_HTTPHEADER => array(
-            'Content-Type: application/json'
-          ),
-        ));
-
-        $response = curl_exec($curl);
-        curl_close($curl);
-        echo $response;
-
        //echo "<script>sendEmail()</script>";
        //header("location:./admin_home.php");
 header("location:./email_of_approved_event.php?event_id=$event_id");
