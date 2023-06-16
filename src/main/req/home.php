@@ -61,7 +61,7 @@
   <?php
     require("../config/session.php");
     require_once("../loader.html");
-    if($user_type=="o" || $user_type=="k")
+    if($user_type=="r")
   {
   }else{
     echo("<script>window.location='../user/sign_in.php';</script>");
@@ -70,7 +70,7 @@
   
   <main id="main">
     <?php
-      include("navbar.php");
+      include("navigation.html");
     ?>
 
     <div class="container-fluid">

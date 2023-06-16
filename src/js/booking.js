@@ -103,8 +103,6 @@ $('#nextFirst').on('click',function()
                   {
                     if($Institute_OrgName_phone_no.length===10)
                     {
-                      if($Institute_OrgName_transaction_id!=="")
-                      {
                         $step.eq(0).removeClass("active");
                         $step.eq(0).addClass("completed");
                         $('.section1').fadeOut();
@@ -112,9 +110,6 @@ $('#nextFirst').on('click',function()
                         $('.section2').fadeIn();
                         $('.section2').show();
                         $step.eq(1).addClass("active");
-                      }else{
-                        alert("Please Input the Transaction Id");
-                      }
                     }else{
                       alert("Please Input the valid Institute/Organisation Phone Number");
                     }

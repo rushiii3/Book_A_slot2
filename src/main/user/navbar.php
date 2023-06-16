@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +12,6 @@
         }
     </style>
 </head>
-<?php
-         include("../config/session.php");
-         require "../connection/connect.php";
-         require_once("../loader.html"); 
-     ?>
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid p-1">
@@ -43,25 +37,16 @@
                         <a class="nav-link mx-1 px-3 fw-bold" href="booking.php">Book Slot</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-1 px-3 fw-bold" href="status.php">Check Status</a>
+                        <a class="nav-link mx-1 px-3 fw-bold" href="<?php if($user_type=="o")
+  {
+    echo"status.php";
+  }else{
+    echo"status_outsider.php";
+  } ?>">Check Status</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link mx-1 px-3 fw-bold" href="cancel.php">Cancel Slot</a>
                     </li>
-                    <?php
-                     $list_of_open_events="SELECT * from `EVENT` where event_date<CURDATE() and status_value='approved' and event_status='Open' and user_name='$user_email'";
-                     $result=mysqli_query($con,$list_of_open_events);
-                     $count=0;
-                     while($row=mysqli_fetch_assoc($result)){
-                        $count++;
-                     }
-                     
-                    if($count>=1){
-                        echo '<li class="nav-item">
-                        <a class="nav-link mx-1 px-3 fw-bold" href="../user/list_of_open_events.php">See Opened Events</a>
-                    </li>';
-                    }
-                    ?>
                     <li class="nav-item">
                         <a class="nav-link mx-1 px-3 fw-bold" id="logout" href="../config/logout.php" style="background-color: rgba(0,77,255,0.5);border-radius: 20px;color: white;">Logout</a>
                     </li>

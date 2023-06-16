@@ -31,7 +31,7 @@
          include("../config/session.php");
          require "../connection/connect.php";
          require_once("../loader.html"); 
-         if($user_type=="o")
+         if($user_type=="o" || $user_type=="k")
   {
   }else{
     echo("<script>window.location='../user/sign_in.php';</script>");
@@ -40,7 +40,7 @@
     <main id="main">
 
         <?php
-     include("navigation.html");
+     include("navbar.php");
     ?>
 
 
@@ -218,12 +218,7 @@ It is a long established fact that a reader will be distracted by the readable c
                                     <div class="col-12 mb-3" id="org_institue_phone">
                                             <label for="Institute_Org_Name_phone_no" class="form-label">Phone Number</label>
                                             <input type="number" name="Institute_OrgName_phone_no"  class="form-control" id="Institute_OrgName_phone_no" placeholder="e.g. ....... " pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" >
-                                    </div>
-                                    <div class="col-12 mb-3" id="org_institue_transaction_id">
-                                            <label for="Institute_Org_Name_transaction_id" class="form-label">Transaction ID / RTGS</label>
-                                            <input type="text" name="Institute_OrgName_transaction_id" class="form-control" id="Institute_OrgName_transaction_id" placeholder="e.g. ....... ">
-                                    </div>
-                                        
+                                    </div>    
                                         <div class="col-12 mb-1 mt-5">
                                             <button type="button" class="btn btn-primary px-4 ms-3" id="nextFirst">Next</button> 
                                         </div>
@@ -386,6 +381,18 @@ It is a long established fact that a reader will be distracted by the readable c
                                                     Laptop
                                                 </label>
                                         </div>
+                                        <div class="col-12 mb-3">
+                                            <label for="select_no_of_chairs" class="form-label">No. of chairs required on dias</label>
+                                            <select class="form-select" name="select_no_of_chairs" id="select_no_of_chairs" aria-label="select_no_of_chairs">
+                                                    <option selected>Select No. of chairs required on dias </option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                        
                                         <div class="col-12 mb-1 mt-5">
                                             <button type="button" class="btn btn-secondary px-4 ms-3" id="prevBtnThird">Previous</button>
                                             <button type="button" class="btn btn-primary px-4 ms-3" id="nextThird">Next</button> 

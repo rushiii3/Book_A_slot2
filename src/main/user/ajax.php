@@ -9,8 +9,7 @@ if (!empty($_POST['fullname']) &&
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $department_namee = mysqli_real_escape_string($con, $_POST['department_namee']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
-    $insert_user_info = "INSERT INTO `USER` (`user_name`, `user_full_name`, `pwd`, `department_name`, `user_type`) VALUES ('$email', '$user_name', '$password', '$department_namee', 'o')";
-
+    $insert_user_info = "UPDATE `USER` SET `department_name` = '$department_namee', `user_full_name` = '$user_name',`pwd` = '$password' WHERE `USER`.`user_name` = '$email' ";
     if (mysqli_query($con, $insert_user_info)) {
         echo ("1");
     } else {
@@ -32,7 +31,7 @@ if (!empty($_POST['email_login']) &&
             $user_email = $row["user_name"];
             $user_full_name = $row["user_full_name"];
             $user_type = $row["user_type"];
-            if ($user_type == "o") {
+            if ($user_type == "o" || $user_type == "k") {
                 echo ("1");
             } elseif($user_type == "a") {
                 echo ("2");
@@ -40,8 +39,10 @@ if (!empty($_POST['email_login']) &&
                 echo ("3");
             }elseif($user_type == "i") {
                 echo ("4");
+            }elseif($user_type == "r") {
+                echo ("5");
             }else{
-                echo("5");
+                echo("6");
             }
             session_start();
             $_SESSION["user_email"] = $email;
@@ -263,8 +264,6 @@ if(!empty($_POST['user_email'])
             &&
     !empty($_POST['Institute_OrgName_phone_no'])
             &&
-    !empty($_POST['Institute_OrgName_transaction_id'])
-            &&
     !empty($_POST['others'])
 )
 {
@@ -288,10 +287,9 @@ if(!empty($_POST['user_email'])
     $Institute_OrgName = mysqli_real_escape_string($con, $_POST['Institute_OrgName']);
     $Institute_OrgName_email = mysqli_real_escape_string($con, $_POST['Institute_OrgName_email']);
     $Institute_OrgName_phone_no = mysqli_real_escape_string($con, $_POST['Institute_OrgName_phone_no']);
-    $Institute_OrgName_transaction_id = mysqli_real_escape_string($con, $_POST['Institute_OrgName_transaction_id']);
 
     $query_insert_event_for_outsider = "INSERT INTO `EVENT` (`event_id`, `event_name`, `event_date`, `event_start_time`, `event_end_time`, `event_description`, `students_total_number`, `status_value`, `organization_institute`, `request_date_time`, `user_name`, `ar_name`, `event_requriement`) VALUES ('$FourDigitRandomNumber','$event_name','$event_date','$event_start_time','$event_end_time','$event_Descr','$num_of_students','Pending','$department_namee','$timestamp','$user_email','$Venue_name','$requriment')";
-    $query_to_insert_outsider_info = "INSERT INTO `OUTSIDER_INFO` (`outsider_name`, `outsider_email`, `outsider_phone`, `outsider_transaction_id`, `outsider_payment_date`, `event_id`) VALUES ('$Institute_OrgName', '$Institute_OrgName_email', '$Institute_OrgName_phone_no', '$Institute_OrgName_transaction_id', '2023-06-15', '$FourDigitRandomNumber')";
+    $query_to_insert_outsider_info = "INSERT INTO `OUTSIDER_INFO` (`outsider_name`, `outsider_email`, `outsider_phone`, `event_id`) VALUES ('$Institute_OrgName', '$Institute_OrgName_email', '$Institute_OrgName_phone_no', '$FourDigitRandomNumber')";
     if(mysqli_query($con,$query_insert_event_for_outsider))
     {
         if(mysqli_query($con,$query_to_insert_outsider_info))
@@ -356,6 +354,19 @@ if(!empty($_POST['sign_up_email']))
     }
 }
 
+if(!empty($_POST['transaction_event_id']) && !empty($_POST['transaction_id_for_event']) && !empty($_POST['transaction_date_for_event']))
+{
+    $id= mysqli_real_escape_string($con, $_POST['transaction_event_id']);
+    $transaction = mysqli_real_escape_string($con, $_POST['transaction_id_for_event']);
+    $transaction_date = date('Y-m-d', strtotime($_POST["transaction_date_for_event"]));
+    $query_to_update = "UPDATE `OUTSIDER_INFO` SET outsider_transaction_id = '$transaction', outsider_payment_date='$transaction_date' WHERE event_id = '$id'";
+    if(mysqli_query($con,$query_to_update))
+    {
+        echo("1");
+    }else{
+        echo("2");
+    }
+}
 
 mysqli_close($con);
 ?>

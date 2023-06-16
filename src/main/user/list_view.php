@@ -27,7 +27,7 @@
     include("../config/session.php");
     require "../connection/connect.php";
     require_once("../loader.html");
-    if($user_type=="o")
+    if($user_type=="o" || $user_type=="k")
   {
   }else{
     echo("<script>window.location='../user/sign_in.php';</script>");
@@ -35,7 +35,7 @@
     ?>
     <main id="main">
         <?php
-        include("navigation.html");
+        include("navbar.php");
         ?>
         <?php
         if ($_GET['id'] == "") {

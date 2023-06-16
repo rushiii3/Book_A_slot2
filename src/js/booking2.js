@@ -8,18 +8,18 @@ $('#FinalSubmit').on('click',function(e)
     $Institute_OrgName = $('#Institute_OrgName').val();
     $Institute_OrgName_email = $('#Institute_OrgName_email').val();
     $Institute_OrgName_phone_no = $('#Institute_OrgName_phone_no').val();
-    $Institute_OrgName_transaction_id = $('#Institute_OrgName_transaction_id').val();
     $Venue_name = $('#Venue_name').val();
     $event_date = $('#selectDate').val();
     $event_start_time = $('#selectStartTime').val();
     $event_end_time = $('#selectEndTime').val();
     $no_of_rp = $('#no_of_rp').val();
-    
+    $select_no_of_chairs = $('#select_no_of_chairs').val();
     if($("input[name='checkArr']").is(':checked') )
     {
         $requriment = $("input[name='checkArr']:checked").map(function() {
             return this.value;
         }).get().join(', ');
+        $requriment =  $requriment+', No of chairs and dias = '+$select_no_of_chairs;
     }else{
         $requriment = "None";
     }
@@ -50,7 +50,7 @@ $('#FinalSubmit').on('click',function(e)
         $.ajax({
             type: 'POST',
             url: 'ajax.php',
-            data: {user_email:$user_email, event_name:$event_name, event_Descr:$event_Descr, num_of_students:$num_of_students , department_namee:$department_namee, Venue_name:$Venue_name, event_date:$event_date, event_start_time:$event_start_time, event_end_time:$event_end_time, requriment:$requriment, rp_names:rp_names, company_names:company_names, designations:designations, experience:experience, Institute_OrgName:$Institute_OrgName, Institute_OrgName_email:$Institute_OrgName_email, Institute_OrgName_phone_no:$Institute_OrgName_phone_no, Institute_OrgName_transaction_id:$Institute_OrgName_transaction_id, others:others  },
+            data: {user_email:$user_email, event_name:$event_name, event_Descr:$event_Descr, num_of_students:$num_of_students , department_namee:$department_namee, Venue_name:$Venue_name, event_date:$event_date, event_start_time:$event_start_time, event_end_time:$event_end_time, requriment:$requriment, rp_names:rp_names, company_names:company_names, designations:designations, experience:experience, Institute_OrgName:$Institute_OrgName, Institute_OrgName_email:$Institute_OrgName_email, Institute_OrgName_phone_no:$Institute_OrgName_phone_no, others:others  },
             success: function(data){
                 console.log(data);
                 if(data==1)

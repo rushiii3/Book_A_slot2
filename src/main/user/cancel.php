@@ -23,7 +23,7 @@
          include("../config/session.php");
          require "../connection/connect.php";
          require_once("../loader.html"); 
-         if($user_type=="o")
+         if($user_type=="o" || $user_type=="k")
             {
             }else{
                 echo("<script>window.location='../user/sign_in.php';</script>");
@@ -32,7 +32,7 @@
     <main id="main">
 
         <?php
-     include("navigation.html");
+     include("navbar.php");
     ?>
 
 <div class="modal fade" id="failed" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

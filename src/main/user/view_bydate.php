@@ -26,7 +26,7 @@
      include("../config/session.php");
      require "../connection/connect.php";
      require_once("../loader.html");
-     if($user_type=="o")
+     if($user_type=="o" || $user_type=="k")
   {
   }else{
     echo("<script>window.location='../user/sign_in.php';</script>");
@@ -35,7 +35,7 @@
     <main id="main">
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <?php
-        include("navigation.html");
+        include("navbar.php");
         ?>
         <div class="container mt-5 mb-5 shadow p-3 mb-5 bg-body" style="border-radius: 20px;width:90%;">
             <div class="row p-3">

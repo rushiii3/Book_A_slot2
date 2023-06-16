@@ -39,6 +39,10 @@ $(document).ready(function(){
                 {
                     window.location.href = '../admin/admin_home.php';
                 }
+                else if(data==5)
+                {
+                    window.location.href = '../req/home.php';
+                }
                 else{
                     $('#failed').modal('show');
                     

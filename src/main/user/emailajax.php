@@ -1,4 +1,5 @@
 <?php
+/*
 require "../connection/connect.php";
 if(!empty($_POST['event_name'])
             &&
@@ -101,5 +102,5 @@ if(!empty($_POST['email']) && !empty($_POST['otp']))
     sendEmail()
   </script>
   <?php
-}
+}*/
 ?>

@@ -117,7 +117,6 @@ require "../connection/connect.php";
                                     while($row_of_outsider=mysqli_fetch_assoc($result_of_outsider_info))
                                     {
                                 ?>
-                                    <p class="card-text"> <span class="fw-bold">Transaction ID : </span> <?php echo ($row_of_outsider['outsider_transaction_id']); ?> </p>
                                     <p class="card-text"> <span class="fw-bold">Phone Number : </span> <?php echo ($row_of_outsider['outsider_phone']); ?> </p>
                                     <p class="card-text"> <span class="fw-bold">Name : </span> <?php echo ($row_of_outsider['outsider_name']); ?> </p>
                                     <p class="card-text"> <span class="fw-bold">Email : </span>  <?php echo ($row_of_outsider['outsider_email']); ?> </p>
