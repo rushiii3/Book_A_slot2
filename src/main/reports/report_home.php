@@ -52,7 +52,7 @@
         
         <div class="row">
                       <div class="col-lg-4 mb-5">
-                            <div class="card mx-auto shadow w-75  " id="card" style="border-radius:20px;height:12rem">
+                            <div class="card mx-auto shadow w-75  " id="card" style="border-radius:20px;height:15rem">
                             <button class="btn  mt-3 m-auto d-flex justify-content-center  " style="border-radius:20px;" data-toggle="modal" data-target="#exampleModalLabel" >
                                     
                                     <div class="card-body text-center text-black flex-fill ">
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="col-lg-4 mb-5">
-                            <div class="card mx-auto shadow w-75"  id="card" style="border-radius:20px;height:auto">
+                            <div class="card mx-auto shadow w-75"  id="card" style="border-radius:20px;height:15rem">
                             <button class="btn  mt-3 m-auto d-flex justify-content-center  " style="border-radius:20px;" data-toggle="modal" data-target="#dept_present" >
 
                                     
@@ -115,7 +115,7 @@
                         </div>
 
                         <div class="col-lg-4 mb-5">
-                            <div class="card mx-auto shadow w-75 "  id="card" style="border-radius:20px;height:12rem">
+                            <div class="card mx-auto shadow w-75 "  id="card" style="border-radius:20px;height:13rem">
                             <a href="../reports/room_occupacy.php" style="text-decoration:none;">
                                     <div class="card-body text-center text-black flex-fill">
                                     <h4 class="text-center fw-bold">ROOM OCCUPACY REPORT</h4>
@@ -127,7 +127,7 @@
                         </div>
 
                         <div class="col-lg-4 mb-5">
-                            <div class="card mx-auto shadow w-75 "  id="card" style="border-radius:20px;height:12rem">
+                            <div class="card mx-auto shadow w-75 "  id="card" style="border-radius:20px;height:13rem">
                             <a href="../reports/cancel_report.php" style="text-decoration:none;">
 
                                     
@@ -243,7 +243,7 @@
                     <label for="year" class="form-label fw-bold">select organization/institute who invited resource persons:</label>
                     <select name="organizer" class='w-50 m-auto' id="organizer">
                         <?php
-                        $get_organizations="SELECT distinct event.organization_institute FROM `EVENT` JOIN (SELECT event_id,full_name from `RESOURCE_PERSON` GROUP BY event_id)`resource_person` on event.event_id=resource_person.event_id where status_value='approved'";
+                        $get_organizations="SELECT distinct EVENT.organization_institute FROM `EVENT` JOIN (SELECT event_id,full_name from `RESOURCE_PERSON` GROUP BY event_id)`RESOURCE_PERSON` on EVENT.event_id=RESOURCE_PERSON.event_id where status_value='Approved' and RESOURCE_PERSON.full_name<>'NA'";
                         $result=mysqli_query($con,$get_organizations);
                         while($row=mysqli_fetch_assoc($result)){
                             $organizer=$row['organization_institute'];

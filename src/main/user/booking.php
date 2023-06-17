@@ -18,7 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="../../css/booking.css">
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="../../js/smtp.js"></script>
     <title>Book</title>
     <link type="image/png" sizes="16x16" rel="icon" href="../../img/logo11.jpeg" />
     

@@ -31,7 +31,7 @@ include '../connection/connect.php';
         </div>
 </div>
 <?php
-$get_organizer="select organization_institute,COUNT(organization_institute) as cancel_org FROM `EVENT` where status_value='Cancel' and organization_institute in (SELECT department_name from `DEPARTMENT`) GROUP BY organization_institute";
+$get_organizer="select organization_institute,COUNT(organization_institute) as cancel_org FROM `EVENT` where status_value='Canceled' and organization_institute <>'Others' GROUP BY organization_institute";
 $result=mysqli_query($con,$get_organizer);
 $organization=array();
 $count_cancel_org=array();
@@ -48,7 +48,7 @@ while($row=mysqli_fetch_assoc($result)){
         <div class="row">
             <div class="col-md-10 col-lg-10 m-auto d-flex justify-content-center">
                 <div class="chartBox">
-                    <h3 class="text-center">Count of event(s) Cancelled in each organization/institute</h3>
+                    <h3 class="text-center">Count of event(s) Cancelled in each department</h3>
                     <canvas id="cancelChart"></canvas>
                 </div>
             </div>
@@ -114,44 +114,30 @@ while($row=mysqli_fetch_assoc($result)){
 </script>
 <?php
 //code showing primary reason for cancellation
-$max_events_cancelled="SELECT count(status_reason),status_reason  as first_cancel_reason from `EVENT` where organization_institute in (SELECT department_name from `DEPARTMENT`)group by status_reason order by count(status_reason) desc limit 1";
+$max_events_cancelled="SELECT count(status_reason),status_reason  as first_cancel_reason from `EVENT` where organization_institute <>'Others' group by status_reason order by count(status_reason) desc limit 1";
 $result=mysqli_query($con,$max_events_cancelled);
 $row=mysqli_fetch_assoc($result);
 $first_cancel_reason=$row['first_cancel_reason'];
 //echo $first_cancel_reason;
-$get_reason="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE status_reason='$first_cancel_reason' and status_value='Cancel' GROUP by organization_institute";
+$get_reason="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE status_reason='$first_cancel_reason' and status_value='Canceled' GROUP by organization_institute";
 $result1=mysqli_query($con,$get_reason);
 while($row=mysqli_fetch_assoc($result1)){
     //echo $row['organization_institute'],$row['total'];
 }
 ?>
-<?php
 
-//code showing second primary reason for cancellation of event
-$second_max_events_cancelled="SELECT COUNT(status_value),status_value,status_reason as second_cancel_reason from `EVENT` where status_reason<>'$first_cancel_reason' and status_value='Cancel' and organization_institute in (SELECT  department_name from `DEPARTMENT`) GROUP by status_reason ORDER by COUNT(status_value) desc LIMIT 1";
-$result=mysqli_query($con,$second_max_events_cancelled);
-$row=mysqli_fetch_assoc($result);
-$second_cancel_reason=$row['second_cancel_reason'];
-//echo $second_cancel_reason;
-$get_reason="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE status_reason='$second_cancel_reason' and status_value='Cancel' GROUP by organization_institute";
-$result1=mysqli_query($con,$get_reason);
-?>
 <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-md-10 col-lg-10 m-auto">
                 <div class="row mt-5">
-                    <div class="col-md-5 col-lg-5 m-auto">
+                    <div class="col-md-6 col-lg-6 m-auto">
                         <h3 class="text-center"><strong>Primary</strong>  reason for events getting cancelled</h3>
                         <div id="piechart" style="width: 500px; height: 400px;"></div>
                         <!-- one piechart -->
                     </div>
-                    <div class="col-md-5 col-lg-5 m-auto">
-
-                     <h3 class="text-center"><strong>Second </strong>  reason for events getting cancelled</h3>
-                        <div id="pie" style="width: 500px; height: 400px;"></div>
-
-                    <!-- one piechart -->
-                    </div>
+                </div>
+            </div>
+        </div>
 <!-- piechart  for maximum event cancellation result-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -163,7 +149,7 @@ $result1=mysqli_query($con,$get_reason);
         var data = google.visualization.arrayToDataTable([
           ['organizations_institute', 'count'],
           <?php
-         $get_reason="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE status_reason like '%$first_cancel_reason%' and status_value='Cancel' GROUP by organization_institute";
+         $get_reason="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE status_reason like '%$first_cancel_reason%' and status_value='Canceled' GROUP by organization_institute";
          $result1=mysqli_query($con,$get_reason);
             while($row=mysqli_fetch_assoc($result1)){
                 echo "['".$row['organization_institute']."',".$row['total']."],";
@@ -173,37 +159,13 @@ $result1=mysqli_query($con,$get_reason);
         var options = {
           title: 'Events cancelled due to <?php echo $first_cancel_reason;?>',
           width:700,
-          height:600,
+          height:500,
         };
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
       }
     </script>
      <!-- piechart for second reson of cancellation -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['organizations_institute', 'count'],
-          <?php
-         $get_reason="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE status_reason like '%$second_cancel_reason%' and status_value='Cancel' GROUP by organization_institute";
-         $result1=mysqli_query($con,$get_reason);
-            while($row=mysqli_fetch_assoc($result1)){
-                echo "['".$row['organization_institute']."',".$row['total']."],";
-            }
-          ?>         
-        ]);
 
-        var options = {
-          title: 'Events cancelled due to  <?php echo $second_cancel_reason;?>',
-          width:700,
-          height:600,
-        };
-        var chart = new google.visualization.PieChart(document.getElementById('pie'));
-        chart.draw(data, options);
-      }
-    </script>
 </body>
 </html>

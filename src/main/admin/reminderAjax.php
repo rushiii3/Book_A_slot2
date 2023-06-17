@@ -1,68 +1,17 @@
 <?php
 include '../connection/connect.php';
-?>
+if(!empty($_POST['event_id'])
+&& !empty($_POST['email'])
+&& !empty($_POST['name'])
+&& !empty($_POST['event_name'])
+&& !empty($_POST['event_date'])){
+$event_id=$_POST['event_id'];
+$email=$_POST['email'];
+$name=$_POST['name'];
+$event_name=$_POST['event_name'];
+$event_date=$_POST['event_date'];
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>open events</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" integrity="sha512-5SUkiwmm+0AiJEaCiS5nu/ZKPodeuInbQ7CiSrSnUHe11dJpQ8o4J1DU/rw4gxk/O+WBpGYAZbb8e17CDEoESw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</head>
-<body>
-<?php
-if(isset($_GET['event_id'])){
-    $event_id=$_GET['event_id'];
-        $info_to_send_mail="select * from `EVENT` where event_id=$event_id ";
-        $result=mysqli_query($con,$info_to_send_mail);
-        $row=mysqli_fetch_assoc($result);
-        $email=$row['user_name'];
-        $status_value=$row['status_value'];
-        $status_reason=$row['status_reason'];
-        $event_name=$row['event_name'];
-        $event_date=$row['event_date'];
-        $query_for_name="select * from `USER` where user_name='$email' ";
-        $result1=mysqli_query($con,$query_for_name);
-        $row=mysqli_fetch_assoc($result1);
-        $name=$row['user_full_name'];
-        // if($result){
-        //     header("location:./remainder_email.php?event_id=$event_id");
-   
-        //    }
-      //  echo $event_id;
-    //     if(isset($result) and isset($result1)){
-    //         echo "<script>";
-    // echo "sendEmail();"; // Call your desired JavaScript function with the division ID
-    // echo "</script>";
-    //     header("location:./admin_home.php?open_event");
-    //     }
-
-}
 ?>
-<div class='container-fluid mt-5'>
-  <div class="row">
-    <div class="container d-flex align-items-center justify-content-center " style="height: 80vh;">
-    <div class="row">
-        <div class="rounded border border-light bg-light">
-            <h3>Click Here To Send Email</h3>
-         
-            <form method="post">
-              
-    <input type="submit" value="Send Email" onclick="sendEmail()" name='email_done'  >
-  </form>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-<?php
-if(isset($_POST['email_done'])){
-  header("location:./admin_home.php");
-}?>
 <div id="emailContent" style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; background-color: #f9f9f9;">
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"><style type="text/css">body, html { margin: 0px; padding: 0px; -webkit-font-smoothing: antialiased; text-size-adjust: none; width: 100% !important; }table td, table { }#outlook a { padding: 0px; }.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }.ExternalClass { width: 100%; }@media only screen and (max-width: 480px) {
@@ -156,8 +105,6 @@ data-new-gr-c-s-loaded="14.1091.0">
  </p>
 </div>
 
-
-<script src="https://smtpjs.com/v3/smtp.js"></script>
 <script>
 function sendEmail() {
   Email.send({
@@ -168,17 +115,9 @@ function sendEmail() {
     Body: document.getElementById('emailContent').innerHTML,
   }).then(message => alert(message));
 }
+sendEmail();
 </script>
+
 <?php
-function hideDivision($divisionId, $shouldHide) {
-if ($shouldHide) {
-    echo "<script>document.getElementById('$divisionId').style.display = 'none';</script>";
-}
 }
 ?>
-<?php
-// Call the function and pass the division ID and the condition
-hideDivision('emailContent', true);
-?>
-</body>
-</html>

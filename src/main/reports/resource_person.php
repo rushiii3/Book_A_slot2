@@ -43,7 +43,8 @@ if(isset($_POST['resource_person'])){
                 ?>
             <?php
             $count=0;
-                $rp_info="SELECT resource_person.full_name,resource_person.company_name,resource_person.designation,resource_person.experience,event.organization_institute,event.event_name FROM `RESOURCE_PERSON` join `EVENT` on resource_person.event_id=event.event_id WHERE resource_person.event_id in (SELECT event_id from `event` WHERE event.organization_institute='$organizer' and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15')";
+                $rp_info="SELECT RESOURCE_PERSON.full_name,RESOURCE_PERSON.company_name,RESOURCE_PERSON.designation,RESOURCE_PERSON.experience,EVENT.organization_institute,EVENT.event_name FROM `RESOURCE_PERSON`
+                join `EVENT` on RESOURCE_PERSON.event_id=EVENT.event_id WHERE RESOURCE_PERSON.full_name<>'NA' AND RESOURCE_PERSON.event_id in (SELECT event_id from `EVENT` WHERE EVENT.organization_institute='$organizer' and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15')";
                 $result1=mysqli_query($con,$rp_info);
                 while($row=mysqli_fetch_assoc($result1)){
                     $count++;
@@ -51,16 +52,16 @@ if(isset($_POST['resource_person'])){
             ?>
             <?php
             if($count>0){
-            echo "<h3 class='text-center'>List of resource person's for $organizer (Academic-Year $academic_year)</h3>";
+            echo "<h3 class='text-center'>List of resource person(s) for $organizer (Academic-Year $academic_year)</h3>";
             echo "<table class='table table-bordered my-4 '>
             <thead >
             <tr >
             <th class='text-center'>Sr No</th>
                 
-                <th class='text-center'>Resource Person Name</th>
-                <th class='text-center'>Resource Person Company Name</th>
-                <th class='text-center'>Resource Person Designation</th>
-                <th class='text-center'>Resource Person Experience</th>
+                <th class='text-center'> Name</th>
+                <th class='text-center'> Company/Organization/Institute</th>
+                <th class='text-center'> Designation</th>
+                <th class='text-center'> Experience</th>
                 <th class='text-center'>Event Name</th>
                 
             </tr>
@@ -76,7 +77,7 @@ if(isset($_POST['resource_person'])){
                 //print_r($organizations);
                 
                 // foreach($organizations as $organizer){
-                    $rp_info="SELECT resource_person.full_name,resource_person.company_name,resource_person.designation,resource_person.experience,event.organization_institute,event.event_name FROM `RESOURCE_PERSON` join `EVENT` on resource_person.event_id=event.event_id WHERE resource_person.event_id in (SELECT event_id from `event` WHERE event.organization_institute='$organizer' and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15')";
+                    $rp_info="SELECT RESOURCE_PERSON.full_name,RESOURCE_PERSON.company_name,RESOURCE_PERSON.designation,RESOURCE_PERSON.experience,EVENT.organization_institute,EVENT.event_name FROM `RESOURCE_PERSON` join `EVENT` on RESOURCE_PERSON.event_id=EVENT.event_id WHERE RESOURCE_PERSON.full_name<>'NA' AND RESOURCE_PERSON.event_id in (SELECT event_id from `EVENT` WHERE EVENT.organization_institute='$organizer' and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15')";
                     $result1=mysqli_query($con,$rp_info);
                     if($result1===false){
                         die(mysqli_error($con));
@@ -102,9 +103,15 @@ if(isset($_POST['resource_person'])){
                     }
                 }
                 else{
-                     echo "<h2 class='text-center'>$organizer did not invite any resource person for academic-year $academic_year</h2> ";
+                     echo "
+            <div class='col-lg-5 col-md-5 mt-5 m-auto'>
+            <div class='container d-flex align-items-center justify-content-center '  id='card' style='border-radius:20px;height:50vh'>
+            <div class='card mx-auto shadow' style='border-radius:20px'>
+            <h2 class='text-center'>$organizer did not invite any resource person for academic-year $academic_year</h2>
+            </div>
+            </div>
+            </div>";
                 }
-        
                 ?>
             </tbody>
             </table>

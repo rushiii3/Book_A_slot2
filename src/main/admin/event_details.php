@@ -32,7 +32,7 @@
     include '../connection/connect.php';
     $currentDate = date("Y-m-d");
     $previousDate = date("Y-m-d", strtotime("-1 day"));
-    $get_event="select * from `EVENT` where status_value='pending' and request_date_time>='$previousDate' order by request_date_time ";
+    $get_event="select * from `EVENT` where status_value='Pending' and request_date_time>='$previousDate' order by request_date_time ";
     $result=mysqli_query($con,$get_event);
     while($row=mysqli_fetch_assoc($result)){
         $event_id=$row['event_id'];

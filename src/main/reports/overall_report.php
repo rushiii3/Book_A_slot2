@@ -65,7 +65,7 @@ include '../connection/connect.php';
 
                             <div class="col-md-6 col-lg-6 my-5">
                                 <?php
-                                $organizer="SELECT count(organization_institute) as max_organizer,organization_institute from `EVENT` where status_value='Approved' GROUP by organization_institute order by max_organizer desc limit 1";
+                                $organizer="SELECT count(organization_institute) as max_organizer,organization_institute from `EVENT` where status_value='Approved' and organization_institute<>'Others'  GROUP by organization_institute order by max_organizer desc limit 1";
                                 $result=mysqli_query($con,$organizer);
                                 $row=mysqli_fetch_assoc($result);
                                 $organization_institute= $row['organization_institute'];
@@ -89,7 +89,8 @@ include '../connection/connect.php';
                             <div class="col-md-6 col-lg-6 my-5">
                                 <?php
                                 // $max_resource_person="SELECT max(organization_institute) FROM `EVENT` WHERE event_id in (SELECT event_id FROM `RESOURCE_PERSON`) and status_value='approved'";
-                                $max_resource_person="SELECT count(event.organization_institute) as total,event.organization_institute,resource_person.full_name FROM `EVENT` JOIN (SELECT event_id,full_name from `resource_person` GROUP BY event_id)`resource_person` on event.event_id=resource_person.event_id WHERE status_value='Approved' GROUP by organization_institute ORDER By total DESC LIMIT 1";
+                                $max_resource_person="SELECT count(EVENT.organization_institute) as total,
+                                EVENT.organization_institute,RESOURCE_PERSON.full_name FROM `EVENT` JOIN (SELECT event_id,full_name from `RESOURCE_PERSON` GROUP BY event_id)`RESOURCE_PERSON` on EVENT.event_id=RESOURCE_PERSON.event_id WHERE status_value='Approved' and organization_institute<>'Others' GROUP by organization_institute ORDER By total DESC LIMIT 1";
                                 $result=mysqli_query($con,$max_resource_person);
                                 $row=mysqli_fetch_assoc($result);
                                 $resource_person_organized=$row['organization_institute'];
@@ -130,23 +131,18 @@ include '../connection/connect.php';
                         <div style="background-color: #f3b2b1">
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
-                                <img src="https://tse2.mm.bing.net/th?id=OIP.X4H3g7tEFozAVl0Fw-8TZgHaEJ&pid=Api&P=0&h=180">
+                                <img src="https://tse2.mm.bing.net/th?id=OIP.497xvLO9t0RX4xrZneokywHaE8&pid=Api&P=0&h=180">
                             </div>
                             <div class="col-md-6 col-lg-6 my-5">
                                 <?php
-                                // $max_resource_person="SELECT max(organization_institute) FROM `EVENT` WHERE event_id in (SELECT event_id FROM `RESOURCE_PERSON`) and status_value='approved'";
-                                $max_purpose="SELECT close_event_purpose,count(close_event_purpose) as purpose_count from `CLOSE_EVENT` group by close_event_purpose order by purpose_count desc limit 1";
-                                $result=mysqli_query($con,$max_purpose);
+                                // $max_resource_person="SELECT max(organization_institute) FROM `EVENT` WHERE event_id in (SELECT event_id FROM `RESOURCE_PERSON`) and status_value='Approved'";
+                                $attendance="SELECT SUM(male_students_count) AS male, SUM(female_students_count) AS female, CASE WHEN SUM(male_students_count) > SUM(female_students_count) THEN 'boys' ELSE 'girls' END AS max_sum_column FROM `CLOSE_EVENT`";
+                                $result=mysqli_query($con,$attendance);
                                 $row=mysqli_fetch_assoc($result);
-                                $event_purpose_value=$row['close_event_purpose'];
-                                $event_purpose="SELECT close_event_purpose,count(close_event_purpose) as purpose_count from `CLOSE_EVENT` where  close_event_purpose like '%$event_purpose_value%' ";
-                                $result_of_purpose=mysqli_query($con,$event_purpose);
-                                if($result_of_purpose===false){
-                                    die(mysqli_error($con));
-                                }
-                                $row=mysqli_fetch_assoc($result_of_purpose);
-                                $purpose=$row['close_event_purpose'];
-                                echo "<p>Most of the time Event <strong>purpose </strong>is $purpose</p>";
+                               
+                                $max_attendance=$row['max_sum_column'];
+                        
+                                echo "<h3>Most of the Events attained by <strong>$max_attendance </strong></h3>";
                                 ?>
                             </div>
                         </div>
@@ -154,7 +150,7 @@ include '../connection/connect.php';
                     
                     </div>
                     
-                    <div class="col-md-5 col-lg-5 m-auto">
+                    <div class="col-md-5 col-lg-5 m-auto" id="event_mode">
                          <!-- right side -->
                     <div style="background-color: #80dfff">
                         <div class="row">
@@ -166,9 +162,21 @@ include '../connection/connect.php';
                                 $max_event_mode="SELECT close_event_mode, COUNT(close_event_mode) AS mode FROM `CLOSE_EVENT`  GROUP BY close_event_mode ORDER BY mode DESC LIMIT 1";
                                 $result=mysqli_query($con,$max_event_mode);
                                 $row=mysqli_fetch_assoc($result);
-                                $mode=$row['close_event_mode'];
-                               
-                                echo "<h2>Most of the time events occured in <strong>$mode</strong> mode</h2>";
+                                //$row = @some_query_function();
+                                //$mode=$row['close_event_mode'];
+                                           if(isset($row['close_event_mode'])){
+                                               $mode=$row['close_event_mode']; 
+                                           }
+                                           else{
+                                             
+                                               echo '<div id="event_mode" style="display: none;">This division is hidden.</div>';
+                                           }
+                               if(isset($mode)){
+                                echo "<h2>Most of the time events occured in <strong></strong> $mode</h2>";
+                               }
+                               else{
+                                   echo "<h2>Most of the time events occured in <strong></strong>offline</h2>";
+                               }
                                 ?>
                             </div>
                         </div>
@@ -179,25 +187,7 @@ include '../connection/connect.php';
                     <!-- row2 -->
                     <div class="col-md-5 col-lg-5 m-auto">
                         <!-- left side -->
-                        <div style="background-color: #e5b3cd">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <img src="https://tse2.mm.bing.net/th?id=OIP.497xvLO9t0RX4xrZneokywHaE8&pid=Api&P=0&h=180">
-                            </div>
-                            <div class="col-md-6 col-lg-6 my-5">
-                                <?php
-                                // $max_resource_person="SELECT max(organization_institute) FROM `EVENT` WHERE event_id in (SELECT event_id FROM `RESOURCE_PERSON`) and status_value='approved'";
-                                $attendance="SELECT SUM(male_students_count) AS male, SUM(female_students_count) AS female, CASE WHEN SUM(male_students_count) > SUM(female_students_count) THEN 'boys' ELSE 'girls' END AS max_sum_column FROM `CLOSE_EVENT`";
-                                $result=mysqli_query($con,$attendance);
-                                $row=mysqli_fetch_assoc($result);
-                                mysqli_fetch_assoc($result_of_purpose);
-                                $max_attendance=$row['max_sum_column'];
                         
-                                echo "<h3>Most of the Events attained by <strong>$max_attendance </strong></h3>";
-                                ?>
-                            </div>
-                        </div>
-                        </div>
                     
                     </div>
                     

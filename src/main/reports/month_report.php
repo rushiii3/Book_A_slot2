@@ -102,7 +102,15 @@ if(isset($_POST['month_report'])){
             }
         }
             else{
-                echo "<h1 class='text-center'>No Event occur in this month of $year</h1>";
+                 echo "
+            <div class='col-lg-5 col-md-5 mt-5 m-auto'>
+            <div class='container d-flex align-items-center justify-content-center '  id='card' style='border-radius:20px;height:50vh'>
+            <div class='card mx-auto shadow' style='border-radius:20px'>
+            <h2 class='text-center'>No Event occur in this month of $year</h2>
+            </div>
+            </div>
+            </div>";
+               
             }
             ?>
             </tbody>
