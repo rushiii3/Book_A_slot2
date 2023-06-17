@@ -40,64 +40,21 @@
       include("navigation.html");
     ?>
     <div class="w-100 d-flex justify-content-between align-items-center mt-3">
-    <button class="btn"><i class="bi bi-caret-left-fill fa-10x" style="font-size: 1rem;font-size: clamp(2rem, 3.5vw, 6rem);"></i></button>
-    <span style="font-size: 1rem;font-size: clamp(2rem, 3.5vw, 6rem);">29 DECEMBER 2023</span>
-    <button class="btn"><i class="bi bi-caret-right-fill fa-10x" style="font-size: 1rem;font-size: clamp(2rem, 3.5vw, 6rem);"></i></button>
+    <button class="btn" id="backward_date"><i class="bi bi-caret-left-fill fa-10x" style="font-size: 1rem;font-size: clamp(2rem, 3.5vw, 6rem);"></i></button>
+    <span style="font-size: 1rem;font-size: clamp(1.5rem, 3vw, 5rem);" id="set_date"></span>
+    <button class="btn" id="forward_date"><i class="bi bi-caret-right-fill fa-10x" style="font-size: 1rem;font-size: clamp(2rem, 3.5vw, 6rem);"></i></button>
     </div>
 
     <div class="container">
-        <div class="row mt-5">
-            
-            <?php 
-            $get_venue_names = "SELECT * FROM AUDI_ROOM" ;
-            $result_of_query = mysqli_query($con,$get_venue_names);
-            if(mysqli_num_rows($result_of_query)>0)
-            {
-                while($row_of_venue = mysqli_fetch_assoc($result_of_query))
-                {
-                    $venue = $row_of_venue['ar_name'];
-
-                    ?>
-                    <table class="table table-responsive table-striped table-bordered">
-            <thead>
-                <tr>
-                <th colspan="4"><?php echo($venue); ?></th>
-                </tr>
-                <tr>
-                <th scope="col">Sr.No</th>
-                <th scope="col">Event Name</th>
-                <th scope="col">Event Time</th>
-                <th scope="col">Event Requirement</th>
-                </tr>
-            </thead>
-            <?php
-                    $get_events = "SELECT * FROM `EVENT` WHERE ar_name = '$venue' AND status_value = 'Approved' ";
-                    $result_of_events = mysqli_query($con,$get_events);
-                    if(mysqli_num_rows($result_of_events)>0)
-                    {
-                        while($row_of_event = mysqli_fetch_assoc($result_of_events))
-                        {
-                            ?>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td><?php echo($row_of_event['event_name']); ?></td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                </tr>
-            </tbody>
-</table>
-                            <?php
-                        }
-                    }
-                }
-            }
-            ?>
-        
+        <div class="row mt-5" id="innerReq">
 
         </div>
     </div>
     
   </main>
+  <!-- <iframe src="https://chatbot.hellotars.com/conv/NJba4f/" style="width: 400px;height: 620px;box-shadow: 0 20px 80px rgba(0,0,0,.6);border-radius: 5px;overflow: hidden;border: none;"></iframe>
+    <iframe src='https://webchat.botframework.com/embed/gosmarterfaqbot?s=YOUR_SECRET_HERE'  
+style='min-width: 400px; width: 100%; min-height: 500px;'></iframe> -->
+  <script src="../../js/require.js"></script>
 </body>
 </html>

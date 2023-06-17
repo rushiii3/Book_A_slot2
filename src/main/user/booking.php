@@ -146,7 +146,7 @@ It is a long established fact that a reader will be distracted by the readable c
                         </div>
                         <div class="stepper-item ">
                             <div class="step-counter">3</div>
-                            <div class="step-name text-center">Requriement<br> </div>
+                            <div class="step-name text-center">Requirement<br> </div>
                         </div>
                         <div class="stepper-item ">
                             <div class="step-counter">4</div>
@@ -170,10 +170,6 @@ It is a long established fact that a reader will be distracted by the readable c
                                         <div class="col-12 mb-3">
                                                 <label for="eventDescription" class="form-label">Event Description</label>
                                                 <textarea class="form-control" name="eventDescription" id="eventDescription" rows="2"></textarea>
-                                        </div>
-                                        <div class="col-12 mb-3">
-                                            <label for="no_of_stu_attending" class="form-label">No of students attending event</label>
-                                            <input type="number" class="form-control" name="no_of_stu_attending" id="no_of_stu_attending" placeholder="e.g. ....... ">
                                         </div>
                                         <div class="col-12 mb-3">
                                         <label for="department_namee" class="form-label">Select Department</label>
@@ -260,6 +256,12 @@ It is a long established fact that a reader will be distracted by the readable c
                                                     ?>
                                         </select>
                                     </div>
+                                    <div class="col-12 mb-3">
+                                            <label for="no_of_stu_attending" class="form-label">No of students attending event</label>
+                                            <input type="number" class="form-control" name="no_of_stu_attending" id="no_of_stu_attending" placeholder="e.g. ....... ">
+                                            <div id="no_verify" class="form-text text-danger"></div>
+
+                                        </div>
                                     <div class="col-12 mb-3 input-group">
                                             <label for="selectDate" class="form-label w-100">Date</label><br>
                                             <input type="text" name="selectDate" class="form-control rounded-start border-end-0" id="selectDate" placeholder="e.g. ....... ">
@@ -404,6 +406,15 @@ It is a long established fact that a reader will be distracted by the readable c
                         
                         <div class="row section4">
                             <!-- new row -->
+                            <div class="col-12 mb-3">
+                                            <label for="alumini" class="form-label">Is it for alumni</label>
+                                            <select class="form-select" name="alumini" id="alumini">
+                                                <option selected>Select whether is it for alumni</option>
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                                
+                                            </select>
+                                        </div>
                                         <div class="col-12 mb-3">
                                             <label for="rp_name" class="form-label">Select the number of Resourse Person attending</label>
                                             <select class="form-select" name="no_of_rp" id="no_of_rp">

@@ -185,6 +185,8 @@ if(!empty($_POST['user_email'])
     !empty($_POST['experience'])
             &&
     !empty($_POST['insider'])
+            &&
+    !empty($_POST['alumni'])
         
 
 )
@@ -206,7 +208,8 @@ if(!empty($_POST['user_email'])
     $company_names = $_POST['company_names'];
     $designations = $_POST['designations'];
     $experience = $_POST['experience'];
-    $query_insert_event_for_insider = "INSERT INTO `EVENT` (`event_id`, `event_name`, `event_date`, `event_start_time`, `event_end_time`, `event_description`, `students_total_number`, `status_value`, `organization_institute`, `request_date_time`, `user_name`, `ar_name`, `event_requriement`) VALUES ('$FourDigitRandomNumber','$event_name','$event_date','$event_start_time','$event_end_time','$event_Descr','$num_of_students','Pending','$department_namee','$timestamp','$user_email','$Venue_name','$requriment')";
+    $alumni = mysqli_real_escape_string($con, $_POST['alumni']);
+    $query_insert_event_for_insider = "INSERT INTO `EVENT` (`event_id`, `event_name`, `event_date`, `event_start_time`, `event_end_time`, `event_description`, `students_total_number`, `status_value`, `organization_institute`, `request_date_time`, `user_name`, `ar_name`, `event_requriement`,alumni) VALUES ('$FourDigitRandomNumber','$event_name','$event_date','$event_start_time','$event_end_time','$event_Descr','$num_of_students','Pending','$department_namee','$timestamp','$user_email','$Venue_name','$requriment','$alumni')";
     if(mysqli_query($con,$query_insert_event_for_insider))
     {
         $count = 0;
@@ -264,6 +267,8 @@ if(!empty($_POST['user_email'])
             &&
     !empty($_POST['Institute_OrgName_phone_no'])
             &&
+    !empty($_POST['alumni'])
+            &&
     !empty($_POST['others'])
 )
 {
@@ -287,8 +292,8 @@ if(!empty($_POST['user_email'])
     $Institute_OrgName = mysqli_real_escape_string($con, $_POST['Institute_OrgName']);
     $Institute_OrgName_email = mysqli_real_escape_string($con, $_POST['Institute_OrgName_email']);
     $Institute_OrgName_phone_no = mysqli_real_escape_string($con, $_POST['Institute_OrgName_phone_no']);
-
-    $query_insert_event_for_outsider = "INSERT INTO `EVENT` (`event_id`, `event_name`, `event_date`, `event_start_time`, `event_end_time`, `event_description`, `students_total_number`, `status_value`, `organization_institute`, `request_date_time`, `user_name`, `ar_name`, `event_requriement`) VALUES ('$FourDigitRandomNumber','$event_name','$event_date','$event_start_time','$event_end_time','$event_Descr','$num_of_students','Pending','$department_namee','$timestamp','$user_email','$Venue_name','$requriment')";
+    $alumni = mysqli_real_escape_string($con, $_POST['alumni']);
+    $query_insert_event_for_outsider = "INSERT INTO `EVENT` (`event_id`, `event_name`, `event_date`, `event_start_time`, `event_end_time`, `event_description`, `students_total_number`, `status_value`, `organization_institute`, `request_date_time`, `user_name`, `ar_name`, `event_requriement`,alumni) VALUES ('$FourDigitRandomNumber','$event_name','$event_date','$event_start_time','$event_end_time','$event_Descr','$num_of_students','Pending','$department_namee','$timestamp','$user_email','$Venue_name','$requriment','$alumni')";
     $query_to_insert_outsider_info = "INSERT INTO `OUTSIDER_INFO` (`outsider_name`, `outsider_email`, `outsider_phone`, `event_id`) VALUES ('$Institute_OrgName', '$Institute_OrgName_email', '$Institute_OrgName_phone_no', '$FourDigitRandomNumber')";
     if(mysqli_query($con,$query_insert_event_for_outsider))
     {
@@ -367,6 +372,97 @@ if(!empty($_POST['transaction_event_id']) && !empty($_POST['transaction_id_for_e
         echo("2");
     }
 }
+if(!empty($_POST['requirement_date']))
+{
+    
+    $date = date('Y-m-d', strtotime($_POST['requirement_date']));
+    $get_venue_names = "SELECT * FROM AUDI_ROOM" ;
+    $result_of_query = mysqli_query($con,$get_venue_names);
+    
+    $for = 1;
+    if(mysqli_num_rows($result_of_query)>0)
+    {
+        while($row_of_venue = mysqli_fetch_assoc($result_of_query))
+        {
+            $venue = $row_of_venue['ar_name'];
 
+            ?>
+            <table class="table table-responsive table-striped table-bordered mt-4" id="vd_<?php echo($for);?>">
+    <thead>
+        <tr>
+        <th colspan="4"><?php echo($venue); ?></th>
+        </tr>
+        <tr>
+        <th scope="col">Sr.No</th>
+        <th scope="col">Event Name</th>
+        <th scope="col">Event Time</th>
+        <th scope="col">Event Requirement</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+    $for = $for+1;
+    $count = 1;
+            $get_events = "SELECT * FROM `EVENT` WHERE ar_name = '$venue' AND status_value = 'Approved' AND event_date = '$date' ORDER BY event_start_time";
+            $result_of_events = mysqli_query($con,$get_events);
+            if(mysqli_num_rows($result_of_events))
+            {
+                while($row_of_event = mysqli_fetch_assoc($result_of_events))
+                {
+                    ?>
+    
+        <tr>
+        <th scope="row"><?php echo($count); ?></th>
+        <td><?php echo($row_of_event['event_name']); ?></td>
+        <td><?php echo date("g:i A", strtotime($row_of_event['event_start_time'])); ?> to <?php echo date("g:i A", strtotime($row_of_event['event_end_time'])); ?></td>
+        <td><?php echo($row_of_event['event_requriement']); ?></td>
+        
+        </tr>
+        
+                    <?php
+                    $count = $count + 1;
+                }
+            }else{
+                ?>
+                <script>
+                    $('#vd_<?php echo($for-1);?>').hide();
+                    </script>
+                <?php
+
+            }
+        }
+    }
+    ?>
+</tbody>
+</table>
+<?php
+}
+
+if(!empty($_POST['number_of_students']) && !empty($_POST['venue_named']))
+{
+    $no_of_student = mysqli_real_escape_string($con, $_POST['number_of_students']);
+    $venue = mysqli_real_escape_string($con, $_POST['venue_named']);
+    $query_to_get_info = "SELECT * FROM AUDI_ROOM WHERE ar_name = '$venue'";
+    $result_to_query = mysqli_query($con,$query_to_get_info);
+    if(mysqli_num_rows($result_to_query))
+    {
+        while($row = mysqli_fetch_assoc($result_to_query))
+        {
+            if($no_of_student<=$row['capacity'])
+            {
+               ?>
+                               <span  class="text-success"> Valid. </span>
+                               <input id="verified_no" style="display:none" type="number" value="1" readonly>
+
+                               <?php
+            }else{
+                ?>
+                <span  class="text-danger"> Number of students should be less than <?php echo($row['capacity']); ?>. </span>
+                <input id="verified_no" style="display:none" type="number" value="2" readonly>
+                <?php
+            }
+        }
+    }
+}
 mysqli_close($con);
 ?>

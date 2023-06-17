@@ -10,7 +10,7 @@ if(isset($_POST['month_report'])){
     $year=$_POST['year'];
     if($year==''){
         echo "<script>alert('Please Enter a year')</script>";
-        echo("<script>window.location='../admin/report_home.php';</script>");
+        echo("<script>window.location='../reports/report_home.php';</script>");
     }
     // else{
         
@@ -52,7 +52,7 @@ if(isset($_POST['month_report'])){
                 include '../admin/admin_navbar.html';
                 ?>
            <?php
-           $get_event="Select * from `EVENT` where MONTH(event_date)='$month' and YEAR(event_date)='$year' and status_value='approved'";
+           $get_event="Select * from `EVENT` where MONTH(event_date)='$month' and YEAR(event_date)='$year' and status_value='Approved'";
            $result=mysqli_query($con,$get_event);
            $count=0;
            while($row=mysqli_fetch_assoc($result)){
@@ -77,7 +77,7 @@ if(isset($_POST['month_report'])){
             </thead>
             <tbody class='bg-primary'>";
             
-            $get_event="Select * from `EVENT` where MONTH(event_date)=$month and YEAR(event_date)=$year and status_value='approved'";
+            $get_event="Select * from `EVENT` where MONTH(event_date)=$month and YEAR(event_date)=$year and status_value='Approved'";
             $result=mysqli_query($con,$get_event);
             
             while($row=mysqli_fetch_assoc($result)){

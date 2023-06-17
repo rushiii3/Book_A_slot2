@@ -3,6 +3,24 @@ $('#org_institue_email').hide();
 $('#org_institue_phone').hide();
 $('#org_institue_transaction_id').hide();
 
+$('#no_of_stu_attending').on('input',function()
+{
+  $Venue_name = $('#Venue_name').val();
+  $data = $('#no_of_stu_attending').val();
+  $.ajax({
+    type: 'POST',
+    url: 'ajax.php',
+    data: {number_of_students:$data,venue_named:$Venue_name},
+    success: function(data){
+      $('#no_verify').html("");
+      $('#no_verify').html(data);
+        console.log(data);
+    },
+    error: function() {
+        console.log(response.status);
+    },
+})
+})
 
 $(window).on('load', function(){
     setTimeout(addBackdrop, 2000); //wait for page load PLUS two seconds.
@@ -80,7 +98,6 @@ $('#nextFirst').on('click',function()
 {
     $event_name = $('#eventName').val();
     $event_Descr = $('#eventDescription').val();
-    $num_of_students = $('#no_of_stu_attending').val();
     $department_namee = $('#department_namee').val();
     $Institute_OrgName = $('#Institute_OrgName').val();
     $Institute_OrgName_email = $('#Institute_OrgName_email').val();
@@ -90,8 +107,6 @@ $('#nextFirst').on('click',function()
     {
       if($event_Descr!=="")
       {
-        if($num_of_students!=="")
-        {
           if($department_namee!=="Select Department")
           {
             if($department_namee=="Others"){
@@ -132,9 +147,6 @@ $('#nextFirst').on('click',function()
           }else{
             alert("Please select department first");
           }
-        }else{
-          alert("Please input number of students attending for event");
-        }
       }
       else{
         alert("Please input your Event Description");
@@ -148,13 +160,20 @@ $('#nextFirst').on('click',function()
 
 $('#nextSecond').on('click',function()
 {
+  $verify = $('#verified_no').val();
+  console.log($verify);
+  $num_of_students = $('#no_of_stu_attending').val();
     $Venue_name = $('#Venue_name').val();
     $event_date = $('#selectDate').val();
     $event_start_time = $('#selectStartTime').val();
     $event_end_time = $('#selectEndTime').val();
-    if($Venue_name!="Select Venue")
+    if($Venue_name!=="Select Venue")
     {
-      if($event_date!="")
+      if($num_of_students!=="")
+      {
+        if($verify==1)
+        {
+          if($event_date!="")
       {
         if($event_start_time!="Select the start time")
         {
@@ -192,6 +211,12 @@ $('#nextSecond').on('click',function()
         alert("Please select Date");
       }
     }else{
+      alert("Number of students attending to should be within in that range");
+    }
+    }else{
+      alert("Please fill the number of students attending events");
+    }
+    }else{
       alert("Please select venue");
     }
 })
@@ -209,6 +234,9 @@ $('#nextThird').on('click',function(){
 
 $('#nextForth').on('click',function(e){
   $no_of_rp = $('#no_of_rp').val();
+  $alumni = $('#alumini').val();
+  if( $alumni!=="Select whether is it for alumni")
+  {
   if($no_of_rp!=="Please Select the Number of Resourse Person")
   {
     if($no_of_rp=="No")
@@ -271,7 +299,9 @@ $('#nextForth').on('click',function(e){
     alert("Please select the Number of Resourse Person");
   }
     
-})
+}else{
+  alert("Select is it for alumni or not");
+}})
 
 $('#bookAgain').on('click',function(){
   window.location='booking.php';

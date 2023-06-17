@@ -137,11 +137,11 @@ while($row=mysqli_fetch_assoc($result1)){
 
 ?>
 <?php
-$second_max_events_occured="SELECT COUNT(ar_name),ar_name as second_ar from `event` where ar_name<>'$first_ar' and status_value='approved' GROUP BY ar_name ORDER by count(ar_name) desc LIMIT 1";
+$second_max_events_occured="SELECT COUNT(ar_name),ar_name as second_ar from `EVENT` where ar_name<>'$first_ar' and status_value='Approved' GROUP BY ar_name ORDER by count(ar_name) desc LIMIT 1";
 $result=mysqli_query($con,$second_max_events_occured);
 $row=mysqli_fetch_assoc($result);
 $second_ar=$row['second_ar'];
-$get_organizers="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE ar_name='$second_ar' and status_value='approved' GROUP by organization_institute";
+$get_organizers="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE ar_name='$second_ar' and status_value='Approved' GROUP by organization_institute";
 $result1=mysqli_query($con,$get_organizers);
 ?>
 <div class="container-fluid mt-3">
@@ -172,7 +172,7 @@ $result1=mysqli_query($con,$get_organizers);
         var data = google.visualization.arrayToDataTable([
           ['organizations_institute', 'count'],
           <?php
-          $get_organizers="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE ar_name='$first_ar' and status_value='approved' GROUP by organization_institute";
+          $get_organizers="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE ar_name='$first_ar' and status_value='Approved' GROUP by organization_institute";
           $result1=mysqli_query($con,$get_organizers);
             while($row=mysqli_fetch_assoc($result1)){
                 echo "['".$row['organization_institute']."',".$row['total']."],";
@@ -203,7 +203,7 @@ $result1=mysqli_query($con,$get_organizers);
         var data = google.visualization.arrayToDataTable([
             ['organizations_institute', 'count'],
           <?php
-          $get_organizers="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE ar_name='$second_ar' and status_value='approved' GROUP by organization_institute";
+          $get_organizers="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE ar_name='$second_ar' and status_value='Approved' GROUP by organization_institute";
           $result1=mysqli_query($con,$get_organizers);
             while($row=mysqli_fetch_assoc($result1)){
                 echo "['".$row['organization_institute']."',".$row['total']."],";

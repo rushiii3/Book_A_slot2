@@ -47,7 +47,7 @@ if(isset($_POST['outsider_report'])){
             </div>
             <?php
             $count=0;
-                $outsider_info="SELECT * FROM `EVENT` where organization_institute not in (SELECT * FROM `DEPARTMENT`) and status_value='approved' and event_date between '$start_year-06-15' and '$end_year-06-15'";
+                $outsider_info="SELECT * FROM `EVENT` where organization_institute not in (SELECT * FROM `DEPARTMENT`) and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15'";
                 $result1=mysqli_query($con,$outsider_info);
                 while($row=mysqli_fetch_assoc($result1)){
                     $count++;
@@ -59,7 +59,7 @@ if(isset($_POST['outsider_report'])){
             if($count>0){
                 echo "<div class='row m-auto'>
                 <div class='col-lg-5 col-md-5 m-auto'>";
-                $most_organizer="SELECT count(organization_institute),organization_institute,event_date FROM `EVENT` where organization_institute not in (SELECT * FROM `DEPARTMENT`) and status_value='approved' and event_date between '$start_year-06-15' and '$end_year-06-15' GROUP by organization_institute order by COUNT(organization_institute) desc LIMIT 1 ";
+                $most_organizer="SELECT count(organization_institute),organization_institute,event_date FROM `EVENT` where organization_institute not in (SELECT * FROM `DEPARTMENT`) and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15' GROUP by organization_institute order by COUNT(organization_institute) desc LIMIT 1 ";
                 $result=mysqli_query($con,$most_organizer);
                 $row=mysqli_fetch_assoc($result);
                 $organizer=$row['organization_institute'];
@@ -68,7 +68,7 @@ if(isset($_POST['outsider_report'])){
                 </div>";
                 echo "</div>";
                 echo "<div class='col-lg-5 col-md-5 m-auto'>";
-                $most_dense_audi="SELECT count(ar_name),ar_name,event_date FROM `EVENT` where organization_institute not in (SELECT * FROM `DEPARTMENT`) and status_value='approved' and event_date between '$start_year-06-15' and '$end_year-06-15' GROUP by organization_institute order by COUNT(ar_name) desc LIMIT 1";
+                $most_dense_audi="SELECT count(ar_name),ar_name,event_date FROM `EVENT` where organization_institute not in (SELECT * FROM `DEPARTMENT`) and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15' GROUP by organization_institute order by COUNT(ar_name) desc LIMIT 1";
                 $result=mysqli_query($con,$most_dense_audi);
                 $row=mysqli_fetch_assoc($result);
                 $ar_name=$row['ar_name'];
@@ -93,7 +93,7 @@ if(isset($_POST['outsider_report'])){
             </thead>
             <tbody class='bg-primary'>";
 
-            $outsider="SELECT * FROM `EVENT` where organization_institute not in (SELECT * FROM `DEPARTMENT`) and status_value='approved' and event_date between '$start_year-06-15' and '$end_year-06-15' order by event_date desc";
+            $outsider="SELECT * FROM `EVENT` where organization_institute not in (SELECT * FROM `DEPARTMENT`) and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15' order by event_date desc";
             $result=mysqli_query($con,$outsider);
             $sr=0;
             while($row=mysqli_fetch_assoc($result)){

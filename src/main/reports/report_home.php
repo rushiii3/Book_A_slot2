@@ -1,135 +1,160 @@
-<?php
-include '../connection/connect.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="image/png" sizes="16x16" rel="icon" href="../../img/logo11.jpeg" />
-
-    <link rel='stylesheet' type='text/css' href='../css/images.css'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" integrity="sha512-5SUkiwmm+0AiJEaCiS5nu/ZKPodeuInbQ7CiSrSnUHe11dJpQ8o4J1DU/rw4gxk/O+WBpGYAZbb8e17CDEoESw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<style>
-
-    img{
-    display: block;
-    width: 500px;
-    height: 500px;
-    margin: 0 auto;
-    transition: 0.3s;
-}
-.btn_style{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-   /* Adjust the height according to your needs */
-}
-</style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <title>Reports</title>
+    <link type="image/png" sizes="16x16" rel="icon" href="../../img/logo11.jpeg" />
+    <style>
+        #card:hover {
+            transform: translateY(-30px);
+        }
+        .custom-gradient {
+      background: linear-gradient(to right,#0066ff, #3385ff,#4d94ff,#6699ff, #80b3ff, #99c2ff, #b3d1ff,#cce0ff,#e6f0ff);
+    }
+    .fixed-size {
+        width: 500px; 
+      height: 200px; 
+    }
+    </style>
 </head>
 
 <body>
-    <div class="container-fluid mt-3">
-        <div class="row">
-            <div class="col-md-10 col-lg-10 m-auto">
-            <?php
-                include '../admin/admin_navbar.html';
-                ?>
+    <?php
+    include("../config/session.php");
+    require "../connection/connect.php";
+    require_once("../loader.html");
+    ?>
+    <main id="main">
+    <?php
+            include("../admin/admin_navbar.html");
+            ?>
+<div class="col-lg-12 mb-5">
                 <button class="btn btn-primary w-50 m-auto d-flex justify-content-center fw-bolder" style="align-items: center;">REPORTS PANEL</button>
                 <a href="../reports/overall_report.php"><strong class="text-center d-flex justify-content-center" >click here to get short summary</strong></a>
-                <div class="row mt-5">
-                    <div class="col-md-5 col-lg-5 m-auto">
-                        <img src="" alt="" id="image" >
-                        <!-- montwise reports -->
-                        <button class="btn btn-primary mt-3 m-auto d-flex justify-content-center" data-toggle="modal" data-target="#exampleModalLabel" >Get Month Wise Report</button>
+                </div>
+        <div class="container-fluid mt-3">
+        
+        <div class="row">
+                      <div class="col-lg-4 mb-5">
+                            <div class="card mx-auto shadow w-75  " id="card" style="border-radius:20px;height:12rem">
+                            <button class="btn  mt-3 m-auto d-flex justify-content-center  " style="border-radius:20px;" data-toggle="modal" data-target="#exampleModalLabel" >
+                                    
+                                    <div class="card-body text-center text-black flex-fill ">
+                                      <h4 class="text-center fw-bold">GET MONTH WISE REPORT</h4>  
+                                      <p>This report will provide a month wise report.Just select month and enter a year </p>
+                                      
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-5">
+                            <div class="card mx-auto shadow w-75"  id="card" style="border-radius:20px;height:auto">
+                            <button class="btn  mt-3 m-auto d-flex justify-content-center " style="border-radius:20px;" data-toggle="modal" data-target="#resource" >
+                                    <div class="card-body text-center text-black flex-fill">
+                                    <h4 class="text-center fw-bold"> RESOURSE PERSON REPORT</h4>
+
+                                    <p>This report will provide list of resourse person according to academic year.
+                                Please enter  complete academic year eg. 2023-2024
+                               </p>
+                                      
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-5">
+                            <div class="card mx-auto shadow w-75"  id="card" style="border-radius:20px;height:auto">
+                            <button class="btn  mt-3 m-auto d-flex justify-content-center  " style="border-radius:20px;" data-toggle="modal" data-target="#dept_present" >
+
+                                    
+                                    <div class="card-body text-center text-black flex-fill">
+                                    <h4 class="text-center fw-bold">DEPARTMENT WISE ATTENDANCE</h4>
+
+                                    <p>This report will provide attendance percentage of boys and girls according to department.
+                               Please enter  complete academic year eg. 2023-2024
+                               </p>
+                                      
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
                         
-                    </div>
-                    <div class="col-md-5 col-lg-5 m-auto">
-                        <img src="" alt="" id="room">
-                        <!-- room occupacy report -->
-                        <a href="../reports/room_occupacy.php" class="text-decoration:none" ><button class="btn btn-primary mt-3 m-auto d-flex justify-content-center" >Room Occupacy Report</button></a>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-md-5 col-lg-5 m-auto">
-                    <img src="" alt="" id="cancel" >
-                        <a class="col-md-5 col-lg-5 m-auto text-decoration:none" href="../reports/cancel_report.php"><button class=" m-auto btn btn-primary mt-3 m-auto d-flex justify-content-center">Cancelled Event Report</button></a>
-                </div>
-                    <div class="col-md-5 col-lg-5 m-auto">
-                    <img src="" alt="" id="guest" >
-                    <!-- <div class="col-md-5 col-lg-5 m-auto"> -->
-                        <button class=" btn btn-primary mt-3 m-auto d-flex justify-content-center" data-toggle="modal" data-target="#resource">Resource Person Report</button>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-md-5 col-lg-5 m-auto">
-                    <img src="" alt="" id="attendance" >
-                    <button class=" btn btn-primary mt-3 m-auto d-flex justify-content-center" data-toggle="modal" data-target="#present">Attendance Report</button>
+      </div>           
+      <div class="row">
+                    <div class="col-lg-4 mb-5">
+                            <div class="card mx-auto shadow w-75"  id="card" style="border-radius:20px;height:auto">
+                            <button class="btn  mt-3 m-auto d-flex justify-content-center  " style="border-radius:20px;" data-toggle="modal" data-target="#out" >
 
-                        <!-- <a class="col-md-5 col-lg-5 m-auto text-decoration:none" href="../reports/attendance.php"><button class=" m-auto btn btn-primary mt-3 m-auto d-flex justify-content-center">Attendance Report</button></a> -->
-                </div>
-                    <div class="col-md-5 col-lg-5 m-auto">
-                    <img src="" alt="" id="outsider" >
-                    <button class=" btn btn-primary mt-3 m-auto d-flex justify-content-center" data-toggle="modal" data-target="#out">Outsider Report</button>
+                                    
+                                    <div class="card-body text-center text-black flex-fill">
+                                    <h4 class="text-center fw-bold">OUTSIDER'S REPORT</h4>
+                                    <p>This report will provide attendance percentage of boys and girls according to department.
+                               Please enter  complete academic year eg. 2023-2024
+                               </p>
+                                      
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
 
-                    </div>
-                </div>
+                        <div class="col-lg-4 mb-5">
+                            <div class="card mx-auto shadow w-75 "  id="card" style="border-radius:20px;height:12rem">
+                            <a href="../reports/room_occupacy.php" style="text-decoration:none;">
+                                    <div class="card-body text-center text-black flex-fill">
+                                    <h4 class="text-center fw-bold">ROOM OCCUPACY REPORT</h4>
+                                    <p>This report will provide graph showing in which audi/room how many event's occured </p>
+                                      
+                                    </div>
+                            </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-5">
+                            <div class="card mx-auto shadow w-75 "  id="card" style="border-radius:20px;height:12rem">
+                            <a href="../reports/cancel_report.php" style="text-decoration:none;">
+
+                                    
+                                    <div class="card-body text-center text-black flex-fill">
+                                    <h4 class="text-center fw-bold">CANCEL EVENTS REPORT</h4>
+                                    <p>This report will provide graph showing which department cancel how many events. </p>
+                                    </div>
+                            </a>
+                            </div>
+                        </div>
+                        
+      </div>           
+           
+            <!-- <div class="row p-4"> -->
+
+
+                <!-- </div> -->
+<!--   end of outer main row -->
+           
             </div>
         </div>
-    </div>
-    <!-- ../js/report_img.js -->
-    <!-- <script src="../.././js/report_img.js"></script>    -->
-
-    <script>
-      let image=document.getElementById('image');
-        let images=['../.././img/m1.jpg','../.././img/m2.jpg','../.././img/m3.jpg'];
-        setInterval(function(){
-            let random=Math.floor(Math.random()*3);
-            image.src=images[random];
-        },800);
-
-        let room=document.getElementById('room');
-        let rooms=['../.././img/ar1.jpg','../.././img/ar2.jpg','../.././img/ar3.jpg'];
-        setInterval(function(){
-            let random=Math.floor(Math.random()*3);
-            room.src=rooms[random];
-        },800);
-
-        let cancel=document.getElementById('cancel');
-       let cancels=['../.././img/c1.jpg','../.././img/c2.jpg','../.././img/c3.jpg'];
-       setInterval(function(){
-        let random=Math.floor(Math.random()*3);
-        cancel.src=cancels[random];
-       },800);
-
-       let guest=document.getElementById('guest');
-       let guests=['../.././img/rp2.jpg','../.././img/rp3.jpg','../.././img/rp4.jpg'];
-       setInterval(function(){
-        let random=Math.floor(Math.random()*3);
-        guest.src=guests[random];
-       },800);
-
-       let attendance=document.getElementById('attendance');
-       let attendances=['../.././img/att1.jpg','../.././img/att2.jpg','../.././img/att3.jpg'];
-       setInterval(function(){
-        let random=Math.floor(Math.random()*3);
-        attendance.src=attendances[random];
-       },800);
-
-       let outsider=document.getElementById('outsider');
-       let outsiders=['../.././img/out1.jpg','../.././img/out2.jpg','../.././img/out3.jpg'];
-       setInterval(function(){
-        let random=Math.floor(Math.random()*3);
-        outsider.src=outsiders[random];
-       },800);
-    </script>
+        
+    </main>
+   
 </body>
-<!-- Modal for month report-->
+
+<!-- modal for month report -->
 <div class="modal fade" id="exampleModalLabel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -167,7 +192,6 @@ include '../connection/connect.php';
     </div>
   </div>
 </div>
-
 <!-- modal for outsider report -->
 <div class="modal fade" id="out" tabindex="-1" aria-labelledby="out" aria-hidden="true">
 <div class="modal-dialog">
@@ -189,7 +213,7 @@ include '../connection/connect.php';
 </div>
 </div>
 <!-- modal for attendance report -->
-<div class="modal fade" id="present" tabindex="-1" aria-labelledby="present" aria-hidden="true">
+<div class="modal fade" id="dept_present" tabindex="-1" aria-labelledby="present" aria-hidden="true">
 <div class="modal-dialog">
     <div class="modal-content">
     <form action="../reports/attendance.php" method="post">
@@ -241,12 +265,8 @@ include '../connection/connect.php';
     </form>
   </div>
 </div>
-<!--  -->
-
-<!--  -->
-
 
 </html>
-
-
-        
+<?php
+mysqli_close($con);
+?>

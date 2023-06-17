@@ -43,7 +43,7 @@ include '../connection/connect.php';
                             </div>
                             <div class="col-md-6 col-lg-6 my-5">
                                 <?php
-                                $most_occupied_ar="SELECT ar_name as first_ar,count(ar_name) as occurance from `EVENT` where status_value='approved' group by ar_name order by occurance desc LIMIT 1 ";
+                                $most_occupied_ar="SELECT ar_name as first_ar,count(ar_name) as occurance from `EVENT` where status_value='Approved' group by ar_name order by occurance desc LIMIT 1 ";
                                 $result=mysqli_query($con,$most_occupied_ar);
                                 $row=mysqli_fetch_assoc($result);
                                 $ar_name= $row['first_ar'];
@@ -65,7 +65,7 @@ include '../connection/connect.php';
 
                             <div class="col-md-6 col-lg-6 my-5">
                                 <?php
-                                $organizer="SELECT count(organization_institute) as max_organizer,organization_institute from `event` where status_value='approved' GROUP by organization_institute order by max_organizer desc limit 1";
+                                $organizer="SELECT count(organization_institute) as max_organizer,organization_institute from `EVENT` where status_value='Approved' GROUP by organization_institute order by max_organizer desc limit 1";
                                 $result=mysqli_query($con,$organizer);
                                 $row=mysqli_fetch_assoc($result);
                                 $organization_institute= $row['organization_institute'];
@@ -89,7 +89,7 @@ include '../connection/connect.php';
                             <div class="col-md-6 col-lg-6 my-5">
                                 <?php
                                 // $max_resource_person="SELECT max(organization_institute) FROM `EVENT` WHERE event_id in (SELECT event_id FROM `RESOURCE_PERSON`) and status_value='approved'";
-                                $max_resource_person="SELECT count(event.organization_institute) as total,event.organization_institute,resource_person.full_name FROM `event` JOIN (SELECT event_id,full_name from `resource_person` GROUP BY event_id)`resource_person` on event.event_id=resource_person.event_id GROUP by organization_institute ORDER By total DESC LIMIT 1";
+                                $max_resource_person="SELECT count(event.organization_institute) as total,event.organization_institute,resource_person.full_name FROM `EVENT` JOIN (SELECT event_id,full_name from `resource_person` GROUP BY event_id)`resource_person` on event.event_id=resource_person.event_id WHERE status_value='Approved' GROUP by organization_institute ORDER By total DESC LIMIT 1";
                                 $result=mysqli_query($con,$max_resource_person);
                                 $row=mysqli_fetch_assoc($result);
                                 $resource_person_organized=$row['organization_institute'];
@@ -110,7 +110,7 @@ include '../connection/connect.php';
                             </div>
                             <div class="col-md-6 col-lg-6 my-5">
                                 <?php
-                                $max_events="SELECT event_date, COUNT(event_date) AS occurrences FROM `EVENT` where status_value='approved' GROUP BY event_date ORDER BY occurrences DESC LIMIT 1";
+                                $max_events="SELECT event_date, COUNT(event_date) AS occurrences FROM `EVENT` where status_value='Approved' GROUP BY event_date ORDER BY occurrences DESC LIMIT 1";
                                 $result=mysqli_query($con,$max_events);
                                 $row=mysqli_fetch_assoc($result);
                                 $date=$row['event_date'];

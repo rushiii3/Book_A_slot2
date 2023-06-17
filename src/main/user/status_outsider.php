@@ -58,107 +58,93 @@
         <div class="container mt-2">
             <div class="row p-3">
                 <?php
-                date_default_timezone_set("Asia/Calcutta");
-                $today_date = date("Y-m-d");
-                $get_events_pending_approved = "SELECT * FROM `EVENT` WHERE user_name = '$user_email' AND status_value in ('Approved','Not Approved','Pending') ORDER BY event_date";
-                
-                $result_of_events_pending_approved = mysqli_query($con, $get_events_pending_approved);
-                
-                if (mysqli_num_rows($result_of_events_pending_approved) > 0) {
-                    while ($row_of_query = mysqli_fetch_assoc($result_of_events_pending_approved)) {
-                        $event_id = $row_of_query['event_id'];
-                        $get_transaction_details = "SELECT * FROM `OUTSIDER_INFO` WHERE event_id = '$event_id'";
-                        $result_of_get_transaction_details = mysqli_query($con, $get_transaction_details);
+                    date_default_timezone_set("Asia/Calcutta");
+                    $today_date = date("Y-m-d");
+                    $get_events_pending_approved = "SELECT * FROM `EVENT` WHERE user_name = '$user_email' AND status_value in ('Approved','Not Approved','Pending') ORDER BY event_date";
+                    
+                    $result_of_events_pending_approved = mysqli_query($con, $get_events_pending_approved);
+                    
+                    if (mysqli_num_rows($result_of_events_pending_approved) > 0) {
+                        while ($row_of_query = mysqli_fetch_assoc($result_of_events_pending_approved)) {
+                            $event_id = $row_of_query['event_id'];
+                            $get_transaction_details = "SELECT * FROM `OUTSIDER_INFO` WHERE event_id = '$event_id'";
+                            $result_of_get_transaction_details = mysqli_query($con, $get_transaction_details);
 
-                        if(mysqli_num_rows($result_of_get_transaction_details))
-                        {
-                            while($row_of_transaction = mysqli_fetch_assoc($result_of_get_transaction_details))
+                            if(mysqli_num_rows($result_of_get_transaction_details)>0)
                             {
-                                
-                                if($row_of_transaction['outsider_transaction_id']=="")
+                                while($row_of_transaction = mysqli_fetch_assoc($result_of_get_transaction_details))
                                 {
-
-                ?>
-                        <div class="col-lg-4 col-md-6 mb-5">
-                            <div class="card shadow p-1" style="width: auto;border-radius: 20px;">
-                                <div class="card-body" style="<?php
-                                                            if ($row_of_query['status_value'] == "Not Approved") {
-                                                                echo ("opacity: 0.6;");
-                                                            }
-                                                            ?>">
-                                    <h5 class="card-title"><?php echo ($row_of_query['event_name']); ?></h5>
-                                    <div class="badge p-1 mb-2
-                                        <?php
-                                        if ($row_of_query['status_value'] == "Approved") {
-                                            echo ("bg-success");
-                                        } elseif ($row_of_query['status_value'] == "Pending") {
-                                            echo ("bg-warning");
-                                        } else {
-                                            echo ("bg-secondary");
-                                        }
-                                        ?>
-                                    ">
-                                        <?php echo ($row_of_query['status_value']); ?>
-                                    </div>
-                                    <p class="card-text" style="text-align:justify;"> <span class="fw-bold">Description : </span> <?php echo ($row_of_query['event_description']); ?> </p>
-                                    <p class="card-text"> <span class="fw-bold">Date : </span> <?php echo date("d M Y", strtotime($row_of_query['event_date'])); ?></p>
-                                    <p class="card-text"> <span class="fw-bold">Time : </span> <?php echo date("g:i A", strtotime($row_of_query['event_start_time'])); ?> to <?php echo date("g:i A", strtotime($row_of_query['event_end_time'])); ?> </p>
-                                    <p class="card-text"> <span class="fw-bold">Venue : </span> <?php echo ($row_of_query['ar_name']); ?> </p>
-                                    <?php
-                                    if ($row_of_query['status_value'] == "Not Approved") {
-                                    ?>
-                                        <p class="card-text bg-secondary text-white w-100 rounded p-2"> <span class="fw-bold">Reason: </span> <?php echo ($row_of_query['status_reason']); ?> </p>
-                                    <?php
-                                    } elseif($row_of_query['status_value'] == "Approved") {
-                                            ?>
-                                            <div class="col-12 mb-3">
-                                            <label for="transaction_id<?php echo($row_of_query['event_id']); ?>" class="form-label">Transaction ID</label>
-                                            <input type="text" name="transaction_id" class="form-control" id="transaction_id<?php echo($row_of_query['event_id']); ?>" placeholder="e.g. ....... ">
-                                        </div>
-                                        <div class="col-12 mb-3">
-                                            <label for="transaction_date<?php echo($row_of_query['event_id']); ?>" class="form-label">Transaction Date</label>
-                                            <input type="date" name="transaction_date<?php echo($row_of_query['event_id']); ?>" class="form-control" id="transaction_date<?php echo($row_of_query['event_id']); ?>" placeholder="e.g. ....... ">
-                                        </div>
-                                        <button type="button" class="btn btn-primary  w-100 my-1" id="ei<?php echo($row_of_query['event_id']); ?>" >ADD</button>
-                                        <script>
-                                            $('#ei<?php echo($row_of_query['event_id']); ?>').on('click',function()
-                                            {
-                                                $transaction_id = $('#transaction_id<?php echo($row_of_query['event_id']); ?>').val();
-                                                $transaction_date = $('#transaction_date<?php echo($row_of_query['event_id']); ?>').val();
-                                                $('#t_id').val($transaction_id);
-                                                $('#t_date').val($transaction_date);
-                                                $('#e_id').val(<?php echo($row_of_query['event_id']); ?>);
-                                                $('#sendTransaction').click();
-                                            })
-                                            
-                                        </script>
-                                        <?php
-                                        }else{
-                                            ?>
-                                            <a href="cancel.php">What to cancel the event?</a>
-                                        <?php
-                                        }
                                     
+                                    if($row_of_transaction['outsider_transaction_id']=="")
+                                    {
+                                        ?>
+                                            <div class="col-lg-4 col-md-6 mb-5">
+                                                <div class="card shadow p-1" style="width: auto;border-radius: 20px;">
+                                                    <div class="card-body" style="<?php if ($row_of_query['status_value'] == "Not Approved") { echo ("opacity: 0.6;");}?>">
+                                                        <h5 class="card-title"><?php echo ($row_of_query['event_name']); ?></h5>
+                                                            <div class="badge p-1 mb-2 <?php if ($row_of_query['status_value'] == "Approved") { echo ("bg-success"); } elseif ($row_of_query['status_value'] == "Pending") { echo ("bg-warning"); } else { echo ("bg-secondary"); } ?>">
+                                                                <?php echo ($row_of_query['status_value']); ?>
+                                                            </div>
+                                                                <p class="card-text" style="text-align:justify;"> <span class="fw-bold">Description : </span> <?php echo ($row_of_query['event_description']); ?> </p>
+                                                                <p class="card-text"> <span class="fw-bold">Date : </span> <?php echo date("d M Y", strtotime($row_of_query['event_date'])); ?></p>
+                                                                <p class="card-text"> <span class="fw-bold">Time : </span> <?php echo date("g:i A", strtotime($row_of_query['event_start_time'])); ?> to <?php echo date("g:i A", strtotime($row_of_query['event_end_time'])); ?> </p>
+                                                                <p class="card-text"> <span class="fw-bold">Venue : </span> <?php echo ($row_of_query['ar_name']); ?> </p>
+                                                                <?php
+                                                                    if ($row_of_query['status_value'] == "Not Approved") 
+                                                                    {
+                                                                        ?>
+                                                                            <p class="card-text bg-secondary text-white w-100 rounded p-2"> <span class="fw-bold">Reason: </span> <?php echo ($row_of_query['status_reason']); ?> </p>
+                                                                        <?php
+                                                                    }elseif($row_of_query['status_value'] == "Approved") 
+                                                                    {
+                                                                        ?>
+                                                                            <div class="col-12 mb-3">
+                                                                                <label for="transaction_id<?php echo($row_of_query['event_id']); ?>" class="form-label">Transaction ID</label>
+                                                                                <input type="text" name="transaction_id" class="form-control" id="transaction_id<?php echo($row_of_query['event_id']); ?>" placeholder="e.g. ....... ">
+                                                                            </div>
+                                                                            <div class="col-12 mb-3">
+                                                                                <label for="transaction_date<?php echo($row_of_query['event_id']); ?>" class="form-label">Transaction Date</label>
+                                                                                <input type="date" name="transaction_date<?php echo($row_of_query['event_id']); ?>" class="form-control" id="transaction_date<?php echo($row_of_query['event_id']); ?>" placeholder="e.g. ....... ">
+                                                                            </div>
+                                                                            <button type="button" class="btn btn-primary  w-100 my-1" id="ei<?php echo($row_of_query['event_id']); ?>" >ADD</button>
+                                                                            <script>
+                                                                                $('#ei<?php echo($row_of_query['event_id']); ?>').on('click',function()
+                                                                                {
+                                                                                    $transaction_id = $('#transaction_id<?php echo($row_of_query['event_id']); ?>').val();
+                                                                                    $transaction_date = $('#transaction_date<?php echo($row_of_query['event_id']); ?>').val();
+                                                                                    $('#t_id').val($transaction_id);
+                                                                                    $('#t_date').val($transaction_date);
+                                                                                    $('#e_id').val(<?php echo($row_of_query['event_id']); ?>);
+                                                                                    $('#sendTransaction').click();
+                                                                                })
+                                                                                
+                                                                            </script>
+                                                                        <?php
+                                                                    }else
+                                                                    {   
+                                                                        ?>
+                                                                            <a href="cancel.php">What to cancel the event?</a>
+                                                                        <?php
+                                                                    }
+                                                                ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php
                                     }
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                <?php
+                                }
+                            }else{
+                                ?>
+                                    <div class="col-lg-12 col-md-12 mb-5">
+                                        <p class="fs-2 text-center" style="margin-top:11rem;">
+                                            You have not booked any events<br>
+                                            <a type="button" class="btn btn-primary px-5 mt-3" href="booking.php">Book Now</a>
+                                        </p>
+                                    </div>
+                                <?php
+                            }
+                        }
                     }
-                }
-                ?>
-                    <div class="col-lg-12 col-md-12 mb-5">
-                        <p class="fs-2 text-center" style="margin-top:11rem;">
-                            You have not booked any events<br>
-                            <a type="button" class="btn btn-primary px-5 mt-3" href="booking.php">Book Now</a>
-                        </p>
-                    </div>
-                <?php
-            }
-                } else {
-                
-                }
                 ?>
             </div>
         </div>
