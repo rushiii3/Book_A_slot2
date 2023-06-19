@@ -18,7 +18,8 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    
+    <div class="container-fluid" id="fluid"> 
         <div class="row">
             <div class="col-lg-4 col-md-4 p-3 mx-auto" id="text">
                 <p class="display-1 fw-bold" style="margin-top: 8rem;">Book your Venue !</p>
@@ -30,9 +31,10 @@
                 </button>
             </div>
             <div class="col-lg-8 col-md-8 shapedividers_com-5015 shapedividers_com-1952" id="img_inside" style="height: 100vh;">
-                <img  src="../img/back4.avif" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 10% 90%;">
+                <img  src="../img/back1.jpeg" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 10% 90%;">
             </div>
         </div>
+        
     </div>
 
     <script>
@@ -40,7 +42,7 @@
         $img_var = $('#img_inside');
 function changeImage() {
     $img_var.html(" ");
-    $imageArray = ['<img  src="../img/back1.jpg" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 50% 50%;">','<img  src="../img/back2.avif" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 80% 10%;"> ','                <img  src="../img/back3.avif" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 50% 50%;"> ','                <img  src="../img/back5.avif" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 50% 50%;"> ','<img  src="../img/back5.avif" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 50% 50%;">','                <img  src="../img/back6.avif" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 50% 50%;">'];
+    $imageArray = ['<img  src="../img/back2.jpeg" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 50% 50%;">','<img  src="../img/back3.jpeg" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 80% 10%;"> ','                <img  src="../img/back4.jpeg" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 50% 50%;"> ','                <img  src="../img/back1.jpeg" alt="background-image1" style="width: 100%;height: 100vh;object-fit: cover;object-position: 10% 90%;">'];
     $randomItem = $imageArray[Math.floor(Math.random()*$imageArray.length)];
     $img_var.append($randomItem);
 }
@@ -48,6 +50,8 @@ setInterval(changeImage, 5000);
       
        })
     </script>
+
+
 </body>
 
 </html>

@@ -37,7 +37,7 @@ $(document).ready(function(){
                 }
                 else if(data==4)
                 {
-                    window.location.href = '../admin/admin_home.php';
+                    window.location.href = '../iqacc/home.php';
                 }
                 else if(data==5)
                 {

@@ -47,7 +47,7 @@ if(isset($_POST['outsider_report'])){
                 include '../admin/admin_navbar.html';
                 ?>
             <?php
-            $percentage_according_to_gender="SELECT EVENT.organization_institute, (SUM(male_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS male_attendance_percentage, (SUM(female_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS female_attendance_percentage FROM `CLOSE_EVENT` join `EVENT` on CLOSE_EVENT.event_id=EVENT.event_id where EVENT.event_date between '$start_year-06-15' and '$end_year-06-14' GROUP BY EVENT.organization_institute ";
+            $percentage_according_to_gender="SELECT EVENT.organization_institute, (SUM(male_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS male_attendance_percentage, (SUM(female_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS female_attendance_percentage FROM `CLOSE_EVENT` join `EVENT` on CLOSE_EVENT.event_id=EVENT.event_id where EVENT.event_date between '$start_year-06-15' and '$end_year-06-14' and EVENT.organization_institute<>'Others' GROUP BY EVENT.organization_institute ";
             $result=mysqli_query($con,$percentage_according_to_gender);
             $count=0;
             while($row=mysqli_fetch_assoc($result)){
@@ -70,7 +70,7 @@ if(isset($_POST['outsider_report'])){
     $sr=0;
     while($row=mysqli_fetch_assoc($result)){
         $sr++;
-        $organizer=$row['close_event_organizer'];
+        $organizer=$row['organization_institute'];
         $male_percentage=$row['male_attendance_percentage'];
         $female_percentage=$row['female_attendance_percentage'];
         echo"<tr class='text-center text-light'>
@@ -82,51 +82,7 @@ if(isset($_POST['outsider_report'])){
     }
     echo "</tbody>
     </table>";
-    echo "</div>";
-    echo "<div class='col-md-10 col-lg-10 m-auto'>";
-    echo "<div class='row m-auto'>
-    <div class='col-lg-5 col-md-5 m-auto'>";
-    $most_male_attendance="SELECT close_event_organizer, (SUM(male_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS male_attendance_percentage, (SUM(female_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS female_attendance_percentage FROM `CLOSE_EVENT` where close_event_date between '$start_year-06-15' and '$end_year-06-14' GROUP BY close_event_organizer order by male_attendance_percentage desc limit 1";
-    $result=mysqli_query($con,$most_male_attendance);
-    $row=mysqli_fetch_assoc($result);
-    $most_boys_attendance=$row['close_event_organizer'];
-    echo "<div class='container mt-5 mb-5 shadow p-3 mb-5 bg-body' style='border-radius: 20px'> 
-    <h2>Events organized by <strong class='fw-bolder'>$most_boys_attendance</strong> have more attendance of boys  </h2>
-    </div>";
-    echo "</div>";
-    // echo "<div class='col-md-10 col-lg-10 m-auto'>";
-    // echo "<div class='row m-auto'>
-    echo "<div class='col-lg-5 col-md-5 m-auto'>";
-    $most_female_attendance="SELECT close_event_organizer, (SUM(male_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS male_attendance_percentage, (SUM(female_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS female_attendance_percentage FROM `CLOSE_EVENT` where close_event_date between '$start_year-06-15' and '$end_year-06-14' GROUP BY close_event_organizer order by female_attendance_percentage desc limit 1";
-    $result=mysqli_query($con,$most_female_attendance);
-    $row=mysqli_fetch_assoc($result);
-    $most_girls_attendance=$row['close_event_organizer'];
-    echo "<div class='container mt-5 mb-5 shadow p-3 mb-5 bg-body' style='border-radius: 20px'> 
-    <h2>Events organized by <strong class='fw-bolder'>$most_girls_attendance</strong> have more attendance of girls  </h2>
-    </div>";
-    echo "</div>";
-    // echo "<div class='col-md-10 col-lg-10 m-auto'>";
-    echo "<div class='row m-auto'>
-    <div class='col-lg-5 col-md-5 m-auto'>";
-    $min_male_attendance="SELECT close_event_organizer, (SUM(male_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS male_attendance_percentage, (SUM(female_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS female_attendance_percentage FROM `CLOSE_EVENT` where close_event_date between '$start_year-06-15' and '$end_year-06-14' GROUP BY close_event_organizer order by male_attendance_percentage  limit 1";
-    $result=mysqli_query($con,$min_male_attendance);
-    $row=mysqli_fetch_assoc($result);
-    $min_boys_attendance=$row['close_event_organizer'];
-    echo "<div class='container mt-5 mb-5 shadow p-3 mb-5 bg-body' style='border-radius: 20px'> 
-    <h2>Events organized by <strong class='fw-bolder'>$min_boys_attendance</strong> have less attendance of boys  </h2>
-    </div>";
-    echo "</div>";
-    // echo "<div class='col-md-10 col-lg-10 m-auto'>";
-    // echo "<div class='row m-auto'>
-    echo "<div class='col-lg-5 col-md-5 m-auto'>";
-    $min_female_attendance="SELECT close_event_organizer, (SUM(male_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS male_attendance_percentage, (SUM(female_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS female_attendance_percentage FROM `CLOSE_EVENT` where close_event_date between '$start_year-06-15' and '$end_year-06-14'  GROUP BY close_event_organizer order by female_attendance_percentage  limit 1";
-    $result=mysqli_query($con,$min_female_attendance);
-    $row=mysqli_fetch_assoc($result);
-    $min_girls_attendance=$row['close_event_organizer'];
-    echo "<div class='container mt-5 mb-5 shadow p-3 mb-5 bg-body' style='border-radius: 20px'> 
-    <h2>Events organized by <strong class='fw-bolder'>$min_girls_attendance</strong> have less attendance of girls  </h2>
-    </div>";
-    echo "</div></div>";
+    
 }
 else{
 

@@ -7,16 +7,19 @@ if(isset($_POST['resource_person'])){
     $academic_year=$_POST['year'];
     $organizer=$_POST['organizer'];
     //echo $organizer;
+    if($academic_year!=''){
     $years = explode("-", $academic_year);
     $start_year=intval($years[0]);
     $end_year=intval($years[1]);
-    if($end_year<$start_year){
+     if($end_year<$start_year){
         echo "<script>alert('Please Enter a academic year appropriately')</script>";
         echo("<script>window.location='../reports/report_home.php';</script>");
+        }
     }
+   
     if($academic_year==''){
         echo "<script>alert('Please Enter a academic year')</script>";
-        echo("<script>window.location='../admin/report_home.php';</script>");
+        echo("<script>window.location='../reports/report_home.php';</script>");
     }
 }
 ?>

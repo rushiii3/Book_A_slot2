@@ -30,8 +30,8 @@
         $get_event="select * from `EVENT` where event_id=$event_id ";
         $result=mysqli_query($con,$get_event);
         $row=mysqli_fetch_assoc($result);
-        $alumni=$row['alumni'];
         $email=$row['user_name'];
+         $alumni=$row['alumni'];
         $event_date=$row['event_date'];
         $event_id=$row['event_id'];
         $event_name=$row['event_name'];
@@ -59,6 +59,7 @@ if(isset($_POST['approve_event_id'])){
         $result=mysqli_query($con,$info_to_send_mail);
         $row=mysqli_fetch_assoc($result);
         $email=$row['user_name'];
+        $alumni=$row['alumni'];
         $status_value=$row['status_value'];
         $event_name = $row['event_name'];
         $event_date=$row['event_date'];
@@ -70,49 +71,11 @@ if(isset($_POST['approve_event_id'])){
         $name=$row['user_full_name'];
     
 
-// API endpoint URL
-$apiUrl = 'https://alumniandroidapp.000webhostapp.com/EventInsertApi3.php?apikey=12345';
 
-// Data to be sent in the request body
-$data = array(
-    'event_name' => $event_name,
-    'event_description' => $event_description,
-    'event_date' => $event_date,
-    'event_time' => $event_start_time,
-    'event_image' => 'event_image',
-    'event_registration_link' => '#'
-);
 
-// Convert data to JSON
-$jsonData = json_encode($data);
 
-// Initialize curl
-$curl = curl_init();
 
-// Set curl options
-curl_setopt_array($curl, array(
-    CURLOPT_URL => $apiUrl,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_HTTPHEADER => array(
-        'Content-Type: application/json',
-    ),
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $jsonData,
-));
 
-// Execute curl request
-$response = curl_exec($curl);
-
-// Check for errors
-if ($response === false) {
-    echo 'Error: ' . curl_error($curl);
-} else {
-    // Display the response
-    echo $response;
-}
-
-// Close curl
-curl_close($curl);
 
 //     if($result){
 //        //echo "<script>sendEmail()</script>";
@@ -152,7 +115,7 @@ if(isset($_POST["not_approved_event_id"])){
   <div class="row">
     <div class="col-md-10 col-lg-10 m-auto">
     <?php
-                include '../user/navigation.html';
+                include '../admin/admin_navbar.html';
                 ?>
     <div class="row">
         <div class="col-md-6 col-lg-7">
@@ -221,7 +184,7 @@ if(isset($_POST["not_approved_event_id"])){
                     <input type='hidden' id='event_date' name='event_date' readonly class='form-control bg-primary text-light ' value='<?php echo $event_date?>'>
                 </div>
                 <div class='form-outline w-50 m-auto my-2'>
-                    <input type='hidden' id='alumni' name='alumni' readonly class='form-control bg-primary text-light ' value='<?php echo $alumni?>'>
+                    <input type='hidden' id='alumni' name='alumni' readonly class='form-control bg-primary text-light ' value='<?php echo  $alumni?>'>
                 </div>
                 <div class='form-outline w-50 m-auto my-2'>
                     <input type='hidden' id='event_description' name='event_description' readonly class='form-control bg-primary text-light ' value='<?php echo $event_description?>'>
