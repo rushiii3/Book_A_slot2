@@ -84,11 +84,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
       <div class="modal-body">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-
-It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+      <ol style="text-align:justify;">
+<li class="mt-1">Departments and Activity groups should strictly follow the timings once booking is done.</li>
+<li class="mt-1">Departments and Activity groups are required to submit details of programme conducted, Report of the programme, Geo-tagged photos, etc. within 2 days after programme is conducted.</li>
+<li class="mt-1">If the programme details are not submitted, the booked event will not be closed. In such situations, the next booking will not be allowed for that Department or Activity group.</li>
+<li class="mt-1">Booking is available for seminars, meetings, and such other academic programmes only.</li>
+<li class="mt-1">Venues are not available for any private functions.</li>
+<li class="mt-1">Eatables are not allowed in the Auditoriums.</li>
+<li class="mt-1">Auditoriums are not allowed  for any practice sessions.</li>
+</ol>
       </div>
       <div class="modal-footer" id="tnc_footer">
       <button type="button" class="btn btn-primary" id="iagree" data-bs-dismiss="modal">I Agree</button>

@@ -61,10 +61,24 @@ function nextDay() {
 
   function show()
   {
-    currentDate.setDate(currentDate.getDate());
-    updateDate();
-    currentDate.setDate(currentDate.getDate() - 1);
     var dateString = currentDate.toDateString();
     document.getElementById("set_date").textContent = dateString;
+    
+    updateDate();
+    $.ajax({
+        type: 'POST',
+        url: '../user/ajax.php',
+        data: {requirement_date:dateString},
+        success: function(data) {
+            $('#innerReq').html("");
+            $('#innerReq').html(data);
+            console.log(data);
+            
+        },
+        error: function() {
+            console.log(response.status);
+        },
+    })
   }
-  show()
+ 
+  show();

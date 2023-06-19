@@ -20,7 +20,7 @@
   
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <title>Home</title>
+  <title>Requirements</title>
   <link type="image/png" sizes="16x16" rel="icon" href="../../img/logo11.jpeg" />
 </head>
 <body>
@@ -52,9 +52,6 @@
     </div>
     
   </main>
-  <!-- <iframe src="https://chatbot.hellotars.com/conv/NJba4f/" style="width: 400px;height: 620px;box-shadow: 0 20px 80px rgba(0,0,0,.6);border-radius: 5px;overflow: hidden;border: none;"></iframe>
-    <iframe src='https://webchat.botframework.com/embed/gosmarterfaqbot?s=YOUR_SECRET_HERE'  
-style='min-width: 400px; width: 100%; min-height: 500px;'></iframe> -->
   <script src="../../js/require.js"></script>
 </body>
 </html>

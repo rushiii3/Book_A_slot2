@@ -2,7 +2,7 @@
 include ('../connection/connect.php');
 if(isset($_GET['event_id'])){
     $event_id=$_GET['event_id'];
-    $getting_event_info="SELECT * from `event` where event_id='$event_id'";
+    $getting_event_info="SELECT * from `EVENT` where event_id='$event_id'";
     $result=mysqli_query($con,$getting_event_info);
     $row=mysqli_fetch_assoc($result);
     $event_end_time=$row['event_end_time'];
@@ -85,7 +85,7 @@ if(isset($_POST['close_event'])){
     <main id="main">
 
         <?php
-     include("../user/navigation.html");
+     include("navbar.php");
     ?>
 
 

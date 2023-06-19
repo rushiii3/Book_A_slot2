@@ -58,7 +58,7 @@ include '../connection/connect.php';
         echo "<h1 class='text-center p-4 mt-4 mb-4'>All Departments filled the event information </h1>";
     }
     else{
-        echo "<h3 class='text-center mt-3 mb-3'>List of events whose informationn is not filled even the events occured successfully</h3>";
+        echo "<h3 class='text-center mt-3 mb-3'>List of events whose information is not filled even the events occured successfully</h3>";
         echo "<table  class='table table-bordered my-4 ' style='align-items:center'>
         <thead >
         <tr >
