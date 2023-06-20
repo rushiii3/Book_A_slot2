@@ -414,8 +414,8 @@
                                             <label for="alumini" class="form-label">Is it for alumni</label>
                                             <select class="form-select" name="alumini" id="alumini">
                                                 <option selected>Select whether is it for alumni</option>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
                                                 
                                             </select>
                                         </div>
@@ -448,7 +448,7 @@
                                         <div class="col-12 mb-1 mt-5">
                                             <button type="button" class="btn btn-secondary px-4 ms-3" id="prevBtnFourth">Previous</button>
                                             <button type="button" class="btn btn-primary px-4 ms-3" id="nextForth">Submit</button> 
-                                            <input type="submit" name="FinalSubmit" id="FinalSubmit" value="none">
+                                            <input type="submit" style="display:none;" name="FinalSubmit" id="FinalSubmit" value="none">
                                         </div>
                         </div>
                         <div id="timeBlock">
