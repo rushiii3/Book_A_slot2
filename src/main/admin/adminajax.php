@@ -130,7 +130,7 @@ function sendEmail() {
     From: "audibooking55@gmail.com",
     Subject: "Update regarding to audibooking",
     Body: document.getElementById('emailContent').innerHTML,
-  }).then(message => alert(message));
+  }).then(message => console.log(message));
 }
 sendEmail();
 </script>
