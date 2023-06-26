@@ -90,7 +90,7 @@ require "../connection/connect.php";
      <div class="container mt-2">
             <div class="row p-3">
                 <?php
-                $get_events = "SELECT * FROM `EVENT` WHERE organization_institute = 'Others' AND status_value = 'Pending' ORDER BY event_date";
+                $get_events = "SELECT * FROM `EVENT` WHERE dep_id = '83' AND status_value = 'Pending' ORDER BY event_date";
                 $result_of_events = mysqli_query($con, $get_events);
                 if (mysqli_num_rows($result_of_events) > 0) {
                     while ($row_of_query = mysqli_fetch_assoc($result_of_events)) {
@@ -160,7 +160,7 @@ require "../connection/connect.php";
 </html>
 <script>
     <?php
-    $get_events = "SELECT * FROM `EVENT` WHERE organization_institute = 'Others' AND status_value = 'Pending' ORDER BY event_date";
+    $get_events = "SELECT * FROM `EVENT` WHERE dep_id = '83' AND status_value = 'Pending' ORDER BY event_date";
                 $result_of_events = mysqli_query($con, $get_events);
                 if (mysqli_num_rows($result_of_events) > 0) {
                     while ($row_of_query = mysqli_fetch_assoc($result_of_events)) {

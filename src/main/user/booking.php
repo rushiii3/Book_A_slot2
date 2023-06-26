@@ -176,32 +176,37 @@
                                                 <textarea class="form-control" name="eventDescription" id="eventDescription" rows="2"></textarea>
                                         </div>
                                         <div class="col-12 mb-3">
+                                                <label for="dep_id" class="form-label">Select your department/Committiee</label>
+                                                <select class="form-select" id="dep_id">
+                                                    <option selected>Select a Department / Committee</option>
+                                                    <?php
+                                                    $get_dep = "SELECT * FROM dep GROUP BY acadamics";
+                                                    $result = mysqli_query($con,$get_dep);
+                                                    if(mysqli_num_rows($result)>0)
+                                                    {
+                                                    while($row = mysqli_fetch_assoc($result))
+                                                    {
+                                                        ?>
+                                                        <option value="<?php echo($row['acadamics']); ?>"><?php echo($row['acadamics']); ?></option>
+                                                        <?php
+                                                        ?>
+                                                    </optgroup>
+                                                        <?php
+                                                    }
+                                                    }
+                                                    ?>
+                                                </select>
+                                        </div>
+                                        <div class="col-12 mb-3">
                                         <label for="department_namee" class="form-label">Select Department</label>
                                         <select
                                             name="department_namee"
                                             class="form-select"
                                             id="department_namee"
                                             name="department_namee"
-                                            required
                                         >
-                                            <option selected>Select Department</option>
-                                            <?php
-                                                $get_department_name_query = "SELECT * FROM DEPARTMENT";
-                                                $result_of_department_query = mysqli_query($con,$get_department_name_query);
-                                                if(mysqli_num_rows($result_of_department_query)>0) 
-                                                {
-                                                    while($row_of_department_name =
-                                                    mysqli_fetch_assoc($result_of_department_query))
-                                                    { ?>
-                                                    <option
-                                                        value="<?php echo($row_of_department_name['department_name']); ?>"
-                                                    >
-                                                        <?php echo($row_of_department_name['department_name']); ?>
-                                                    </option>
-                                                    <?php
-                                                }
-                                                }
-                                                    ?>
+                                            <option selected>Select your department/committee first</option>
+                                            
                                         </select>
                                     </div>
 
@@ -274,82 +279,16 @@
                                         <div class="col-6 mb-3">
                                             <label for="startTime" class="form-label">Start Time</label>
                                             <select class="form-select" name="selectStartTime" id="selectStartTime" aria-label="select_start_time">
-                                                <option selected>Select the start time</option>
-                                                <option class="start-time" value="07:00">07:00 AM</option>
-                                                <option class="start-time" value="07:30">07:30 AM</option>
-                                                <option class="start-time" value="08:00">08:00 AM</option>
-                                                <option class="start-time" value="08:30">08:30 AM</option>
-                                                <option class="start-time" value="09:00">09:00 AM</option>
-                                                <option class="start-time" value="09:30">09:30 AM</option>
-                                                <option class="start-time" value="10:00">10:00 AM</option>
-                                                <option class="start-time" value="10:30">10:30 AM</option>
-                                                <option class="start-time" value="11:00">11:00 AM</option>
-                                                <option class="start-time" value="11:30">11:30 AM</option>
-                                                <option class="start-time" value="12:00">12:00 PM</option>
-                                                <option class="start-time" value="12:30">12:30 PM</option>
-                                                <option class="start-time" value="13:00">01:00 PM</option>
-                                                <option class="start-time" value="13:30">01:30 PM</option>
-                                                <option class="start-time" value="14:00">02:00 PM</option>
-                                                <option class="start-time" value="14:30">02:30 PM</option>
-                                                <option class="start-time" value="15:00">03:00 PM</option>
-                                                <option class="start-time" value="15:30">03:30 PM</option>
-                                                <option class="start-time" value="16:00">04:00 PM</option>
-                                                <option class="start-time" value="16:30">04:30 PM</option>
-                                                <option class="start-time" value="17:00">05:00 PM</option>
-                                                <option class="start-time" value="17:30">05:30 PM</option>
-                                                <option class="start-time" value="18:00">06:00 PM</option>
-                                                <option class="start-time" value="18:30">06:30 PM</option>
-                                                <option class="start-time" value="19:00">07:00 PM</option>
-                                                <option class="start-time" value="19:30">07:30 PM</option>
-                                                <option class="start-time" value="20:00">08:00 PM</option>
-                                                <option class="start-time" value="20:30">08:30 PM</option>
-                                                <option class="start-time" value="21:00">09:00 PM</option>
-                                                <option class="start-time" value="21:30">09:30 PM</option>
-                                                <option class="start-time" value="22:00">10:00 PM</option>
-                                                <option class="start-time" value="22:30">10:30 PM</option>
-                                                <option class="start-time" value="23:00">11:00 PM</option>
-                                                <option class="start-time" value="23:30">11:30 PM</option>
+                                            <option selected>Select the Date and Venue First</option>    
+                                            
                                             </select>
                                             
                                         </div>
                                         <div class="col-6 mb-3">
                                             <label for="endTime" class="form-label">End Time</label>
                                             <select class="form-select" name="selectEndTime" id="selectEndTime" aria-label="select_start_time">
-                                                <option selected>Select End time</option>
-                                                <option class="end-time" value="07:00">07:00 AM</option>
-                                                <option class="end-time" value="07:30">07:30 AM</option>
-                                                <option class="end-time" value="08:00">08:00 AM</option>
-                                                <option class="end-time" value="08:30">08:30 AM</option>
-                                                <option class="end-time" value="09:00">09:00 AM</option>
-                                                <option class="end-time" value="09:30">09:30 AM</option>
-                                                <option class="end-time" value="10:00">10:00 AM</option>
-                                                <option class="end-time" value="10:30">10:30 AM</option>
-                                                <option class="end-time" value="11:00">11:00 AM</option>
-                                                <option class="end-time" value="11:30">11:30 AM</option>
-                                                <option class="end-time" value="12:00">12:00 PM</option>
-                                                <option class="end-time" value="12:30">12:30 PM</option>
-                                                <option class="end-time" value="13:00">01:00 PM</option>
-                                                <option class="end-time" value="13:30">01:30 PM</option>
-                                                <option class="end-time" value="14:00">02:00 PM</option>
-                                                <option class="end-time" value="14:30">02:30 PM</option>
-                                                <option class="end-time" value="15:00">03:00 PM</option>
-                                                <option class="end-time" value="15:30">03:30 PM</option>
-                                                <option class="end-time" value="16:00">04:00 PM</option>
-                                                <option class="end-time" value="16:30">04:30 PM</option>
-                                                <option class="end-time" value="17:00">05:00 PM</option>
-                                                <option class="end-time" value="17:30">05:30 PM</option>
-                                                <option class="end-time" value="18:00">06:00 PM</option>
-                                                <option class="end-time" value="18:30">06:30 PM</option>
-                                                <option class="end-time" value="19:00">07:00 PM</option>
-                                                <option class="end-time" value="19:30">07:30 PM</option>
-                                                <option class="end-time" value="20:00">08:00 PM</option>
-                                                <option class="end-time" value="20:30">08:30 PM</option>
-                                                <option class="end-time" value="21:00">09:00 PM</option>
-                                                <option class="end-time" value="21:30">09:30 PM</option>
-                                                <option class="end-time" value="22:00">10:00 PM</option>
-                                                <option class="end-time" value="22:30">10:30 PM</option>
-                                                <option class="end-time" value="23:00">11:00 PM</option>
-                                                <option class="end-time" value="23:30">11:30 PM</option>
+                                            <option selected>Select the Date and Venue First</option>  
+                                                
                                             </select>
                                         </div>
                                     <div class="col-12 mb-1 mt-5">

@@ -73,13 +73,13 @@
         events: [
             <?php
             if($venue_name=="Audi 1"){
-                $event_info_query = "SELECT event_name,event_date,event_start_time,event_end_time,organization_institute FROM `EVENT` WHERE ar_name = '$venue_name' AND status_value in ('Approved','Pending') UNION SELECT `description`,datee,start_time,end_time,branch FROM disableDates";
+                $event_info_query = "SELECT event_name,event_date,event_start_time,event_end_time FROM `EVENT` WHERE ar_name = '$venue_name' AND status_value in ('Approved','Pending') UNION SELECT `description`,datee,start_time,end_time FROM disableDates";
             $result_of_event_info_query = mysqli_query($con, $event_info_query);
             if (mysqli_num_rows($result_of_event_info_query)) {
                 while ($row_of_event_info = mysqli_fetch_assoc($result_of_event_info_query)) {
             ?>
                     { // this object will be "parsed" into an Event Object
-                        title: " <?php echo ($row_of_event_info['event_name']); ?> \n <?php echo ($row_of_event_info['organization_institute']); ?>", // a property!
+                        title: " <?php echo ($row_of_event_info['event_name']); ?> \n <?php //echo ($row_of_event_info['organization_institute']); ?>", // a property!
                         start: "<?php echo ($row_of_event_info['event_date']); ?> <?php echo ($row_of_event_info['event_start_time']); ?>", // a property!
                         end: "<?php echo ($row_of_event_info['event_date']); ?> <?php echo ($row_of_event_info['event_end_time']); ?>", // a property! ** see important note below about 'end' **
                         <?php

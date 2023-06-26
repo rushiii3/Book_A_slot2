@@ -209,7 +209,7 @@ if(!empty($_POST['user_email'])
     $designations = $_POST['designations'];
     $experience = $_POST['experience'];
     $alumni = mysqli_real_escape_string($con, $_POST['alumni']);
-    $query_insert_event_for_insider = "INSERT INTO `EVENT` (`event_id`, `event_name`, `event_date`, `event_start_time`, `event_end_time`, `event_description`, `students_total_number`, `status_value`, `organization_institute`, `request_date_time`, `user_name`, `ar_name`, `event_requriement`,alumni) VALUES ('$FourDigitRandomNumber','$event_name','$event_date','$event_start_time','$event_end_time','$event_Descr','$num_of_students','Pending','$department_namee','$timestamp','$user_email','$Venue_name','$requriment','$alumni')";
+    $query_insert_event_for_insider = "INSERT INTO `EVENT` (`event_id`, `event_name`, `event_date`, `event_start_time`, `event_end_time`, `event_description`, `students_total_number`, `status_value`, `dep_id`, `request_date_time`, `user_name`, `ar_name`, `event_requriement`,alumni) VALUES ('$FourDigitRandomNumber','$event_name','$event_date','$event_start_time','$event_end_time','$event_Descr','$num_of_students','Pending','$department_namee','$timestamp','$user_email','$Venue_name','$requriment','$alumni')";
     if(mysqli_query($con,$query_insert_event_for_insider))
     {
         $count = 0;
@@ -293,7 +293,7 @@ if(!empty($_POST['user_email'])
     $Institute_OrgName_email = mysqli_real_escape_string($con, $_POST['Institute_OrgName_email']);
     $Institute_OrgName_phone_no = mysqli_real_escape_string($con, $_POST['Institute_OrgName_phone_no']);
     $alumni = mysqli_real_escape_string($con, $_POST['alumni']);
-    $query_insert_event_for_outsider = "INSERT INTO `EVENT` (`event_id`, `event_name`, `event_date`, `event_start_time`, `event_end_time`, `event_description`, `students_total_number`, `status_value`, `organization_institute`, `request_date_time`, `user_name`, `ar_name`, `event_requriement`,alumni) VALUES ('$FourDigitRandomNumber','$event_name','$event_date','$event_start_time','$event_end_time','$event_Descr','$num_of_students','Pending','$department_namee','$timestamp','$user_email','$Venue_name','$requriment','$alumni')";
+    $query_insert_event_for_outsider = "INSERT INTO `EVENT` (`event_id`, `event_name`, `event_date`, `event_start_time`, `event_end_time`, `event_description`, `students_total_number`, `status_value`, `dep_id`, `request_date_time`, `user_name`, `ar_name`, `event_requriement`,alumni) VALUES ('$FourDigitRandomNumber','$event_name','$event_date','$event_start_time','$event_end_time','$event_Descr','$num_of_students','Pending','$department_namee','$timestamp','$user_email','$Venue_name','$requriment','$alumni')";
     $query_to_insert_outsider_info = "INSERT INTO `OUTSIDER_INFO` (`outsider_name`, `outsider_email`, `outsider_phone`, `event_id`) VALUES ('$Institute_OrgName', '$Institute_OrgName_email', '$Institute_OrgName_phone_no', '$FourDigitRandomNumber')";
     if(mysqli_query($con,$query_insert_event_for_outsider))
     {
@@ -462,6 +462,38 @@ if(!empty($_POST['number_of_students']) && !empty($_POST['venue_named']))
                 <?php
             }
         }
+    }
+}
+
+if(!empty($_POST['dep_name']))
+{
+    $dep_name = $_POST['dep_name'];
+    $get_dep_names ="SELECT * FROM dep WHERE acadamics = '$dep_name' GROUP BY stream";
+    $result = mysqli_query($con,$get_dep_names);
+    if(mysqli_num_rows($result))
+    {
+        echo("<option selected>Select a Department / Committee</option>");
+        while($row = mysqli_fetch_assoc($result))
+        {
+            $stream = $row['stream'];
+            ?>
+            <optgroup label="<?php echo($stream); ?>">
+            <?php
+            $get_details = "SELECT * FROM dep WHERE stream = '$stream' AND acadamics = '$dep_name'";
+            $result_of_details = mysqli_query($con,$get_details);
+            if(mysqli_num_rows($result_of_details))
+            {
+              while($row_of_details = mysqli_fetch_assoc($result_of_details))
+              {
+                ?>
+                <option value="<?php echo($row_of_details['dep_id']); ?>"><?php echo($row_of_details['dep_name']); ?></option>
+                <?php
+                
+              }
+            }
+        }
+    }else{
+        echo("<option selected>Select a Department / Committee first</option>");
     }
 }
 mysqli_close($con);

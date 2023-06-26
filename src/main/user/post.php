@@ -45,38 +45,50 @@
       </select>
 
 
-      <select class="form-control" >
-        <option selected>Select a Department</option>
-<?php
-$get_dep = "SELECT * FROM dep GROUP BY stream";
-$result = mysqli_query($con,$get_dep);
-if(mysqli_num_rows($result)>0)
-{
-  while($row = mysqli_fetch_assoc($result))
-  {
-    
-    ?>
-  <optgroup label="<?php echo($row['stream']); ?>">
-    <?php
-    $stream = $row['stream'];
-    $get_details = "SELECT * FROM dep WHERE stream = '$stream'";
-    $result_of_details = mysqli_query($con,$get_details);
-    if(mysqli_num_rows($result_of_details))
-    {
-      while($row_of_details = mysqli_fetch_assoc($result_of_details))
-      {
-        ?>
-        <option value="<?php echo($row_of_details['dep_id']); ?>"><?php echo($row_of_details['dep_name']); ?></option>
+      <select class="form-control" id="dep_id">
+        <option selected>Select a Department / Committee</option>
         <?php
-        
-      }
-    }
-    ?>
-  </optgroup>
-    <?php
-  }
-}
-?>
- </select>
+        $get_dep = "SELECT * FROM dep GROUP BY acadamics";
+        $result = mysqli_query($con,$get_dep);
+        if(mysqli_num_rows($result)>0)
+        {
+          while($row = mysqli_fetch_assoc($result))
+          {
+            ?>
+            <option value="<?php echo($row['acadamics']); ?>"><?php echo($row['acadamics']); ?></option>
+            <?php
+            ?>
+          </optgroup>
+            <?php
+          }
+        }
+        ?>
+      </select>
+
+ <select id="dep_com_names">
+  <option>Select your department/committee first</option>
+</select>
+ <script>
+  $('#dep_id').on('change',function()
+  {
+    $dep_name =  $('#dep_id').val();
+    $.ajax({
+            type: 'POST',
+            url: 'ajax.php',
+            data: {dep_name: $dep_name },
+            success: function(data){
+                $('#dep_com_names').html("");
+                $('#dep_com_names').html(data);
+            },
+            error: function() {
+                console.log(response.status);
+            },
+        })
+  })
+  $('#dep_com_names').on('change',function()
+  {
+    $dep_name_id = $('#dep_com_names :selected').text();
+  })
+  </script>
 </body>
 </html>

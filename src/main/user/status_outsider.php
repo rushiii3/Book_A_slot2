@@ -123,7 +123,7 @@
                                                                     }else
                                                                     {   
                                                                         ?>
-                                                                            <a href="cancel.php">What to cancel the event?</a>
+                                                                            <a href="cancel.php">Want to cancel the event?</a>
                                                                         <?php
                                                                     }
                                                                 ?>

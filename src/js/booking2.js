@@ -5,6 +5,7 @@ $('#FinalSubmit').on('click',function(e)
     $event_Descr = $('#eventDescription').val();
     $num_of_students = $('#no_of_stu_attending').val();
     $department_namee = $('#department_namee').val();
+    $dep_name = $('#department_namee :selected').text();
     $Institute_OrgName = $('#Institute_OrgName').val();
     $Institute_OrgName_email = $('#Institute_OrgName_email').val();
     $Institute_OrgName_phone_no = $('#Institute_OrgName_phone_no').val();
@@ -37,8 +38,6 @@ $('#FinalSubmit').on('click',function(e)
             $requriment =  $requriment+', No of chairs and dias = '+$select_no_of_chairs;
         }
     }
-    console.log($requriment);
-    
     var rp_names = [];
     var company_names = [];
     var designations = [];
@@ -58,8 +57,9 @@ $('#FinalSubmit').on('click',function(e)
         experience.push($('#experience'+i+'').val());
       }
     }
-    if($department_namee=="Others")
+    if($dep_name==="Others")
     {
+
         var others = "others";
         $.ajax({
             type: 'POST',

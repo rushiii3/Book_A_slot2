@@ -48,7 +48,8 @@ $('#check_box_terms_and_condition').on('click',function(){
   
 })
 $('#department_namee').on('change',function(){
-    $department_namee = $('#department_namee').val();
+    $department_namee = $('#department_namee :selected').text();
+    console.log($department_namee);
     if($department_namee==="Others")
     {
         $('#org_institue_name').show();
@@ -63,8 +64,6 @@ $('#department_namee').on('change',function(){
       $('#org_institue_transaction_id').hide();
     }
 }) 
-
-
 $('.section2').hide();
 $('.section3').hide();
 $('.section4').hide();
@@ -118,12 +117,12 @@ $('#nextFirst').on('click',function()
                   {
                     if($Institute_OrgName_phone_no.length===10)
                     {
-                        $step.eq(0).removeClass("active");
-                        $step.eq(0).addClass("completed");
                         $('.section1').fadeOut();
                         $('.section1').hide();
                         $('.section2').fadeIn();
                         $('.section2').show();
+                        $step.eq(0).removeClass("active");
+                        $step.eq(0).addClass("completed");
                         $step.eq(1).addClass("active");
                     }else{
                       alert("Please Input the valid Institute/Organisation Phone Number");
@@ -138,10 +137,12 @@ $('#nextFirst').on('click',function()
                 alert("Please Input the Institute/Organisation Name");
               }
             }else{
+              $('.section1').fadeOut();
+                        $('.section1').hide();
+                        $('.section2').fadeIn();
+                        $('.section2').show();
               $step.eq(0).removeClass("active");
               $step.eq(0).addClass("completed");
-              $('.section1').hide();
-              $('.section2').show();
               $step.eq(1).addClass("active");
             }
           }else{
@@ -221,7 +222,7 @@ $('#nextSecond').on('click',function()
     }
 })
 $('#nextThird').on('click',function(){
-              $step.eq(2).removeClass("active");
+                $step.eq(2).removeClass("active");
                 $step.eq(2).addClass("completed");
                 $('.section1').hide();
                 $('.section2').hide();
@@ -310,7 +311,23 @@ $('#bookAgain').on('click',function(){
 
 
 
-
+$('#dep_id').on('change',function()
+  {
+    $dep_name =  $('#dep_id').val();
+    $.ajax({
+            type: 'POST',
+            url: 'ajax.php',
+            data: {dep_name: $dep_name },
+            success: function(data){
+                $('#department_namee').html("");
+                $('#department_namee').html(data);
+            },
+            error: function() {
+                console.log(response.status);
+            },
+        })
+  })
+  
 
 
 
