@@ -110,7 +110,7 @@ include '../connection/connect.php';
                             include '../connection/connect.php';
                             $currentDate = date("Y-m-d");
                             $previousDate = date("Y-m-d", strtotime("-1 day"));
-                            $get_event="select * from `EVENT` where status_value='Pending' and request_date_time>='$previousDate' and dep_id<>(SELECT dep_id FROM `DEP` WHERE dep_name='Others')";
+                            $get_event="select * from `EVENT` where status_value='Pending' and request_date_time>='$previousDate' and dep_id<>(SELECT dep_id FROM `DEPARTMENT` WHERE department_name='Others')";
                             $result=mysqli_query($con,$get_event);
                             $count=0;
                             while($row=mysqli_fetch_assoc($result)){

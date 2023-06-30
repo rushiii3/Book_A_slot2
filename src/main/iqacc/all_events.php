@@ -48,10 +48,10 @@ if(isset($_POST['all_events'])){
                 <h3 class="text-center">Information of close events</h3>
            <?php
            $get_event="SELECT EVENT.event_name,EVENT.event_date,EVENT.event_start_time,EVENT.event_end_time,
-           EVENT.ar_name,EVENT.event_description,EVENT.organization_institute,
+           EVENT.ar_name,EVENT.event_description,EVENT.dep_id,
            CLOSE_EVENT.close_event_activities,CLOSE_EVENT.male_students_count,CLOSE_EVENT.female_students_count,CLOSE_EVENT.faculty_members_count,
            CLOSE_EVENT.close_event_mode,CLOSE_EVENT.close_event_link,CLOSE_EVENT.close_event_purpose,CLOSE_EVENT.close_event_impact,CLOSE_EVENT.event_pic1,
-           CLOSE_EVENT.event_pic2 from `EVENT` join `CLOSE_EVENT` on EVENT.event_id=CLOSE_EVENT.event_id  where MONTH(event_date)='$month' and YEAR(event_date)='$year' and EVENT.status_value='Approved' and EVENT.event_status='Closed' and EVENT.organization_institute<>'Others'
+           CLOSE_EVENT.event_pic2 from `EVENT` join `CLOSE_EVENT` on EVENT.event_id=CLOSE_EVENT.event_id  where MONTH(event_date)='$month' and YEAR(event_date)='$year' and EVENT.status_value='Approved' and EVENT.event_status='Closed' and EVENT.dep_id<>'Others'
            ";
            $result=mysqli_query($con,$get_event);
            $count=0;
@@ -88,7 +88,7 @@ if(isset($_POST['all_events'])){
                 <td> <?php echo $row['event_date'] ?></td>
                 <td> <?php echo date("g:i A", strtotime($row['event_start_time'])); ?> to <?php echo date("g:i A", strtotime($row['event_end_time'])); ?> </td>
                 <td> <?php echo $row['ar_name'] ?></td>
-                <td> <?php echo $row['organization_institute'] ?></td>
+                <td> <?php echo $row['dep_id'] ?></td>
                 <td > <?php echo $row['event_description'] ?></td>
                 <td><?php echo $row['close_event_mode'] ?></td>
                 <?php

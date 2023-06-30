@@ -145,7 +145,21 @@ if (!empty($_POST['selectdatee']) && !empty($_POST['venue_name'])) {
                     <br>
                     <?php echo (date('H:i A', strtotime($row_of_get_event_info_by_date['event_start_time']))); ?> to <?php echo (date('H:i A', strtotime($row_of_get_event_info_by_date['event_end_time']))); ?>
                     <br>
-                    <small> <?php echo ($row_of_get_event_info_by_date['organization_institute']); ?> </small>
+                    <small> <?php
+                    $dept_id = $row_of_get_event_info_by_date['dep_id'];
+                    $get_dept_name = "SELECT * FROM DEPARTMENT WHERE department_id = '$dept_id'";
+                    $result_of_dep = mysqli_query($con,$get_dept_name);
+                    if(mysqli_num_rows($result_of_dep)>0)
+                    {
+                        while($row = mysqli_fetch_assoc($result_of_dep))
+                        {
+                            echo($row['department_acadamics']);
+                            echo(" ");
+                            echo($row['department_name']);
+                        }
+                    }
+                    ?> 
+                    </small>
                 </p>
             </div>
             <hr>

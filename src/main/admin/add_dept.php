@@ -26,12 +26,14 @@ include '../connection/connect.php';
 //to add a new department
 if(isset($_POST['add_dept'])){
     $department_name=$_POST['department_name'];
+    $department_Stream = $_POST['department_Stream'];
+    $department_Academic = $_POST['department_Academic'];
     if( $department_name==''){
         echo "<script>alert('Please fill the field first')</script>";
         echo("<script>window.location='admin_home.php?add_dept';</script>");
     }
     else{
-    $add_dept="Insert into `DEPARTMENT`(department_name) value('$department_name')";
+    $add_dept="Insert into `DEPARTMENT`(department_name,department_stream,department_acadamics) value('$department_name','$department_Stream','$department_Academic')";
     $result=mysqli_query($con,$add_dept);
     if($result){
         header('location:./admin_home.php?add_dept');
@@ -54,6 +56,8 @@ if(isset($_POST['add_dept'])){
         <tr >
         <th class="text-center"> Sr. No</th>
            <th class="text-center"> DEPARTMENT NAMES</th>
+           <th class="text-center"> STREAM</th>
+           <th class="text-center"> ACADEMIC</th>
         </tr>
         </thead> 
     <tbody class="bg-primary">
@@ -63,10 +67,15 @@ if(isset($_POST['add_dept'])){
         $number=0;
         while($row=mysqli_fetch_assoc($result)){
             $department_name=$row['department_name'];
+            $department_stream=$row['department_stream'];
+            $department_acadamics=$row['department_acadamics'];
             $number++;
+
             echo"
             <tr class='text-center text-light'><td> $number</td>
-            <td> $department_name</td></tr>";
+            <td> $department_name</td>
+            <td> $department_stream</td>
+            <td> $department_acadamics</td></tr>";
             }
             ?>
         </tbody>    
@@ -87,7 +96,15 @@ if(isset($_POST['add_dept'])){
                 <div class="form-outline w-100 m-auto">
                     <label for="department_name" class="form-label fw-bold">Department Name</label>
                     <input type="text" id="department_name" name="department_name" class="form-control" placeholder="Enter a depertment name">
-                </div>               
+                </div>    
+                <div class="form-outline w-100 m-auto">
+                    <label for="department_Stream" class="form-label fw-bold">Stream</label>
+                    <input type="text" id="department_Stream" name="department_Stream" class="form-control" placeholder="Enter a depertment Stream">
+                </div>
+                <div class="form-outline w-100 m-auto">
+                    <label for="department_Academic" class="form-label fw-bold">Academic</label>
+                    <input type="text" id="department_Academic" name="department_Academic" class="form-control" placeholder="Enter a depertment Academic">
+                </div>           
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" >close</button>

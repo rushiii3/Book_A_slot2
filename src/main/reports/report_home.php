@@ -243,10 +243,10 @@
                     <label for="year" class="form-label fw-bold">select organization/institute who invited resource persons:</label>
                     <select name="organizer" class='w-50 m-auto' id="organizer">
                         <?php
-                        $get_organizations="SELECT distinct EVENT.organization_institute FROM `EVENT` JOIN (SELECT event_id,full_name from `RESOURCE_PERSON` GROUP BY event_id)`RESOURCE_PERSON` on EVENT.event_id=RESOURCE_PERSON.event_id where status_value='Approved' and RESOURCE_PERSON.full_name<>'NA'";
+                        $get_organizations="SELECT distinct `DEPARTMENT`.`department_name` FROM `EVENT` JOIN `DEPARTMENT` on EVENT.dep_id=DEPARTMENT.department_id JOIN (SELECT event_id,full_name from `RESOURCE_PERSON` GROUP BY event_id)`RESOURCE_PERSON` on EVENT.event_id=RESOURCE_PERSON.event_id where status_value='Approved' and RESOURCE_PERSON.full_name<>'NA'";
                         $result=mysqli_query($con,$get_organizations);
                         while($row=mysqli_fetch_assoc($result)){
-                            $organizer=$row['organization_institute'];
+                            $organizer=$row['department_name'];
                             echo "<option  value='$organizer'>$organizer</option>   ";
                         }
                         ?>

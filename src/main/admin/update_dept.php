@@ -62,25 +62,33 @@ if(isset($_POST['no'])){
         <tr >
         <th class="text-center"> Sr. No</th>
            <th class="text-center"> DEPARTMENT NAMES</th>
-          
+           <th class="text-center"> STREAM</th>
+           <th class="text-center"> ACADEMIC</th>
         </tr>
         </thread> 
     <tbody class="bg-primary">
-        <?php
+    <?php
         $get_dept="select * from `DEPARTMENT` ";
         $result=mysqli_query($con,$get_dept);
         $number=0;
         while($row=mysqli_fetch_assoc($result)){
             $department_name=$row['department_name'];
+            $department_stream=$row['department_stream'];
+            $department_acadamics=$row['department_acadamics'];
             $number++;
+
             echo"
             <tr class='text-center text-light'><td> $number</td>
-            <td><a class='text-light' style='text-decoration:none' data_id='$department_name' onclick='confirmupdate(this)'
+            <td><a class='text-light' style='text-decoration:none' 
+            data_id='$department_name' onclick='confirmupdate(this)' 
             type='button' class='text-light' data-toggle='modal' 
-            data-target='#update_dept'> $department_name</td></tr>";
-            // href='update.php?update_id=$department_name'
+            data-target='#update_dept'> $department_name</td>
+            
+            <td> $department_stream</td>
+            <td> $department_acadamics</td></tr>";
             }
             ?>
+        
         </tbody>    
     </table>
     </div>

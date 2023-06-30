@@ -28,11 +28,11 @@ if(isset($_POST['submit'])){
     $event_date = date('Y-m-d', strtotime($_POST["date"]));
     //echo $organization_institute," ",$event_date;
     $close_event_info="SELECT EVENT.event_name,EVENT.event_date,EVENT.event_start_time,EVENT.event_end_time,
-    EVENT.ar_name,EVENT.event_description,EVENT.organization_institute,
+    EVENT.ar_name,EVENT.event_description,EVENT.dep_id,
     CLOSE_EVENT.close_event_activities,CLOSE_EVENT.male_students_count,CLOSE_EVENT.female_students_count,CLOSE_EVENT.faculty_members_count,
     CLOSE_EVENT.close_event_mode,CLOSE_EVENT.close_event_link,CLOSE_EVENT.close_event_purpose,CLOSE_EVENT.close_event_impact,CLOSE_EVENT.event_pic1,
     CLOSE_EVENT.event_pic2 from `EVENT` join `CLOSE_EVENT` on EVENT.event_id=CLOSE_EVENT.event_id where EVENT.event_status='Closed' and EVENT.status_value='Approved' 
-    and EVENT.organization_institute='$organization_institute' and EVENT.event_date='$event_date'";
+    and EVENT.dep_id='$organization_institute' and EVENT.event_date='$event_date'";
     $result=mysqli_query($con,$close_event_info);
     if(mysqli_num_rows($result)>0){
         while($row=mysqli_fetch_assoc($result)){
@@ -44,7 +44,7 @@ if(isset($_POST['submit'])){
                                     <div class="badge p-1 mb-2">
                                       
                                     </div>
-                                    <p class="card-text " style="text-align:justify;"> <span class="fw-bold">Department: </span> <?php echo ($row['organization_institute']); ?> </p>
+                                    <p class="card-text " style="text-align:justify;"> <span class="fw-bold">Department: </span> <?php echo ($row['dep_id']); ?> </p>
                                     <p class="card-text " style="text-align:justify;"> <span class="fw-bold">Description : </span> <?php echo ($row['event_description']); ?> </p>
                                     <p class="card-text "> <span class="fw-bold">Date : </span> <?php echo date("d M Y", strtotime($row['event_date'])); ?></p>
                                     <p class="card-text "> <span class="fw-bold">Time : </span> <?php echo date("g:i A", strtotime($row['event_start_time'])); ?> to <?php echo date("g:i A", strtotime($row['event_end_time'])); ?> </p>

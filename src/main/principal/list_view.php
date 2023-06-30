@@ -35,7 +35,7 @@
     ?>
     <main id="main">
         <?php
-        include("navigation.html");
+        include("navbar.php");
         ?>
         <?php
         if ($_GET['id'] == "") {
@@ -73,13 +73,27 @@
         events: [
             <?php
             if($venue_name=="Audi 1"){
-                $event_info_query = "SELECT event_name,event_date,event_start_time,event_end_time FROM `EVENT` WHERE ar_name = '$venue_name' AND status_value in ('Approved','Pending') UNION SELECT `description`,datee,start_time,end_time FROM disableDates";
+                $event_info_query = "SELECT event_name,event_date,event_start_time,event_end_time,dep_id FROM `EVENT` WHERE ar_name = '$venue_name' AND status_value in ('Approved','Pending') UNION SELECT `description`,datee,start_time,end_time,branch FROM disableDates";
             $result_of_event_info_query = mysqli_query($con, $event_info_query);
             if (mysqli_num_rows($result_of_event_info_query)) {
                 while ($row_of_event_info = mysqli_fetch_assoc($result_of_event_info_query)) {
             ?>
                     { // this object will be "parsed" into an Event Object
-                        title: " <?php echo ($row_of_event_info['event_name']); ?> \n <?php //echo ($row_of_event_info['organization_institute']); ?>", // a property!
+                        title: " <?php echo ($row_of_event_info['event_name']); ?> \n <?php
+                            $dept_id = $row_of_event_info['dep_id'];
+                            $get_dept_name = "SELECT * FROM DEPARTMENT WHERE department_id = '$dept_id'";
+                            $result_of_dep = mysqli_query($con,$get_dept_name);
+                            if(mysqli_num_rows($result_of_dep)>0)
+                            {
+                                while($row = mysqli_fetch_assoc($result_of_dep))
+                                {
+                                    echo($row['department_acadamics']);
+                                    echo(" ");
+                                    echo($row['department_name']);
+                                }
+                            }
+                             ?>
+                            ", // a property!
                         start: "<?php echo ($row_of_event_info['event_date']); ?> <?php echo ($row_of_event_info['event_start_time']); ?>", // a property!
                         end: "<?php echo ($row_of_event_info['event_date']); ?> <?php echo ($row_of_event_info['event_end_time']); ?>", // a property! ** see important note below about 'end' **
                         <?php

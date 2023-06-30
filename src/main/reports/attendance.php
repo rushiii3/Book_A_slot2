@@ -47,7 +47,7 @@ if(isset($_POST['outsider_report'])){
                 include '../admin/admin_navbar.html';
                 ?>
             <?php
-            $percentage_according_to_gender="SELECT EVENT.organization_institute, (SUM(male_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS male_attendance_percentage, (SUM(female_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS female_attendance_percentage FROM `CLOSE_EVENT` join `EVENT` on CLOSE_EVENT.event_id=EVENT.event_id where EVENT.event_date between '$start_year-06-15' and '$end_year-06-14' and EVENT.organization_institute<>'Others' GROUP BY EVENT.organization_institute ";
+            $percentage_according_to_gender="SELECT EVENT.dep_id, (SUM(male_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS male_attendance_percentage, (SUM(female_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS female_attendance_percentage FROM `CLOSE_EVENT` join `EVENT` on CLOSE_EVENT.event_id=EVENT.event_id where EVENT.event_date between '$start_year-06-15' and '$end_year-06-14' and EVENT.dep_id<>'83' GROUP BY EVENT.dep_id ";
             $result=mysqli_query($con,$percentage_according_to_gender);
             $count=0;
             while($row=mysqli_fetch_assoc($result)){
@@ -65,12 +65,24 @@ if(isset($_POST['outsider_report'])){
         </tr>
         </thead>
         <tbody class='bg-primary'>";
-    $percentage_according_to_gender="SELECT EVENT.organization_institute, (SUM(male_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS male_attendance_percentage, (SUM(female_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS female_attendance_percentage FROM `CLOSE_EVENT` join `EVENT` on CLOSE_EVENT.event_id=EVENT.event_id where EVENT.event_date between '$start_year-06-15' and '$end_year-06-14' GROUP BY EVENT.organization_institute";
+    $percentage_according_to_gender="SELECT EVENT.dep_id, (SUM(male_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS male_attendance_percentage, (SUM(female_students_count) * 100.0 / (SUM(male_students_count) + SUM(female_students_count))) AS female_attendance_percentage FROM `CLOSE_EVENT` join `EVENT` on CLOSE_EVENT.event_id=EVENT.event_id where EVENT.event_date between '$start_year-06-15' and '$end_year-06-14' GROUP BY EVENT.dep_id";
     $result=mysqli_query($con,$percentage_according_to_gender);
     $sr=0;
     while($row=mysqli_fetch_assoc($result)){
         $sr++;
-        $organizer=$row['organization_institute'];
+        $dep_id=$row['dep_id'];
+
+        $get_dept_name = "SELECT * FROM DEPARTMENT WHERE department_id = '$dep_id'";
+                    $result_of_dep = mysqli_query($con,$get_dept_name);
+                    if(mysqli_num_rows($result_of_dep)>0)
+                    {
+                        while($row_dep = mysqli_fetch_assoc($result_of_dep))
+                        {
+                            $organizer = $row_dep['department_name']." ".$row_dep['department_acadamics']  ;
+                            
+                        }
+                    }
+
         $male_percentage=$row['male_attendance_percentage'];
         $female_percentage=$row['female_attendance_percentage'];
         echo"<tr class='text-center text-light'>

@@ -86,7 +86,17 @@ if(isset($_POST['month_report'])){
                 $event_description=$row['event_description'];
                 $event_start_time=$row['event_start_time'];
                 $event_end_time=$row['event_end_time'];
-                $organization_institute=$row['organization_institute'];
+                $dep_id=$row['dep_id'];
+                $get_dept_name = "SELECT * FROM DEPARTMENT WHERE department_id = '$dep_id'";
+                $result_of_dep = mysqli_query($con,$get_dept_name);
+                if(mysqli_num_rows($result_of_dep)>0)
+                {
+                    while($row_dep = mysqli_fetch_assoc($result_of_dep))
+                    {
+                        $organizer = $row_dep['department_name']." ".$row_dep['department_acadamics']  ;
+                        
+                    }
+                }
                 $students_total_number=$row['students_total_number'];
                 $ar_name=$row['ar_name'];
                 echo"<tr class='text-center text-light'><td> $event_name</td>
@@ -94,7 +104,7 @@ if(isset($_POST['month_report'])){
                 <td> $event_description</td>
                 <td> $event_start_time</td>
                 <td> $event_end_time</td>
-                <td>$organization_institute</td>
+                <td>$organizer</td>
                 <td>$students_total_number</td>
                 <td>$ar_name</td>
                 </tr>
