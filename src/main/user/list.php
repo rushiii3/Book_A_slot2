@@ -28,8 +28,9 @@
     include("../config/session.php");
     require "../connection/connect.php";
     require_once("../loader.html");
-    if($user_type=="o" || $user_type=="k")
+    if($user_type=="o" || $user_type=="k" || $user_type=="p")
   {
+
   }else{
     echo("<script>window.location='../user/sign_in.php';</script>");
   }
@@ -63,7 +64,6 @@
                                             "../../img/18.png",
                                             "../../img/19.png",
                                             "../../img/20.png"
-                                            
                                         );
                                         ?>
                                         <img src="<?php echo ($img_array[array_rand($img_array)]) ?>"
@@ -79,14 +79,7 @@
                 }
                 ?>
             </div>
-
-
-
-
-
-            
-        </div>
-        
+        </div> 
     </main>
 </body>
 

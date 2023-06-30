@@ -68,23 +68,38 @@
                             <div id="emailVerify" class="form-text"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="SelectDepartment" name="department" class="form-label">Select Department</label>
-                            <select name="department_namee" class="form-select" id="department_namee" required>
-                                <option selected>Select Department</option>
-                                <?php
-                                    $get_department_name_query = "SELECT * FROM DEPARTMENT";
-                                    $result_of_department_query = mysqli_query($con,$get_department_name_query);
-                                    if(mysqli_num_rows($result_of_department_query)>0) {
-                                        while($row_of_department_name = mysqli_fetch_assoc($result_of_department_query)) {
-                                            ?>
-                                            <option value="<?php echo($row_of_department_name['department_name']); ?>">
-                                                <?php echo($row_of_department_name['department_name']); ?>
-                                            </option>
-                                            <?php
-                                        }
-                                    }
-                                ?>
-                            </select>
+                        <label for="dep_id" class="form-label">Select your department/Committiee</label>
+                                                <select class="form-select" id="dep_id">
+                                                    <option selected>Select a Department / Committee</option>
+                                                    <?php
+                                                    $get_dep = "SELECT * FROM dep GROUP BY acadamics";
+                                                    $result = mysqli_query($con,$get_dep);
+                                                    if(mysqli_num_rows($result)>0)
+                                                    {
+                                                    while($row = mysqli_fetch_assoc($result))
+                                                    {
+                                                        ?>
+                                                        <option value="<?php echo($row['acadamics']); ?>"><?php echo($row['acadamics']); ?></option>
+                                                        <?php
+                                                        ?>
+                                                    </optgroup>
+                                                        <?php
+                                                    }
+                                                    }
+                                                    ?>
+                                                </select>
+                        </div>
+                        <div class="mb-3">
+                        <label for="department_namee" class="form-label">Select Department</label>
+                                        <select
+                                            name="department_namee"
+                                            class="form-select"
+                                            id="department_namee"
+                                            name="department_namee"
+                                        >
+                                            <option selected>Select your department/committee first</option>
+                                            
+                                        </select>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>

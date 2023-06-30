@@ -1,4 +1,3 @@
-
 <?php
 include '../connection/connect.php';
 // if(isset($_POST['remainder'])){
@@ -58,7 +57,7 @@ include '../connection/connect.php';
         echo "<h1 class='text-center p-4 mt-4 mb-4'>All Departments filled the event information </h1>";
     }
     else{
-        echo "<h3 class='text-center mt-3 mb-3'>List of events whose information is not filled even the events occured successfully</h3>";
+        echo "<h3 class='text-center mt-3 mb-3'>List of events whose informationn is not filled even the events occured successfully</h3>";
         echo "<table  class='table table-bordered my-4 ' style='align-items:center'>
         <thead >
         <tr >
@@ -72,7 +71,7 @@ include '../connection/connect.php';
         <tbody class='bg-primary'>";
             //event_date plus 8 days for remainder
            // $list_of_open_events="SELECT * from `EVENT` where DATE_ADD(event_date, INTERVAL 8 DAY)<=CURDATE() and status_value='Approved' and event_status='Open' and organization_institute<>'Others'";
-            $list_of_open_events="SELECT * from `EVENT` where DATE_ADD(event_date, INTERVAL 0 DAY)<=CURDATE() and status_value='Approved' and event_status='Open' and organization_institute<>'Others'";
+            $list_of_open_events="SELECT * from `EVENT` where DATE_ADD(event_date, INTERVAL 0 DAY)<=CURDATE() and status_value='Approved' and event_status='Open' and dep_id<>(SELECT dep_id FROM `DEP` WHERE dep_name='Others')";
 
             $result=mysqli_query($con,$list_of_open_events);
             $count=0;   
@@ -81,7 +80,12 @@ include '../connection/connect.php';
                 $event_id=$row['event_id'];
                 $event_name=$row['event_name'];
                 $event_date=$row['event_date'];
-                $event_organizer=$row['organization_institute'];
+                $dep_id=$row['dep_id'];
+                $get_event_organizer="SELECT dep_name,acadamics from `DEP` where dep_id='$dep_id' ";
+                $result_for_organizer=mysqli_query($con,$get_event_organizer);
+                $event_organizer_row=mysqli_fetch_assoc($result_for_organizer);
+                $event_organizer=$event_organizer_row['dep_name'];
+                $acadamics=$event_organizer_row['acadamics'];
                 $email=$row['user_name'];
                 $get_user_name="SELECT * from `USER` where user_name='$email'";
                 $result1=mysqli_query($con,$get_user_name);
@@ -92,7 +96,7 @@ include '../connection/connect.php';
                 <td> $event_id</td>
                 <td> $event_name</td>
                 <td> $event_date</td>
-                <td> $event_organizer</td>
+                <td> $event_organizer of $acadamics</td>
                 <form method='post'>
                 <input type='hidden' id='event_id$event_id' name='event_id' readonly class='form-control bg-primary text-light ' value='$event_id'>
                 <input type='hidden' id='event_name$event_id' name='event_name' readonly class='form-control bg-primary text-light ' value='$event_name'>

@@ -148,4 +148,22 @@ $(document).ready(function(){
             }
           e.preventDefault();
     })
-    })
+    });
+
+$('#dep_id').on('change',function()
+{
+  console.log("yes");
+  $dep_name =  $('#dep_id').val();
+  $.ajax({
+          type: 'POST',
+          url: 'ajax.php',
+          data: {dep_name: $dep_name },
+          success: function(data){
+              $('#department_namee').html("");
+              $('#department_namee').html(data);
+          },
+          error: function() {
+              console.log(response.status);
+          },
+      })
+});
