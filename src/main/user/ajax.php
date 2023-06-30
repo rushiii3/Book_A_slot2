@@ -468,25 +468,25 @@ if(!empty($_POST['number_of_students']) && !empty($_POST['venue_named']))
 if(!empty($_POST['dep_name']))
 {
     $dep_name = $_POST['dep_name'];
-    $get_dep_names ="SELECT * FROM dep WHERE acadamics = '$dep_name' GROUP BY stream";
+    $get_dep_names ="SELECT * FROM DEPARTMENT WHERE department_acadamics = '$dep_name' GROUP BY department_stream";
     $result = mysqli_query($con,$get_dep_names);
     if(mysqli_num_rows($result))
     {
         echo("<option selected>Select a Department / Committee</option>");
         while($row = mysqli_fetch_assoc($result))
         {
-            $stream = $row['stream'];
+            $stream = $row['department_stream'];
             ?>
             <optgroup label="<?php echo($stream); ?>">
             <?php
-            $get_details = "SELECT * FROM dep WHERE stream = '$stream' AND acadamics = '$dep_name'";
+            $get_details = "SELECT * FROM DEPARTMENT WHERE department_stream = '$stream' AND department_acadamics = '$dep_name'";
             $result_of_details = mysqli_query($con,$get_details);
             if(mysqli_num_rows($result_of_details))
             {
               while($row_of_details = mysqli_fetch_assoc($result_of_details))
               {
                 ?>
-                <option value="<?php echo($row_of_details['dep_id']); ?>"><?php echo($row_of_details['dep_name']); ?></option>
+                <option value="<?php echo($row_of_details['department_id']); ?>"><?php echo($row_of_details['department_name']); ?></option>
                 <?php
                 
               }

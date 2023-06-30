@@ -180,14 +180,14 @@
                                                 <select class="form-select" id="dep_id">
                                                     <option selected>Select a Department / Committee</option>
                                                     <?php
-                                                    $get_dep = "SELECT * FROM dep GROUP BY acadamics";
+                                                    $get_dep = "SELECT * FROM DEPARTMENT GROUP BY department_acadamics";
                                                     $result = mysqli_query($con,$get_dep);
                                                     if(mysqli_num_rows($result)>0)
                                                     {
                                                     while($row = mysqli_fetch_assoc($result))
                                                     {
                                                         ?>
-                                                        <option value="<?php echo($row['acadamics']); ?>"><?php echo($row['acadamics']); ?></option>
+                                                        <option value="<?php echo($row['department_acadamics']); ?>"><?php echo($row['department_acadamics']); ?></option>
                                                         <?php
                                                         ?>
                                                     </optgroup>

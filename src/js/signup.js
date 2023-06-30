@@ -8,7 +8,24 @@ $(document).ready(function(){
         return pattern.test(value);
      }
      $('#full_name').bind('keypress', testInput);
-    
+
+     $('#dep_id').on('change',function(){
+        console.log("yes");
+        $dep_name =  $('#dep_id').val();
+    $.ajax({
+            type: 'POST',
+            url: 'ajax.php',
+            data: {dep_name: $dep_name },
+            success: function(data){
+                $('#department_namee').html("");
+                $('#department_namee').html(data);
+            },
+            error: function() {
+                console.log(response.status);
+            },
+        })
+     })
+
     $('#email').on('input',function(){
         var email = $('#email').val();
         $.ajax({
@@ -150,20 +167,3 @@ $(document).ready(function(){
     })
     });
 
-$('#dep_id').on('change',function()
-{
-  console.log("yes");
-  $dep_name =  $('#dep_id').val();
-  $.ajax({
-          type: 'POST',
-          url: 'ajax.php',
-          data: {dep_name: $dep_name },
-          success: function(data){
-              $('#department_namee').html("");
-              $('#department_namee').html(data);
-          },
-          error: function() {
-              console.log(response.status);
-          },
-      })
-});

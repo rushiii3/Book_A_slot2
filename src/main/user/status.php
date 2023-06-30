@@ -42,15 +42,23 @@
                 <?php
                 date_default_timezone_set("Asia/Calcutta");
                 $today_date = date("Y-m-d");
-                $get_events_pending_approved = "SELECT * FROM `EVENT` WHERE user_name = '$user_email' AND status_value in ('Approved','Not Approved','Pending') ORDER BY event_date";
+                $get_events_pending_approved = "SELECT * FROM `EVENT` WHERE user_name = '$user_email' AND status_value in ('Approved','Not Approved','Pending') AND event_status IS NULL OR event_status IN ('Open')  ORDER BY event_date";
                 $result_of_events_pending_approved = mysqli_query($con, $get_events_pending_approved);
                 if (mysqli_num_rows($result_of_events_pending_approved) > 0) {
                     while ($row_of_query = mysqli_fetch_assoc($result_of_events_pending_approved)) {
                         $event_status = $row_of_query['event_status'];
                         if($event_status=="Open" || $event_status=="")
                         {
-                ?>
-                        <div class="col-lg-4 col-md-6 mb-5">
+                            date_default_timezone_set('Asia/Kolkata');
+                ?>  
+                        <div class="col-lg-4 col-md-6 mb-5" style="<?php
+                                                            if ($row_of_query['status_value'] == "Not Approved") {
+                                                                if(date('Y-m-d')>=$row_of_query['event_date']){
+                                                                    echo("display:none");
+                                                                }
+                                                                
+                                                            }
+                                                            ?>">
                             <div class="card shadow p-1" style="width: auto;border-radius: 20px;">
                                 <div class="card-body" style="<?php
                                                             if ($row_of_query['status_value'] == "Not Approved") {
@@ -82,7 +90,7 @@
                                     <?php
                                     } else {
                                         
-                                            date_default_timezone_set('Asia/Kolkata');
+                                            
                             if($row_of_query['event_status']=="Open" && date('Y-m-d')>=$row_of_query['event_date'])
                             {?>
                                 <a href="close_event_form.php?event_id=<?php echo $row_of_query['event_id']; ?>" class="btn btn-primary btn-primary w-100 my-1" role="button">Close Event</a>

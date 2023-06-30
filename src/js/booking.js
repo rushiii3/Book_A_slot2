@@ -49,7 +49,6 @@ $('#check_box_terms_and_condition').on('click',function(){
 })
 $('#department_namee').on('change',function(){
     $department_namee = $('#department_namee :selected').text();
-    console.log($department_namee);
     if($department_namee==="Others")
     {
         $('#org_institue_name').show();
@@ -63,7 +62,8 @@ $('#department_namee').on('change',function(){
       $('#org_institue_phone').hide();
       $('#org_institue_transaction_id').hide();
     }
-}) 
+})
+
 $('.section2').hide();
 $('.section3').hide();
 $('.section4').hide();
@@ -95,20 +95,24 @@ $('#prevBtnFourth').on('click',function(){
 })
 $('#nextFirst').on('click',function()
 {
+  
     $event_name = $('#eventName').val();
     $event_Descr = $('#eventDescription').val();
     $department_namee = $('#department_namee').val();
+    $dep_namee = $('#department_namee :selected').text();
     $Institute_OrgName = $('#Institute_OrgName').val();
     $Institute_OrgName_email = $('#Institute_OrgName_email').val();
     $Institute_OrgName_phone_no = $('#Institute_OrgName_phone_no').val();
     $Institute_OrgName_transaction_id = $('#Institute_OrgName_transaction_id').val();
+    console.log($department_namee);
     if($event_name!="")
     {
-      if($event_Descr!=="")
+      if($event_Descr!="")
       {
-          if($department_namee!=="Select Department")
+          if($department_namee!="Select your department/committee first" && $department_namee!="Select a Department / Committee")
           {
-            if($department_namee=="Others"){
+            if($dep_namee=="Others")
+            {
               if($Institute_OrgName!=="")
               {
                 if($Institute_OrgName_email!=="" )
