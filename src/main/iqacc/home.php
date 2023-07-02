@@ -61,11 +61,7 @@
   <?php
     require("../config/session.php");
     require_once("../loader.html");
-   if($user_type=="i")
-  {
-  }else{
-    echo("<script>window.location='../user/sign_in.php';</script>");
-  }
+   
   ?>
   
   <main id="main">

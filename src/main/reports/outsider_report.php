@@ -47,11 +47,12 @@ if(isset($_POST['outsider_report'])){
             </div>
             <?php
             $count=0;
-                $outsider_info="SELECT * FROM `EVENT` where dep_id ='83' and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15'";
+                $outsider_info="SELECT EVENT.event_name,OUTSIDER_INFO.outsider_name,OUTSIDER_INFO.outsider_phone FROM `EVENT` join `OUTSIDER_INFO` on EVENT.event_id=OUTSIDER_INFO.event_id  and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15'";
                 $result1=mysqli_query($con,$outsider_info);
                 while($row=mysqli_fetch_assoc($result1)){
                     $count++;
                    }
+                //echo $count;
             ?>
              
                 
@@ -59,16 +60,19 @@ if(isset($_POST['outsider_report'])){
             if($count>0){
                 echo "<div class='row m-auto'>
                 <div class='col-lg-5 col-md-5 m-auto'>";
-                $most_organizer="SELECT COUNT(OUTSIDER_INFO.outsider_name),OUTSIDER_INFO.outsider_name as organization_institute,EVENT.event_name FROM `EVENT` JOIN `OUTSIDER_INFO` on EVENT.event_id=OUTSIDER_INFO.event_id where status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15' GROUP by OUTSIDER_INFO.outsider_name ORDER By COUNT(OUTSIDER_INFO.outsider_name) desc LIMIT 1 ";
+                $most_organizer="SELECT COUNT(OUTSIDER_INFO.outsider_name),OUTSIDER_INFO.outsider_name as organization_institute,EVENT.event_name FROM `EVENT` JOIN `OUTSIDER_INFO` on EVENT.event_id=OUTSIDER_INFO.event_id where status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15' GROUP by OUTSIDER_INFO.outsider_name ORDER By COUNT(OUTSIDER_INFO.outsider_name) desc LIMIT 1";
                 $result=mysqli_query($con,$most_organizer);
+               
                 $row=mysqli_fetch_assoc($result);
+                if(mysqli_num_rows($result)>0){
                 $organizer=$row['organization_institute'];
+                }
                 echo "<div class='container mt-5 mb-5 shadow p-3 mb-5 bg-body' style='border-radius: 20px'> 
                 <h3 class='text-center'>Most of the time event organized by institute/organization :<strong>$organizer</strong> </h3>
                 </div>";
                 echo "</div>";
                 echo "<div class='col-lg-5 col-md-5 m-auto'>";
-                $most_dense_audi="SELECT count(ar_name),ar_name,event_date FROM `EVENT` where dep_id ='83' and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15' GROUP by dep_id order by COUNT(ar_name) desc LIMIT 1";
+                $most_dense_audi="SELECT count(ar_name),ar_name,event_date,OUTSIDER_INFO.event_id FROM `EVENT` JOIN `OUTSIDER_INFO` on EVENT.event_id=OUTSIDER_INFO.event_id  where   status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15' GROUP by EVENT.ar_name order by COUNT(ar_name) desc LIMIT 1";
                 $result=mysqli_query($con,$most_dense_audi);
                 $row=mysqli_fetch_assoc($result);
                 $ar_name=$row['ar_name'];
@@ -93,8 +97,11 @@ if(isset($_POST['outsider_report'])){
             </thead>
             <tbody class='bg-primary'>";
 
-            $outsider="SELECT OUTSIDER_INFO.outsider_name as organization_institute,EVENT.event_date,EVENT.event_name,EVENT.ar_name,EVENT.students_total_number,EVENT.event_description FROM `EVENT` JOIN `OUTSIDER_INFO` on EVENT.event_id=OUTSIDER_INFO.event_id where dep_id ='83' and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15'";
+            $outsider="SELECT OUTSIDER_INFO.outsider_name as organization_institute,EVENT.event_date,EVENT.event_name,EVENT.ar_name,EVENT.students_total_number,EVENT.event_description FROM `EVENT` JOIN `OUTSIDER_INFO` on EVENT.event_id=OUTSIDER_INFO.event_id  where  status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15'";
             $result=mysqli_query($con,$outsider);
+            if($result===false){
+                die(mysqli_error($con));
+            }
             $sr=0;
             while($row=mysqli_fetch_assoc($result)){
                 $sr++;

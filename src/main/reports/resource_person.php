@@ -46,8 +46,12 @@ if(isset($_POST['resource_person'])){
                 ?>
             <?php
             $count=0;
-                $rp_info="SELECT RESOURCE_PERSON.full_name,RESOURCE_PERSON.company_name,RESOURCE_PERSON.designation,RESOURCE_PERSON.experience,DEPARTMENT.department_name,EVENT.event_name FROM `RESOURCE_PERSON` join `EVENT` on RESOURCE_PERSON.event_id=EVENT.event_id JOIN `DEPARTMENT` on EVENT.dep_id=DEPARTMENT.department_id WHERE RESOURCE_PERSON.full_name<>'NA' AND RESOURCE_PERSON.event_id in (SELECT event_id from `EVENT` WHERE DEPARTMENT.department_name='$organizer' and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15')";
+                $rp_info="SELECT RESOURCE_PERSON.full_name,RESOURCE_PERSON.company_name,RESOURCE_PERSON.designation,RESOURCE_PERSON.experience,DEPARTMENT.department_name,EVENT.event_name FROM `RESOURCE_PERSON`
+                join `EVENT` on RESOURCE_PERSON.event_id=EVENT.event_id JOIN `DEPARTMENT` on EVENT.dep_id=DEPARTMENT.department_id WHERE RESOURCE_PERSON.full_name<>'NA' AND RESOURCE_PERSON.event_id in (SELECT event_id from `EVENT` WHERE DEPARTMENT.department_name='$organizer' and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15')";
                 $result1=mysqli_query($con,$rp_info);
+                if($result1===false){
+                    die(mysqli_error($con));
+                }
                 while($row=mysqli_fetch_assoc($result1)){
                     $count++;
                    }
@@ -79,7 +83,8 @@ if(isset($_POST['resource_person'])){
                 //print_r($organizations);
                 
                 // foreach($organizations as $organizer){
-                    $rp_info="SELECT RESOURCE_PERSON.full_name,RESOURCE_PERSON.company_name,RESOURCE_PERSON.designation,RESOURCE_PERSON.experience,DEPARTMENT.department_name,EVENT.event_name FROM `RESOURCE_PERSON` join `EVENT` on RESOURCE_PERSON.event_id=EVENT.event_id JOIN `DEPARTMENT` on EVENT.dep_id=DEPARTMENT.department_id WHERE RESOURCE_PERSON.full_name<>'NA' AND RESOURCE_PERSON.event_id in (SELECT event_id from `EVENT` WHERE DEPARTMENT.department_name='$organizer' and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15')";
+                    $rp_info="SELECT RESOURCE_PERSON.full_name,RESOURCE_PERSON.company_name,RESOURCE_PERSON.designation,RESOURCE_PERSON.experience,DEPARTMENT.department_name,EVENT.event_name FROM `RESOURCE_PERSON`
+                    join `EVENT` on RESOURCE_PERSON.event_id=EVENT.event_id JOIN `DEPARTMENT` on EVENT.dep_id=DEPARTMENT.department_id WHERE RESOURCE_PERSON.full_name<>'NA' AND RESOURCE_PERSON.event_id in (SELECT event_id from `EVENT` WHERE DEPARTMENT.department_name='$organizer' and status_value='Approved' and event_date between '$start_year-06-15' and '$end_year-06-15')";
                     $result1=mysqli_query($con,$rp_info);
                     if($result1===false){
                         die(mysqli_error($con));

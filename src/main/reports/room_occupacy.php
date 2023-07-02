@@ -123,9 +123,12 @@ $max_events_occured="select ar_name as first_ar,count(ar_name) as occurance from
 $result=mysqli_query($con,$max_events_occured);
 $row=mysqli_fetch_assoc($result);
 $first_ar=$row['first_ar'];
-echo $first_ar;
 $get_organizers="SELECT department_name,COUNT(department_name) as total from `EVENT` JOIN `DEPARTMENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE ar_name='$first_ar' and status_value='Approved' GROUP by DEPARTMENT.department_name";
 $result1=mysqli_query($con,$get_organizers);
+// while($row=mysqli_fetch_assoc($result1)){
+//     echo $row['department_name']," ",$row['total'];
+// };
+;
 while($row=mysqli_fetch_assoc($result1)){
     //echo $row['organization_institute'],$row['total'];
 //     $organizer=$row['organization_institute'];
@@ -138,12 +141,18 @@ while($row=mysqli_fetch_assoc($result1)){
 
 ?>
 <?php
-$second_max_events_occured="SELECT ar_name,COUNT(ar_name) as second_ar from `EVENT` where ar_name<>'$first_ar' and status_value='Approved' GROUP BY ar_name ORDER by count(ar_name) desc LIMIT 1";
+$second_max_events_occured="SELECT COUNT(ar_name),ar_name as second_ar from `EVENT` where ar_name<>'$first_ar' and status_value='Approved' GROUP BY ar_name ORDER by count(ar_name) desc LIMIT 1";
 $result=mysqli_query($con,$second_max_events_occured);
 $row=mysqli_fetch_assoc($result);
 $second_ar=$row['second_ar'];
+//echo $first_ar;
+//echo $second_ar;
 $get_organizers="SELECT department_name,COUNT(department_name) as total from `EVENT` JOIN `DEPARTMENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE ar_name='$second_ar' and status_value='Approved' GROUP by DEPARTMENT.department_name";
 $result1=mysqli_query($con,$get_organizers);
+// echo "  ----------------";
+// while($row=mysqli_fetch_assoc($result1)){
+//     echo $row['department_name']," ",$row['total'];
+// }
 ?>
 <div class="container-fluid mt-3">
         <div class="row">
@@ -173,7 +182,7 @@ $result1=mysqli_query($con,$get_organizers);
         var data = google.visualization.arrayToDataTable([
           ['organizations_institute', 'count'],
           <?php
-          $get_organizers="SELECT dep_name,COUNT(dep_name) as total from `EVENT` JOIN `DEP` on DEP.dep_id=EVENT.dep_id WHERE ar_name='$first_ar' and status_value='Approved' GROUP by DEP.dep_name";
+          $get_organizers="SELECT department_name,COUNT(department_name) as total from `EVENT` JOIN `DEPARTMENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE ar_name='$first_ar' and status_value='Approved' GROUP by DEPARTMENT.department_name";
           $result1=mysqli_query($con,$get_organizers);
             while($row=mysqli_fetch_assoc($result1)){
                 echo "['".$row['dep_name']."',".$row['total']."],";
@@ -204,7 +213,7 @@ $result1=mysqli_query($con,$get_organizers);
         var data = google.visualization.arrayToDataTable([
             ['organizations_institute', 'count'],
           <?php
-          $get_organizers="SELECT dep_name,COUNT(dep_name) as total from `EVENT` JOIN `DEP` on DEP.dep_id=EVENT.dep_id WHERE ar_name='$second_ar' and status_value='Approved' GROUP by DEP.dep_name";
+          $get_organizers="SELECT department_name,COUNT(department_name) as total from `EVENT` JOIN `DEPARTMENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE ar_name='$second_ar' and status_value='Approved' GROUP by DEPARTMENT.department_name";
           $result1=mysqli_query($con,$get_organizers);
             while($row=mysqli_fetch_assoc($result1)){
                 echo "['".$row['dep_name']."',".$row['total']."],";

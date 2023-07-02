@@ -1,3 +1,4 @@
+
 <?php
 include '../connection/connect.php';
 // if(isset($_POST['remainder'])){
@@ -81,11 +82,11 @@ include '../connection/connect.php';
                 $event_name=$row['event_name'];
                 $event_date=$row['event_date'];
                 $dep_id=$row['dep_id'];
-                $get_event_organizer="SELECT dep_name,acadamics from `DEP` where dep_id='$dep_id' ";
+                $get_event_organizer="SELECT department_name,department_acadamics from `DEPARTMENT` where department_id='$dep_id' ";
                 $result_for_organizer=mysqli_query($con,$get_event_organizer);
                 $event_organizer_row=mysqli_fetch_assoc($result_for_organizer);
-                $event_organizer=$event_organizer_row['dep_name'];
-                $acadamics=$event_organizer_row['acadamics'];
+                $event_organizer=$event_organizer_row['department_name'];
+                $acadamics=$event_organizer_row['department_acadamics'];
                 $email=$row['user_name'];
                 $get_user_name="SELECT * from `USER` where user_name='$email'";
                 $result1=mysqli_query($con,$get_user_name);

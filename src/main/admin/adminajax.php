@@ -18,7 +18,7 @@ $event_description=$_POST['event_description'];
 $event_start_time=$_POST['event_start_time'];
 if($alumni=='Yes'){
     echo "yes";
-    $apiUrl = 'https://alumniandroidapp.000webhostapp.com/EventInsertApi3.php?apikey=12345';
+    $apiUrl = 'https://www.vazecollege.net/ALUMNI/EventInsertApi3.php?apikey=12345';
 
 // Data to be sent in the request body
 $data = array(
@@ -126,11 +126,11 @@ $result=mysqli_query($con,$update_event_status);
 function sendEmail() {
   Email.send({
     SecureToken: "81b5fc89-513e-421c-ab1a-f690f117c594",
-    To: '<?php echo $email?>',
+    To: '<?php echo $email;?>',
     From: "audibooking55@gmail.com",
     Subject: "Update regarding to audibooking",
     Body: document.getElementById('emailContent').innerHTML,
-  }).then(message => console.log(message));
+  }).then(message => alert(message));
 }
 sendEmail();
 </script>

@@ -44,11 +44,11 @@ include '../connection/connect.php';
                     <select name="organizer" class='w-100 m-auto form-control' id="organizer">
                         <?php
                         $all_organizer=array();
-                        $get_organizations="SELECT DISTINCT EVENT.dep_id,EVENT.event_id from `EVENT` join `CLOSE_EVENT` on EVENT.event_id=CLOSE_EVENT.event_id where EVENT.organization_institute<>'Others' and EVENT.event_status='Closed' and EVENT.status_value='Approved'";
+                        $get_organizations="SELECT distinct DEPARTMENT.department_name FROM `EVENT` JOIN `DEPARTMENT` on EVENT.dep_id=DEPARTMENT.department_id  where status_value='Approved' and DEPARTMENT.department_name<>'Others' and EVENT.event_status='Closed'";
                         $result=mysqli_query($con,$get_organizations);
                         while($row=mysqli_fetch_assoc($result)){
-                            $all_organizer[]=$row['dep_id'];
-                            $organizer=$row['dep_id'];
+                            $all_organizer[]=$row['department_name'];
+                            $organizer=$row['department_name'];
                             echo "<option  value='$organizer'>$organizer</option>  ";
                         ?>
                         <?php

@@ -39,20 +39,12 @@
         $event_end_time=$row['event_end_time'];
         $students_total_number=$row['students_total_number'];
         $ar_name=$row['ar_name'];
-        
         $dep_id=$row['dep_id'];
-
-        $get_dept_name = "SELECT * FROM DEPARTMENT WHERE department_id = '$dep_id'";
-                    $result_of_dep = mysqli_query($con,$get_dept_name);
-                    if(mysqli_num_rows($result_of_dep)>0)
-                    {
-                        while($row_dep = mysqli_fetch_assoc($result_of_dep))
-                        {
-                            $organizer = $row_dep['department_name']." ".$row_dep['department_acadamics']  ;
-                            
-                        }
-                    }
-
+                $get_event_organizer="SELECT department_name,department_acadamics from `DEPARTMENT` where department_id='$dep_id' ";
+                $result_for_organizer=mysqli_query($con,$get_event_organizer);
+                $event_organizer_row=mysqli_fetch_assoc($result_for_organizer);
+                $event_organizer=$event_organizer_row['department_name'];
+                $acadamics=$event_organizer_row['department_acadamics'];
         $request_date_time=$row['request_date_time'];
         $event_description=$row['event_description'];
         $get_user_name="select * from `USER` where user_name='$email'";
@@ -84,11 +76,49 @@ if(isset($_POST['approve_event_id'])){
         $name=$row['user_full_name'];
     
 
+// API endpoint URL
+$apiUrl = 'https://alumniandroidapp.000webhostapp.com/EventInsertApi3.php?apikey=12345';
 
+// Data to be sent in the request body
+$data = array(
+    'event_name' => $event_name,
+    'event_description' => $event_description,
+    'event_date' => $event_date,
+    'event_time' => $event_start_time,
+    'event_image' => 'event_image',
+    'event_registration_link' => '#'
+);
 
+// Convert data to JSON
+$jsonData = json_encode($data);
 
+// Initialize curl
+$curl = curl_init();
 
+// Set curl options
+curl_setopt_array($curl, array(
+    CURLOPT_URL => $apiUrl,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json',
+    ),
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => $jsonData,
+));
 
+// Execute curl request
+$response = curl_exec($curl);
+
+// Check for errors
+if ($response === false) {
+    echo 'Error: ' . curl_error($curl);
+} else {
+    // Display the response
+    echo $response;
+}
+
+// Close curl
+curl_close($curl);
 
 //     if($result){
 //        //echo "<script>sendEmail()</script>";
@@ -175,7 +205,7 @@ if(isset($_POST["not_approved_event_id"])){
                 </tr>
                 <tr>
                   <td>Event Organizer</td>
-                  <td class="mt-2"><?php echo $organizer?></td>
+                  <td class="mt-2"><?php echo $event_organizer?></td>
                 </tr>
               </tbody>
             </table>

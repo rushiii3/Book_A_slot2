@@ -31,7 +31,7 @@ $('#approve_event_id').on('click',function(){
         success: function(data) {
             $('#emailTemp').html(data);
             console.log(data);
-            setTimeout(function(){location = 'admin_home.php'},30000)
+            setTimeout(function(){location = 'admin_home.php'},3000)
             
         },
         error: function() {

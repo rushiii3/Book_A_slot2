@@ -41,25 +41,21 @@
         $event_end_time=$row['event_end_time'];
         $students_total_number=$row['students_total_number'];
         $ar_name=$row['ar_name'];
+        
         $dep_id=$row['dep_id'];
-
-        $get_dept_name = "SELECT * FROM DEPARTMENT WHERE department_id = '$dep_id'";
-                    $result_of_dep = mysqli_query($con,$get_dept_name);
-                    if(mysqli_num_rows($result_of_dep)>0)
-                    {
-                        while($row_dep = mysqli_fetch_assoc($result_of_dep))
-                        {
-                            $organizer = $row_dep['department_name']." ".$row_dep['department_acadamics']  ;
-                            
-                        }
-                    }
+        $get_event_organizer="SELECT department_name,department_acadamics from `DEPARTMENT` where department_id='$dep_id' ";
+        $result_for_organizer=mysqli_query($con,$get_event_organizer);
+        $event_organizer_row=mysqli_fetch_assoc($result_for_organizer);
+        $event_organizer=$event_organizer_row['department_name'];
+        $acadamics=$event_organizer_row['department_acadamics'];
+        $organization_institute	=$event_organizer;
         $request_date_time=$row['request_date_time'];
         // $event_duration=$event_end_time-$event_start_time; find out how to find time difference
         // echo $event_duration;
         echo "<tr class='text-center text-light'>
         <td>$event_id</td>
         <td>$event_name</td>
-        <td>$organizer</td>
+        <td>$organization_institute</td>
         <td>$request_date_time</td>
         <td class='bg-light'><a href='event_more_details.php?event_id=$event_id' ><input type='button'class='bg-primary text-light' style='border-radius:20px' value='Details'><a></td></tr>
 

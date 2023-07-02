@@ -65,12 +65,19 @@ include '../connection/connect.php';
 
                             <div class="col-md-6 col-lg-6 my-5">
                                 <?php
-                                $organizer="SELECT count(organization_institute) as max_organizer,organization_institute from `EVENT` where status_value='Approved' and organization_institute<>'Others'  GROUP by organization_institute order by max_organizer desc limit 1";
+                                $organizer="SELECT department_name,department_acadamics,count(department_name) from `DEPARTMENT` join `EVENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE DEPARTMENT.department_name<>'Others' and EVENT.status_value='Approved' GROUP By DEPARTMENT.department_name ORDER by COUNT(department_name) desc LIMIT 1;";
                                 $result=mysqli_query($con,$organizer);
                                 $row=mysqli_fetch_assoc($result);
-                                $organization_institute= $row['organization_institute'];
-                                $count=$row['max_organizer'];
-                                echo "<h2>Most of the events organized by <strong class='fw-bolder'> $organization_institute </strong> </h2>"
+                                $organization_institute= $row['department_name'];
+                                $acadamics=$row['department_acadamics'];
+                                //$count=$row['max_organizer'];
+                                if($acadamics!='Degree College Committee'){
+                                echo "<h3>Most of the events organized by <strong class='fw-bolder'> $organization_institute department of $acadamics </strong> </h3>";
+                                }
+                                else{
+                                    echo "<h2>Most of the events organized by <strong class='fw-bolder'> $organization_institute  </strong> </h2>";
+
+                                }
                                 ?>
                             </div>
                         </div>
@@ -79,27 +86,37 @@ include '../connection/connect.php';
                 </div> 
                 <div class="row mt-5">
                     <!-- row2 -->
-                    <div class="col-md-5 col-lg-5 m-auto">
-                        <!-- left side -->
-                        <div style="background-color: #ffb3ff">
+                    <div class="col-md-5 col-lg-5 m-auto" id="event_mode">
+                         <!-- right side -->
+                    <div style="background-color: #80dfff">
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
-                                <img src="https://img.freepik.com/free-photo/corporate-businessman-giving-presentation-large-audience_53876-101865.jpg?size=626&ext=jpg&ga=GA1.2.304178890.1681303369&semt=sph" alt="">
+                                <img src="https://tse1.mm.bing.net/th?id=OIP.dFmZXcsdyY6oYXNCXdIssAHaEz&pid=Api&P=0&h=180" alt="">
                             </div>
                             <div class="col-md-6 col-lg-6 my-5">
                                 <?php
-                                // $max_resource_person="SELECT max(organization_institute) FROM `EVENT` WHERE event_id in (SELECT event_id FROM `RESOURCE_PERSON`) and status_value='approved'";
-                                $max_resource_person="SELECT count(EVENT.organization_institute) as total,
-                                EVENT.organization_institute,RESOURCE_PERSON.full_name FROM `EVENT` JOIN (SELECT event_id,full_name from `RESOURCE_PERSON` GROUP BY event_id)`RESOURCE_PERSON` on EVENT.event_id=RESOURCE_PERSON.event_id WHERE status_value='Approved' and organization_institute<>'Others' GROUP by organization_institute ORDER By total DESC LIMIT 1";
-                                $result=mysqli_query($con,$max_resource_person);
+                                $max_event_mode="SELECT close_event_mode, COUNT(close_event_mode) AS mode FROM `CLOSE_EVENT`  GROUP BY close_event_mode ORDER BY mode DESC LIMIT 1";
+                                $result=mysqli_query($con,$max_event_mode);
                                 $row=mysqli_fetch_assoc($result);
-                                $resource_person_organized=$row['organization_institute'];
-                                echo "<h2><strong>$resource_person_organized</strong> Invite  resource persons maximum time</h2>";
+                                //$row = @some_query_function();
+                                //$mode=$row['close_event_mode'];
+                                           if(isset($row['close_event_mode'])){
+                                               $mode=$row['close_event_mode']; 
+                                           }
+                                           else{
+                                             
+                                               echo '<div id="event_mode" style="display: none;">This division is hidden.</div>';
+                                           }
+                               if(isset($mode)){
+                                echo "<h2>Most of the time events occured in <strong>$mode</strong> mode</h2>";
+                               }
+                               else{
+                                   echo "<h2>Most of the time events occured in <strong></strong>offline</h2>";
+                               }
                                 ?>
                             </div>
                         </div>
                         </div>
-                    
                     </div>
                     
                     <div class="col-md-5 col-lg-5 m-auto">
@@ -150,38 +167,7 @@ include '../connection/connect.php';
                     
                     </div>
                     
-                    <div class="col-md-5 col-lg-5 m-auto" id="event_mode">
-                         <!-- right side -->
-                    <div style="background-color: #80dfff">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6">
-                                <img src="https://tse1.mm.bing.net/th?id=OIP.dFmZXcsdyY6oYXNCXdIssAHaEz&pid=Api&P=0&h=180" alt="">
-                            </div>
-                            <div class="col-md-6 col-lg-6 my-5">
-                                <?php
-                                $max_event_mode="SELECT close_event_mode, COUNT(close_event_mode) AS mode FROM `CLOSE_EVENT`  GROUP BY close_event_mode ORDER BY mode DESC LIMIT 1";
-                                $result=mysqli_query($con,$max_event_mode);
-                                $row=mysqli_fetch_assoc($result);
-                                //$row = @some_query_function();
-                                //$mode=$row['close_event_mode'];
-                                           if(isset($row['close_event_mode'])){
-                                               $mode=$row['close_event_mode']; 
-                                           }
-                                           else{
-                                             
-                                               echo '<div id="event_mode" style="display: none;">This division is hidden.</div>';
-                                           }
-                               if(isset($mode)){
-                                echo "<h2>Most of the time events occured in <strong></strong> $mode</h2>";
-                               }
-                               else{
-                                   echo "<h2>Most of the time events occured in <strong></strong>offline</h2>";
-                               }
-                                ?>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
+                   
                 </div> 
                 <div class="row mt-5">
                     <!-- row2 -->

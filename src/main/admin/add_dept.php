@@ -1,3 +1,4 @@
+
 <?php
 include '../connection/connect.php';
 ?>
@@ -34,11 +35,15 @@ if(isset($_POST['add_dept'])){
     }
     else{
     $add_dept="Insert into `DEPARTMENT`(department_name,department_stream,department_acadamics) value('$department_name','$department_Stream','$department_Academic')";
+    //$add_dept="Insert into `DEPARTMENT`(department_name,department_stream,department_acadamics) value('no i will not','my','no')";
     $result=mysqli_query($con,$add_dept);
     if($result){
         header('location:./admin_home.php?add_dept');
     }
     else{
+    echo $department_Academic," ",$department_name," ",$department_Stream;
+
+        echo "Here i'm";
         die(mysqli_error($con));
     }
 }

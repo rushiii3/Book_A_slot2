@@ -110,7 +110,8 @@ include '../connection/connect.php';
                             include '../connection/connect.php';
                             $currentDate = date("Y-m-d");
                             $previousDate = date("Y-m-d", strtotime("-1 day"));
-                            $get_event="select * from `EVENT` where status_value='Pending' and request_date_time>='$previousDate' and dep_id<>(SELECT dep_id FROM `DEPARTMENT` WHERE department_name='Others')";
+                            //echo $previousDate;
+                            $get_event="SELECT * from `EVENT` where status_value='Pending' and request_date_time>='$previousDate' and dep_id<>(SELECT department_id FROM `DEPARTMENT` WHERE department_name='Others')";
                             $result=mysqli_query($con,$get_event);
                             $count=0;
                             while($row=mysqli_fetch_assoc($result)){
@@ -143,3 +144,4 @@ include '../connection/connect.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>
+

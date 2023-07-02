@@ -31,12 +31,22 @@ include '../connection/connect.php';
         </div>
 </div>
 <?php
-$get_organizer="select dep_id,COUNT(dep_id) as cancel_org FROM `EVENT` where status_value='Canceled' and dep_id <>'83' GROUP BY dep_id";
+$get_organizer="SELECT department_name,department_acadamics,count(department_name) as cancel_org from `DEPARTMENT` join `EVENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE DEPARTMENT.department_name<>'Others' and EVENT.status_value='Canceled' GROUP By DEPARTMENT.department_name ORDER by COUNT(department_name) desc LIMIT 5";
+//$get_organizer="select organization_institute,COUNT(organization_institute) as cancel_org FROM `EVENT` where status_value='Canceled' and organization_institute <>'Others' GROUP BY organization_institute";
 $result=mysqli_query($con,$get_organizer);
 $organization=array();
 $count_cancel_org=array();
 while($row=mysqli_fetch_assoc($result)){
-    $organization[]=$row['organization_institute'];//x-axis data
+    $acadamics=$row['department_acadamics'];
+    if($acadamics=='Junior College'){
+    $organization[]=$row['department_name']." ".' JC';//x-axis data
+    }
+    else if($acadamics=='Degree College'){
+        $organization[]=$row['department_name']." ".' DC';//x-axis data
+    }
+    else{
+        $organization[]=$row['department_name']." ".' Commitee';//x-axis data
+    }
     $count_cancel_org[]=$row['cancel_org'];//y-axis data
  }
 //  print_r($organization);
@@ -114,12 +124,14 @@ while($row=mysqli_fetch_assoc($result)){
 </script>
 <?php
 //code showing primary reason for cancellation
-$max_events_cancelled="SELECT count(status_reason),status_reason  as first_cancel_reason from `EVENT` where dep_id <>'83' group by status_reason order by count(status_reason) desc limit 1";
+$max_events_cancelled="SELECT count(status_reason),status_reason as first_cancel_reason from `DEPARTMENT` join `EVENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE DEPARTMENT.department_name<>'Others' and EVENT.status_value='Canceled' GROUP By EVENT.status_reason ORDER by COUNT(status_reason) desc LIMIT 1";
+//$max_events_cancelled="SELECT count(status_reason),status_reason  as first_cancel_reason from `EVENT` where organization_institute <>'Others' group by status_reason order by count(status_reason) desc limit 1";
 $result=mysqli_query($con,$max_events_cancelled);
 $row=mysqli_fetch_assoc($result);
 $first_cancel_reason=$row['first_cancel_reason'];
 //echo $first_cancel_reason;
-$get_reason="SELECT dep_id,COUNT(dep_id) as total from `EVENT` WHERE status_reason='$first_cancel_reason' and status_value='Canceled' GROUP by dep_id";
+$get_reason="SELECT count(department_name) as total,department_acadamics,department_name from `DEPARTMENT` join `EVENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE DEPARTMENT.department_name<>'Others' and EVENT.status_value='Canceled' and EVENT.status_reason like '%$first_cancel_reason%' GROUP by DEPARTMENT.department_name";
+//$get_reason="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE status_reason='$first_cancel_reason' and status_value='Canceled' GROUP by organization_institute";
 $result1=mysqli_query($con,$get_reason);
 while($row=mysqli_fetch_assoc($result1)){
     //echo $row['organization_institute'],$row['total'];
@@ -149,10 +161,19 @@ while($row=mysqli_fetch_assoc($result1)){
         var data = google.visualization.arrayToDataTable([
           ['organizations_institute', 'count'],
           <?php
-         $get_reason="SELECT dep_id,COUNT(dep_id) as total from `EVENT` WHERE status_reason like '%$first_cancel_reason%' and status_value='Canceled' GROUP by dep_id";
+         $get_reason="SELECT count(department_name) as total,department_acadamics,dep_name from `DEPARTMENT` join `EVENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE DEPARTMENT.department_name<>'Others' and EVENT.status_value='Canceled' and EVENT.status_reason like '%$first_cancel_reason%' GROUP by DEPARTMENT.department_name";
          $result1=mysqli_query($con,$get_reason);
             while($row=mysqli_fetch_assoc($result1)){
-                echo "['".$row['dep_id']."',".$row['total']."],";
+                $acadamics=$row['department_acadamics'];
+                if($acadamics=='Degree College'){
+                echo "['".$row['department_name']." ".' DC'."',".$row['total']."],";
+                }
+                else if($acadamics=='Junior College'){
+                    echo "['".$row['department_name']." ".' JC'."',".$row['total']."],";
+                }
+                else{
+                echo "['".$row['department_name']." ".' Commitee'."',".$row['total']."],";
+                }
             }
           ?>
         ]);
