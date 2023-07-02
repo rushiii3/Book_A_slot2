@@ -140,36 +140,15 @@ while($row=mysqli_fetch_assoc($result1)){
 }
 
 ?>
-<?php
-$second_max_events_occured="SELECT COUNT(ar_name),ar_name as second_ar from `EVENT` where ar_name<>'$first_ar' and status_value='Approved' GROUP BY ar_name ORDER by count(ar_name) desc LIMIT 1";
-$result=mysqli_query($con,$second_max_events_occured);
-$row=mysqli_fetch_assoc($result);
-$second_ar=$row['second_ar'];
-//echo $first_ar;
-//echo $second_ar;
-$get_organizers="SELECT department_name,COUNT(department_name) as total from `EVENT` JOIN `DEPARTMENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE ar_name='$second_ar' and status_value='Approved' GROUP by DEPARTMENT.department_name";
-$result1=mysqli_query($con,$get_organizers);
-// echo "  ----------------";
-// while($row=mysqli_fetch_assoc($result1)){
-//     echo $row['department_name']," ",$row['total'];
-// }
-?>
+
 <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-md-10 col-lg-10 m-auto">
                 <div class="row mt-5">
-                    <div class="col-md-5 col-lg-5 m-auto">
-                        <h3 class="text-center">Chart showing events organized in <strong>most</strong> occupied audi/room</h3>
-                        <div id="piechart" style="width: 500px; height: 400px;"></div>
-                        <!-- one piechart -->
-                    </div>
+                    
                     <div class="col-md-5 col-lg-5 m-auto">
 
-                     <h3 class="text-center">Chart showing events organized in <strong>second</strong> most occupied audi/room</h3>
-                        <div id="pie" style="width: 500px; height: 400px;"></div>
-
-                    <!-- one piechart -->
-                    </div>
+                     
 </body>
 <!-- piechart  for maximum audi occurance-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

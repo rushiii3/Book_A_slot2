@@ -122,31 +122,13 @@ while($row=mysqli_fetch_assoc($result)){
         config
     );
 </script>
-<?php
-//code showing primary reason for cancellation
-$max_events_cancelled="SELECT count(status_reason),status_reason as first_cancel_reason from `DEPARTMENT` join `EVENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE DEPARTMENT.department_name<>'Others' and EVENT.status_value='Canceled' GROUP By EVENT.status_reason ORDER by COUNT(status_reason) desc LIMIT 1";
-//$max_events_cancelled="SELECT count(status_reason),status_reason  as first_cancel_reason from `EVENT` where organization_institute <>'Others' group by status_reason order by count(status_reason) desc limit 1";
-$result=mysqli_query($con,$max_events_cancelled);
-$row=mysqli_fetch_assoc($result);
-$first_cancel_reason=$row['first_cancel_reason'];
-//echo $first_cancel_reason;
-$get_reason="SELECT count(department_name) as total,department_acadamics,department_name from `DEPARTMENT` join `EVENT` on DEPARTMENT.department_id=EVENT.dep_id WHERE DEPARTMENT.department_name<>'Others' and EVENT.status_value='Canceled' and EVENT.status_reason like '%$first_cancel_reason%' GROUP by DEPARTMENT.department_name";
-//$get_reason="SELECT organization_institute,COUNT(organization_institute) as total from `EVENT` WHERE status_reason='$first_cancel_reason' and status_value='Canceled' GROUP by organization_institute";
-$result1=mysqli_query($con,$get_reason);
-while($row=mysqli_fetch_assoc($result1)){
-    //echo $row['organization_institute'],$row['total'];
-}
-?>
+
 
 <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-md-10 col-lg-10 m-auto">
                 <div class="row mt-5">
-                    <div class="col-md-6 col-lg-6 m-auto">
-                        <h3 class="text-center"><strong>Primary</strong>  reason for events getting cancelled</h3>
-                        <div id="piechart" style="width: 500px; height: 400px;"></div>
-                        <!-- one piechart -->
-                    </div>
+                    
                 </div>
             </div>
         </div>
