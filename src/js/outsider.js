@@ -12,7 +12,6 @@ $('#sendTransaction').on('click',function()
             url: 'ajax.php',
             data: {transaction_event_id:$event_id, transaction_id_for_event:$evennt_transaction_id, transaction_date_for_event:$event_transaction_date},
             success: function(data) {
-                console.log(data);
                 if(data==1)
                 {
                     window.location.reload();

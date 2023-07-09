@@ -25,7 +25,7 @@ $(document).ready(function(){
         let mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d);
         let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
 
-        console.log();
+       
         if($date!==""){
             if($Venue_name!=="Select Venue")
             {
@@ -34,7 +34,7 @@ $(document).ready(function(){
                     url: 'ajax.php',
                     data: { selectdatee:$date,venue_name:$Venue_name },
                     success: function(data){
-                        console.log(data);
+                        
                         $('#showDate').html(`${da} ${mo} ${ye}`);
                         $('#showDay').html(dayNames[day]);
                         $('#dayList').html(" ");

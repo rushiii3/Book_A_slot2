@@ -1,13 +1,13 @@
 $('#Acceptconfirm').on('click',function()
                             {
                                 $event_id = $('#confirm_event_id').text();
-                                console.log($event_id);
+                                
                                 $.ajax({
                                     type: 'POST',
                                     url: 'pajax.php',
                                     data: { accepteventid : $event_id},
                                     success: function(data){
-                                        console.log(data);
+                                        
                                         if(data==1){
                                             sendAcceptEmail($event_id)
                                             //window.location.reload();
@@ -30,7 +30,7 @@ $('#Acceptconfirm').on('click',function()
                                     url: 'pajax.php',
                                     data: { rejecteventid : $event_id, reason: $reason},
                                     success: function(data){
-                                        console.log(data);
+                                        
                                         if(data==1){
                                             sendRejectEmail($event_id,$reason)
                                         }else{
@@ -52,7 +52,7 @@ $('#Acceptconfirm').on('click',function()
                                     url: 'pajax.php',
                                     data: { accept_event_id_email:email_approved_event_id},
                                     success: function(data){
-                                        console.log(data);
+                                        
                                         $('#emailTemp').html(data);
                                         setInterval(moveClass, 2000); 
                                         window.location.reload();
@@ -72,7 +72,7 @@ $('#Acceptconfirm').on('click',function()
                                     url: 'pajax.php',
                                     data: { email_reject_event_id:email_reject_event_id,reason_to_reject_event:reason_to_reject_event},
                                     success: function(data){
-                                        console.log(data);
+                                        
                                         $('#emailTemp').html(data);
                                         setInterval(moveClass, 2000);
                                         window.location.reload(); 

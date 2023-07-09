@@ -32,7 +32,7 @@ $(document).ready(function(){
                     url: '../user/ajax.php',
                     data: { selectdatee:$date,venue_name:$Venue_name },
                     success: function(data){
-                        console.log(data);
+                        
                         $('#showDate').html(`${da} ${mo} ${ye}`);
                         $('#showDay').html(dayNames[day]);
                         $('#dayList').html(" ");

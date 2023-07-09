@@ -8,7 +8,6 @@ $('#email').on('input',function(){
         url: 'ajax.php',
         data: {sign_up_email : email},
         success: function(data) {
-            console.log(data);
             if(data==1)
             {
                 $('#sendOtp').show();
@@ -102,7 +101,7 @@ $('#resetPassword').on('click',function()
                         $('#section4').fadeIn();
                         $('#section4').show();
                     }
-                    console.log(data);
+                   
                     
                 },
                 error: function() {
@@ -139,7 +138,7 @@ function generateOtp()
         {
             
             generateOtp()
-            console.log(val);
+            
             $email = $('#email').val();
             $('#section2').fadeIn();
             $('#section2').show();
@@ -152,6 +151,7 @@ function generateOtp()
         
  function OTPInput() {
         const inputs = document.querySelectorAll('#otp > *[id]');
+        
         for (let i = 0; i < inputs.length; i++) 
         { 
             inputs[i].addEventListener('keydown', function(event) 
@@ -198,7 +198,7 @@ function generateOtp()
             if(count===inputs.length)
             {
                     $otp_number = Number($('#first').val()+$('#second').val()+$('#third').val()+$('#fourth').val());
-                    console.log($otp_number);
+                    
                     if($otp_number===val)
                     {
                         $('#section1').hide();
@@ -229,7 +229,7 @@ function generateOtp()
                 url: 'emailajax.php',
                 data: {email:email,otp:otp},
                 success: function(data){
-                    console.log(data);
+                    
                     $('#emailTemp').html(data);
                     setInterval(moveClass, 2000); 
                 },

@@ -61,11 +61,11 @@
   <?php
     require("../config/session.php");
     require_once("../loader.html");
-    if($user_type=="o" || $user_type=="k")
-  {
-  }else{
-    echo("<script>window.location='../user/sign_in.php';</script>");
-  }
+    if($user_type=="o" || $user_type=="k" || $user_type=="a")
+            {
+            }else{
+                echo("<script>window.location='../user/sign_in.php';</script>");
+            }
   ?>
   
   <main id="main">

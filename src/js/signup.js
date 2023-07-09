@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $('.pass_open_eye').hide();
     $('.cpass_open_eye').hide();
-
+    $('#section2').hide();
     function testInput(event) {
         var value = String.fromCharCode(event.which);
         var pattern = new RegExp(/[a-zåäö ]/i);
@@ -10,7 +10,7 @@ $(document).ready(function(){
      $('#full_name').bind('keypress', testInput);
 
      $('#dep_id').on('change',function(){
-        console.log("yes");
+        
         $dep_name =  $('#dep_id').val();
     $.ajax({
             type: 'POST',
@@ -21,6 +21,7 @@ $(document).ready(function(){
                 $('#department_namee').html(data);
             },
             error: function() {
+                
                 console.log(response.status);
             },
         })
@@ -33,7 +34,7 @@ $(document).ready(function(){
             url: 'ajax.php',
             data: {sign_up_email : email},
             success: function(data) {
-                console.log(data);
+                
                 if(data==1)
                 {
                     $('#emailVerify').text("Valid email!").css("color", "green");
@@ -110,6 +111,7 @@ $(document).ready(function(){
     })
     
     $('#submit').on('click',function(e){
+        
         $email_verify =  $('#emailVerify').text();
         $password_verify = $('#pass_verify').text();
         $confirm_password_verify = $('#confirm_password_verify').text();
@@ -126,19 +128,26 @@ $(document).ready(function(){
                                 $email = $('#email').val();
                                 $department_namee = $('#department_namee').val();
                                 $password = $('#password').val();
-                                console.log($department_namee);
+                                
                                 $.ajax({
                                     type: 'POST',
                                     url: 'ajax.php',
                                     data: {fullname : $full_name, email: $email, department_namee : $department_namee, password : $password},
                                     success: function(data) {
-                                        console.log(data);
+                                        
                                         if(data==1)
                                         {
-                                            $('#success').modal('show');
+                                            $('#sendEmail').click();
+                                            $('#section2').fadeIn();
+                                            $('#section2').show();
+                                            $('#section1').fadeOut();
+                                            $('#section1').hide();
+
                                         }
-                                        else
+                                        else if(data==3)
                                         {
+                                            $('#alreadyuser').modal('show');
+                                        }else{
                                             $('#failed').modal('show');
                                         }
                                     },
@@ -167,3 +176,6 @@ $(document).ready(function(){
     })
     });
 
+
+
+    

@@ -37,7 +37,20 @@
                 </div>
             </div>
         </div>
-        
+        <!-- Not verified Email -->
+        <div class="modal fade" id="notverified" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog modal-dialog-centered w-75 mx-auto">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-626.jpg?w=1480&t=st=1688927496~exp=1688928096~hmac=e12c7f28cdf6c210c5dcbdeaab0858108334123c4d85e6bcaca8563fcc4a8d4b" class="img-fluid" alt="">
+                        <p class="fs-6 text-center"><strong>Account not Verified</strong> <br/> Your account is not verified. <br/> Verify your account by signing up. </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="location.href='sign_up.php';" class="btn btn-primary">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container w-75 mt-5 mb-5 shadow p-3 mb-5 bg-body" style="border-radius: 20px">
             <div class="row p-3">
                 <div class="p-1 col-lg-6">

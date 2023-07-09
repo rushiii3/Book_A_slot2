@@ -23,7 +23,7 @@
          include("../config/session.php");
          require "../connection/connect.php";
          require_once("../loader.html"); 
-         if($user_type=="o" || $user_type=="k")
+         if($user_type=="o" || $user_type=="k" || $user_type=="a")
             {
             }else{
                 echo("<script>window.location='../user/sign_in.php';</script>");

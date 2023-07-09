@@ -1,5 +1,6 @@
 <?php
 require "../connection/connect.php";
+
 if (!empty($_POST['fullname']) &&
     !empty($_POST['email']) &&
     !empty($_POST['department_namee']) &&
@@ -9,12 +10,22 @@ if (!empty($_POST['fullname']) &&
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $department_namee = mysqli_real_escape_string($con, $_POST['department_namee']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
-    $insert_user_info = "UPDATE `USER` SET `department_name` = '$department_namee', `user_full_name` = '$user_name',`pwd` = '$password' WHERE `USER`.`user_name` = '$email' ";
-    if (mysqli_query($con, $insert_user_info)) {
-        echo ("1");
-    } else {
-        echo ("2");
-        echo ("Error description: " . mysqli_error($con));
+    $query_to_get_if_already_user = "SELECT * FROM `USER` WHERE `user_name` = '$email'";
+    $result_of_already_user = mysqli_query($con,$query_to_get_if_already_user);
+    if(mysqli_num_rows($result_of_already_user)>0){
+        while($row_of_already_user = mysqli_fetch_assoc($result_of_already_user)){
+            if($row_of_already_user['account_status']=="Inactive"){
+                $insert_user_info = "UPDATE `USER` SET `department_name` = '$department_namee', `user_full_name` = '$user_name',`pwd` = '$password' WHERE `USER`.`user_name` = '$email' ";
+                if (mysqli_query($con, $insert_user_info)) {
+                    echo ("1");
+                } else {
+                    echo ("2");
+                    echo ("Error description: " . mysqli_error($con));
+                }
+            }else{
+                echo("3");
+            }
+        }
     }
 }
 
@@ -28,26 +39,30 @@ if (!empty($_POST['email_login']) &&
     $result_of_user_info = mysqli_query($con, $user_info_query);
     if (mysqli_num_rows($result_of_user_info) == 1) {
         while ($row = mysqli_fetch_assoc($result_of_user_info)) {
-            $user_email = $row["user_name"];
-            $user_full_name = $row["user_full_name"];
-            $user_type = $row["user_type"];
-            if ($user_type == "o" || $user_type == "k") {
-                echo ("1");
-            } elseif($user_type == "a") {
-                echo ("2");
-            }elseif($user_type == "p") {
-                echo ("3");
-            }elseif($user_type == "i") {
-                echo ("4");
-            }elseif($user_type == "r") {
-                echo ("5");
+            if($row["account_status"]=="Inactive"){
+                echo("7");
             }else{
-                echo("6");
+                $user_email = $row["user_name"];
+                $user_full_name = $row["user_full_name"];
+                $user_type = $row["user_type"];
+                if ($user_type == "o" || $user_type == "k") {
+                    echo ("1");
+                } elseif($user_type == "a") {
+                    echo ("2");
+                }elseif($user_type == "p") {
+                    echo ("3");
+                }elseif($user_type == "i") {
+                    echo ("4");
+                }elseif($user_type == "r") {
+                    echo ("5");
+                }else{
+                    echo("6");
+                }
+                session_start();
+                $_SESSION["user_email"] = $email;
+                $_SESSION["user_full_name"] = $user_full_name;
+                $_SESSION["user_type"] = $user_type;
             }
-            session_start();
-            $_SESSION["user_email"] = $email;
-            $_SESSION["user_full_name"] = $user_full_name;
-            $_SESSION["user_type"] = $user_type;
         }
 
 
@@ -509,6 +524,18 @@ if(!empty($_POST['dep_name']))
     }else{
         echo("<option selected>Select a Department / Committee first</option>");
     }
+}
+if(!empty($_POST['useremailtoverify']))
+{
+    $email = $_POST['useremailtoverify'];
+    $set_email_activation = "UPDATE `USER` SET account_status = 'Active' WHERE `USER`.`user_name` = '$email'";
+    if(mysqli_query($con,$set_email_activation))
+    {
+        echo("1");
+    }else{
+        echo("2");
+    }
+
 }
 mysqli_close($con);
 ?>

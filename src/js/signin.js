@@ -22,14 +22,13 @@ $(document).ready(function(){
             url: 'ajax.php',
             data: {email_login: $email, password_login : $password},
             success: function(data) {
-                console.log(data);
                 if(data==1)
                 {
                     window.location.href = 'home.php';
                 }
                 else if(data==2)
                 {
-                    window.location.href = '../admin/admin_home.php';
+                    window.location.href = '../admin/home.php';
                 }
                 else if(data==3)
                 {
@@ -42,6 +41,9 @@ $(document).ready(function(){
                 else if(data==5)
                 {
                     window.location.href = '../req/home.php';
+                }
+                else if(data==7){
+                    $('#notverified').modal('show');
                 }
                 else{
                     $('#failed').modal('show');

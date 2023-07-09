@@ -12,7 +12,7 @@ $('#backward_date').on('click',function()
         success: function(data) {
             $('#innerReq').html("");
             $('#innerReq').html(data);
-            console.log(data);
+            
         },
         error: function() {
             console.log(response.status);
@@ -33,7 +33,7 @@ $('#forward_date').on('click',function()
         success: function(data) {
             $('#innerReq').html("");
             $('#innerReq').html(data);
-            console.log(data);
+            
             
         },
         error: function() {
@@ -72,7 +72,7 @@ function nextDay() {
         success: function(data) {
             $('#innerReq').html("");
             $('#innerReq').html(data);
-            console.log(data);
+            
             
         },
         error: function() {

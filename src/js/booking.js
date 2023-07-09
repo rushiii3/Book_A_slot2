@@ -14,7 +14,6 @@ $('#no_of_stu_attending').on('input',function()
     success: function(data){
       $('#no_verify').html("");
       $('#no_verify').html(data);
-        console.log(data);
     },
     error: function() {
         console.log(response.status);
@@ -104,7 +103,6 @@ $('#nextFirst').on('click',function()
     $Institute_OrgName_email = $('#Institute_OrgName_email').val();
     $Institute_OrgName_phone_no = $('#Institute_OrgName_phone_no').val();
     $Institute_OrgName_transaction_id = $('#Institute_OrgName_transaction_id').val();
-    console.log($department_namee);
     if($event_name!="")
     {
       if($event_Descr!="")
@@ -166,7 +164,6 @@ $('#nextFirst').on('click',function()
 $('#nextSecond').on('click',function()
 {
   $verify = $('#verified_no').val();
-  console.log($verify);
   $num_of_students = $('#no_of_stu_attending').val();
     $Venue_name = $('#Venue_name').val();
     $event_date = $('#selectDate').val();
@@ -289,7 +286,6 @@ $('#nextForth').on('click',function(e){
         }  
   
       }
-      console.log(count);
       if(count==$no_of_rp)
       {
         if($('#check_box_terms_and_condition').is(':checked'))
